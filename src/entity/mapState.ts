@@ -125,6 +125,9 @@ export class MapState {
      * @returns 置ける場合はtrue
      */
     public isReversible(coord: Coord, mark: MarkType): boolean {
+        if (this.field[coord.y][coord.x] !== MarkType.NONE) {
+            return false;
+        }
         return this.getReversibleCoords(mark, coord).length > 0;
     }
 
