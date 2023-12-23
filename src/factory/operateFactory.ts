@@ -1,3 +1,4 @@
+import { AlphaBetaImpl } from "../service/operate/impl/alphaBetaImpl";
 import { ManualImpl } from "../service/operate/impl/manualImpl";
 import { MiniMaxImpl } from "../service/operate/impl/miniMaxImpl";
 import { OperateType } from "../type/operateType";
@@ -16,8 +17,10 @@ export class OperateFactory {
         switch (operateType) {
             case OperateType.MANUAL:
                 return new ManualImpl(scene);
-            case OperateType.MINIMAX:
+            case OperateType.MINI_MAX:
                 return new MiniMaxImpl();
+            case OperateType.ALPHA_BETA:
+                return new AlphaBetaImpl();
             default:
                 throw new Error('OperateFactory: OperateType not found.');
         }

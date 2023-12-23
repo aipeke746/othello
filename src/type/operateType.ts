@@ -10,9 +10,9 @@ export enum OperateType {
     /**
      * MiniMax法
      */
-    MINIMAX,
+    MINI_MAX,
     /**
-     * モンテカルロ法
+     * αβ法
      */
-    MONTECARLO,
+    ALPHA_BETA,
 }

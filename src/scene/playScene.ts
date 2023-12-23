@@ -17,8 +17,8 @@ export class PlayScene extends Phaser.Scene {
 
     init() {
         this.turnMap = new Map<MarkType, OperateService>();
-        this.turnMap.set(MarkType.BLACK, OperateFactory.create(this, OperateType.MANUAL));
-        this.turnMap.set(MarkType.WHITE, OperateFactory.create(this, OperateType.MINIMAX));
+        this.turnMap.set(MarkType.BLACK, OperateFactory.create(this, OperateType.ALPHA_BETA));
+        this.turnMap.set(MarkType.WHITE, OperateFactory.create(this, OperateType.ALPHA_BETA));
     }
 
     preload() {

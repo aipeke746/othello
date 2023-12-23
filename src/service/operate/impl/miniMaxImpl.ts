@@ -31,10 +31,10 @@ export class MiniMaxImpl implements OperateService {
     }
 
     /**
-     * 
+     * ミニマックス法で座標を返す
      * @param simulate シミュレーション
-     * @param depth 
-     * @returns 
+     * @param depth 探索深さ
+     * @returns スコアと座標
      */
     private getMiniMaxCoord(simulate: SimulateService, depth: number): [number, Coord | undefined] {
         if (simulate.isDone() || depth === 0) {
@@ -58,52 +58,18 @@ export class MiniMaxImpl implements OperateService {
         return bestScoreCoord;
     }
 
-    private getChildScore(simulate_: SimulateService, depth: number, mark: MarkType, coord: Coord): number {
-        const simulate = simulate_.clone();
-        simulate.mapState.advance(coord, mark);
+    /**
+     * 子ノードのスコアを返す
+     * @param simulate シミュレーション
+     * @param depth 探索深さ
+     * @param mark マーク
+     * @param coord 座標
+     * @returns スコア
+     */
+    private getChildScore(simulate: SimulateService, depth: number, mark: MarkType, coord: Coord): number {
+        const nextSimulate = simulate.clone();
+        nextSimulate.mapState.advance(coord, mark);
 
-        return this.getMiniMaxCoord(simulate, depth - 1)[0];
+        return this.getMiniMaxCoord(nextSimulate, depth - 1)[0];
     }
-
-
-
-
-
-    // private getMiniMaxCoord_2(simulate: SimulateService, depth: number): [number, Coord | undefined] {
-    //     if (simulate.isDone() || depth === 0) {
-    //         return [simulate.evaluate(), undefined];
-    //     }
-
-    //     const targetMark = simulate.isMyTurn() ? simulate.myMark : MarkTypeUtil.getOpponent(simulate.myMark);
-    //     if (simulate.isMyTurn()) {
-    //         // 自分のターン
-    //         let maxScore: [number, Coord | undefined] = [-this.INF, undefined];
-    //         for (const coord of simulate.mapState.getPutableCoords(targetMark)) {
-    //             const childScore = this.getChildScore_2(simulate, depth, targetMark, coord);
-    //             if (childScore[0] > maxScore[0]) {
-    //                 maxScore[0] = childScore[0];
-    //                 maxScore[1] = coord;
-    //             }
-    //         }
-    //         return maxScore;
-    //     } else {
-    //         // 相手のターン
-    //         let miniScore: [number, Coord | undefined] = [this.INF, undefined];
-    //         for (const coord of simulate.mapState.getPutableCoords(targetMark)) {
-    //             const childScore = this.getChildScore_2(simulate, depth, targetMark, coord);
-    //             if (childScore[0] < miniScore[0]) {
-    //                 miniScore[0] = childScore[0];
-    //                 miniScore[1] = coord;
-    //             }
-    //         }
-    //         return miniScore;
-    //     }
-    // }
-
-    // private getChildScore_2(simulate_: SimulateService, depth: number, mark: MarkType, coord: Coord): [number, Coord | undefined] {
-    //     const simulate = simulate_.clone();
-    //     simulate.mapState.advance(coord, mark);
-
-    //     return this.getMiniMaxCoord_2(simulate, depth - 1);
-    // }
 }
