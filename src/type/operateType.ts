@@ -8,10 +8,6 @@ export enum OperateType {
      */
     MANUAL,
     /**
-     * MiniMax法
-     */
-    MINI_MAX,
-    /**
      * αβ法
      */
     ALPHA_BETA,

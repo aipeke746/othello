@@ -3,6 +3,7 @@ import { OperateFactory } from "../factory/operateFactory";
 import { OperateService } from "../service/operate/operateService";
 import { MarkType } from "../type/markType";
 import { OperateType } from "../type/operateType";
+import { MapService } from '../service/map/mapService';
 
 /**
  * ゲームのプレイシーン
@@ -10,6 +11,7 @@ import { OperateType } from "../type/operateType";
 export class PlayScene extends Phaser.Scene {
     private tilemap?: Tilemap;
     private turnMap: Map<MarkType, OperateService> = new Map<MarkType, OperateService>();
+    private mapService: MapService = new MapService(this);
 
     constructor() {
         super({ key: 'PlayScene'});
@@ -18,7 +20,7 @@ export class PlayScene extends Phaser.Scene {
     init() {
         this.turnMap = new Map<MarkType, OperateService>();
         this.turnMap.set(MarkType.BLACK, OperateFactory.create(this, OperateType.ALPHA_BETA));
-        this.turnMap.set(MarkType.WHITE, OperateFactory.create(this, OperateType.ALPHA_BETA));
+        this.turnMap.set(MarkType.WHITE, OperateFactory.create(this, OperateType.MANUAL));
     }
 
     preload() {
@@ -27,10 +29,11 @@ export class PlayScene extends Phaser.Scene {
 
     create() {
         this.tilemap = new Tilemap(this, 'mapTiles');
+        this.mapService.showPutableCoords(this.tilemap);
     }
 
     update() {
-        if (!this.tilemap || !this.turnMap) return;
+        if (!this.tilemap) return;
 
         if (this.tilemap.mapState.isDone()) {
             console.log("黒: ", this.tilemap.mapState.getMarkCount(MarkType.BLACK), " / 白: ", this.tilemap.mapState.getMarkCount(MarkType.WHITE));
@@ -50,6 +53,7 @@ export class PlayScene extends Phaser.Scene {
 
         if (coord) {
             tilemap.advance(coord, markTurn);
+            this.mapService.showPutableCoords(tilemap);
         }
     }
 }

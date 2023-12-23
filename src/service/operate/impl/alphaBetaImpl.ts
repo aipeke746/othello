@@ -13,7 +13,7 @@ export class AlphaBetaImpl implements OperateService {
     /**
      * 探索する深さ
      */
-    private depth: number = 3;
+    private depth: number = 5;
 
     /**
      * 次にオセロのマークを置く座標を返す

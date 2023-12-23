@@ -195,7 +195,7 @@ export class MapState {
      */
     private skip(pos: Phaser.Math.Vector2): boolean {
         return (pos.x<0 || pos.x>MapState.LENGTH-1 || pos.y<0 || pos.y>MapState.LENGTH-1)
-            || (this.field[pos.y][pos.x] == MarkType.NONE);
+            || (this.field[pos.y][pos.x] === MarkType.NONE);
     }
 
     /**
