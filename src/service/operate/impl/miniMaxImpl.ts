@@ -10,10 +10,6 @@ import { OperateService } from "../operateService";
  */
 export class MiniMaxImpl implements OperateService {
     /**
-     * 無限大
-     */
-    private readonly INF: number = 1000000000;
-    /**
      * 探索する深さ
      */
     private depth: number = 3;
@@ -41,7 +37,7 @@ export class MiniMaxImpl implements OperateService {
             return [simulate.evaluate(), undefined];
         }
 
-        let bestScoreCoord: [number, Coord | undefined] = [-this.INF, undefined];
+        let bestScoreCoord: [number, Coord | undefined] = [Number.NEGATIVE_INFINITY, undefined];
         const targetMark = simulate.isMyTurn() ? simulate.myMark : MarkTypeUtil.getOpponent(simulate.myMark);
         const turnSign: number = simulate.isMyTurn() ? 1 : -1;
 
