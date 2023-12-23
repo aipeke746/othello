@@ -60,6 +60,7 @@ export class MapState {
     public clone(): MapState {
         const mapState: MapState = new MapState();
         mapState.field = JSON.parse(JSON.stringify(this.field));
+        mapState.nowTurnMark = this.nowTurnMark;
         return mapState;
     }
 
@@ -207,13 +208,15 @@ export class MapState {
         this.field[4][4] = MarkType.WHITE;
         this.field[3][4] = MarkType.BLACK;
         this.field[4][3] = MarkType.BLACK;
+
+        this.nowTurnMark = MarkType.BLACK;
     }
 
     /**
      * マークを置ける場所がどこにもないかどうか
      * @returns マークを置ける場所がない場合はtrue
      */
-    isNotPutable(): boolean {
+    public isNotPutable(): boolean {
         return !this.isPutable(MarkType.BLACK) && !this.isPutable(MarkType.WHITE);
     }
 
@@ -222,7 +225,7 @@ export class MapState {
      * @param mark マーク
      * @returns 置ける場所がある場合はtrue
      */
-    private isPutable(mark: MarkType): boolean {
+    public isPutable(mark: MarkType): boolean {
         return this.getPutableCoords(mark).length > 0;
     }
 

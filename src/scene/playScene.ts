@@ -33,7 +33,7 @@ export class PlayScene extends Phaser.Scene {
         if (!this.tilemap || !this.turnMap) return;
 
         if (this.tilemap.mapState.isDone()) {
-            console.log('ゲーム終了');
+            console.log("黒: ", this.tilemap.mapState.getMarkCount(MarkType.BLACK), " / 白: ", this.tilemap.mapState.getMarkCount(MarkType.WHITE));
         } else {
             this.play(this.tilemap, this.turnMap);
         }

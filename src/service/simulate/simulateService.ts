@@ -1,35 +1,44 @@
 import { MapState } from "../../entity/mapState";
 import { MarkType } from "../../type/markType";
+import { MarkTypeUtil } from "../../util/markTypeUtil";
 
 /**
- * シミュレートするサービス
+ * ミニマックス法でシミュレートするクラス
  */
-export interface SimulateService {
+export class SimulateService {
     /**
      * シミュレートするマップの状態
     */
-    mapState: MapState;
+    public mapState: MapState;
    /**
     * 自分のマーク
     */
-    myMark: MarkType;
-    /**
-     * 評価値
-     */
-    evaluatedScore: number;
+    public myMark: MarkType;
+
+    constructor(mapState: MapState, myMark: MarkType) {
+        this.mapState = mapState;
+        this.myMark = myMark;
+    }
 
     /**
-     * シミュレートを複製する
-     * @returns 複製したシミュレート
+     * シミュレーションを複製する
+     * @returns 
      */
-    clone(): SimulateService;
-    /**
-     * シミュレートを評価する
-     */
-    evaluate(): void;
-    /**
-     * シミュレートが終了したかどうかを返す
-     * @returns シミュレートが終了した場合はtrue
-     */
-    isDone(): boolean;
+    public clone(): SimulateService {
+        return new SimulateService(this.mapState.clone(), this.myMark);
+    }
+
+    public evaluate(): number {
+        const myMarkCount = this.mapState.getMarkCount(this.myMark);
+        const opponentMarkCount = this.mapState.getMarkCount(MarkTypeUtil.getOpponent(this.myMark));
+        return myMarkCount - opponentMarkCount;
+    }
+
+    public isDone(): boolean {
+        return this.mapState.isDone();
+    }
+
+    public isMyTurn(): boolean {
+        return this.mapState.getNowTurnMark() === this.myMark;
+    }
 }
