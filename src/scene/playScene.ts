@@ -1,9 +1,10 @@
 import { Tilemap } from "../entity/tilemap";
-import { OperateService } from "../service/operate/operateService";
 import { MarkType } from "../type/markType";
 import { OperateType } from "../type/operateType";
 import { AssistService } from '../service/map/assistService';
 import { OperateManager } from "../entity/operateManager";
+import { PlayService } from "../service/map/playService";
+import { ScoreService } from "../service/map/scoreService";
 
 /**
  * ゲームのプレイシーン
@@ -11,7 +12,9 @@ import { OperateManager } from "../entity/operateManager";
 export class PlayScene extends Phaser.Scene {
     private tilemap: Tilemap;
     private operateManager: OperateManager;
-    private assist: AssistService = new AssistService(this);
+    private assistService: AssistService;
+    private scoreService: ScoreService
+    private playService: PlayService;
 
     constructor() {
         super({ key: 'playScene'});
@@ -31,31 +34,15 @@ export class PlayScene extends Phaser.Scene {
 
     create() {
         this.tilemap = new Tilemap(this, 'mapTiles');
-        this.assist.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
+        this.assistService = new AssistService(this);
+        this.scoreService = new ScoreService(this);
+        this.playService = new PlayService(this.operateManager, this.assistService);
+
+        this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
     }
 
     update() {
-        if (this.tilemap.mapState.isDone()) {
-            console.log("黒: ", this.tilemap.mapState.getMarkCount(MarkType.BLACK), " / 白: ", this.tilemap.mapState.getMarkCount(MarkType.WHITE));
-        } else {
-            this.play(this.tilemap, this.operateManager);
-        }
-    }
-
-    /**
-     * プレイを実行する
-     * @param tilemap タイルマップ
-     * @param turnMap ターンマップ
-     */
-    private play(tilemap: Tilemap, operateManager: OperateManager) {
-        const nowMark: MarkType = tilemap.mapState.getNowTurnMark();
-        const operateService: OperateService = operateManager.getOperateService(nowMark);
-        const coord = operateService.getCoord(tilemap, nowMark);
-
-        if (coord) {
-            tilemap.advance(coord, nowMark);
-            const nextMark: MarkType = tilemap.mapState.getNowTurnMark();
-            this.assist.showPutableCoords(tilemap, operateManager.isManual(nextMark));
-        }
+        this.playService.do(this.tilemap);
+        this.scoreService.update(this.tilemap);
     }
 }
