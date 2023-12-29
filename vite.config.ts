@@ -5,4 +5,7 @@ export default defineConfig({
         assetsInlineLimit: 0,
         outDir: 'docs',
     },
+    server: {
+        host: true,
+    },
 });
