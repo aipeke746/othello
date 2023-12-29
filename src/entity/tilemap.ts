@@ -1,3 +1,4 @@
+import { Param } from "../param";
 import { MarkType } from "../type/markType";
 import { Coord } from "../vo/coord";
 import { MapState } from "./mapState";
@@ -94,7 +95,7 @@ export class Tilemap {
      * @returns レイヤー
      */
     private getLayer(tileset: Phaser.Tilemaps.Tileset) {
-        const layer = this.map?.createLayer(0, tileset, 0, 0);
+        const layer = this.map?.createLayer(0, tileset, Param.TILE_MARGIN, Param.TILE_MARGIN);
         if (layer == null)  {
             throw new Error('layer is null');
         }
