@@ -1,26 +1,24 @@
 import { Tilemap } from "../entity/tilemap";
-import { OperateFactory } from "../factory/operateFactory";
 import { OperateService } from "../service/operate/operateService";
 import { MarkType } from "../type/markType";
 import { OperateType } from "../type/operateType";
-import { MapService } from '../service/map/mapService';
+import { AssistService } from '../service/map/assistService';
+import { OperateManager } from "../entity/operateManager";
 
 /**
  * ゲームのプレイシーン
  */
 export class PlayScene extends Phaser.Scene {
-    private tilemap?: Tilemap;
-    private turnMap: Map<MarkType, OperateService> = new Map<MarkType, OperateService>();
-    private mapService: MapService = new MapService(this);
+    private tilemap: Tilemap;
+    private operateManager: OperateManager;
+    private assist: AssistService = new AssistService(this);
 
     constructor() {
         super({ key: 'PlayScene'});
     }
 
     init() {
-        this.turnMap = new Map<MarkType, OperateService>();
-        this.turnMap.set(MarkType.BLACK, OperateFactory.create(this, OperateType.ALPHA_BETA));
-        this.turnMap.set(MarkType.WHITE, OperateFactory.create(this, OperateType.MANUAL));
+        this.operateManager = new OperateManager(this, OperateType.MANUAL, OperateType.ALPHA_BETA);
     }
 
     preload() {
@@ -29,16 +27,14 @@ export class PlayScene extends Phaser.Scene {
 
     create() {
         this.tilemap = new Tilemap(this, 'mapTiles');
-        this.mapService.showPutableCoords(this.tilemap);
+        this.assist.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
     }
 
     update() {
-        if (!this.tilemap) return;
-
         if (this.tilemap.mapState.isDone()) {
             console.log("黒: ", this.tilemap.mapState.getMarkCount(MarkType.BLACK), " / 白: ", this.tilemap.mapState.getMarkCount(MarkType.WHITE));
         } else {
-            this.play(this.tilemap, this.turnMap);
+            this.play(this.tilemap, this.operateManager);
         }
     }
 
@@ -47,13 +43,15 @@ export class PlayScene extends Phaser.Scene {
      * @param tilemap タイルマップ
      * @param turnMap ターンマップ
      */
-    private play(tilemap: Tilemap, turnMap: Map<MarkType, OperateService>) {
-        const markTurn: MarkType = tilemap.mapState.getNowTurnMark();
-        const coord = turnMap.get(markTurn)?.getCoord(tilemap, markTurn);
+    private play(tilemap: Tilemap, operateManager: OperateManager) {
+        const nowMark: MarkType = tilemap.mapState.getNowTurnMark();
+        const operateService: OperateService = operateManager.getOperateService(nowMark);
+        const coord = operateService.getCoord(tilemap, nowMark);
 
         if (coord) {
-            tilemap.advance(coord, markTurn);
-            this.mapService.showPutableCoords(tilemap);
+            tilemap.advance(coord, nowMark);
+            const nextMark: MarkType = tilemap.mapState.getNowTurnMark();
+            this.assist.showPutableCoords(tilemap, operateManager.isManual(nextMark));
         }
     }
 }

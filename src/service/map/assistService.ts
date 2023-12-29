@@ -1,20 +1,34 @@
 import { MapState } from "../../entity/mapState";
 import { Tilemap } from "../../entity/tilemap";
-import { Param } from "../../param";
+import { Param } from '../../param';
 
-export class MapService {
+/**
+ * アシスト機能に関するサービス
+ * 対象：手動操作のプレイヤー
+ */
+export class AssistService {
+    /**
+     * シーン
+     */
     private scene: Phaser.Scene;
-    private isVisible: boolean = Param.SHOW_PUTABLE_CIRCLES;
+    /**
+     * 置ける場所を示す円
+     */
     private putableCircles: Phaser.GameObjects.Graphics[] = [];
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
     }
 
-    public showPutableCoords(tilemap: Tilemap): void {
+    /**
+     * 置ける場所を表示する
+     * @param tilemap タイルマップ
+     * @param isManualOperator 手動操作のプレイヤーかどうか
+     */
+    public showPutableCoords(tilemap: Tilemap, isManualOperator: boolean): void {
         const mark = tilemap.mapState.getNowTurnMark();
-        if (!this.isVisible) return;
         this.removeAllCircle();
+        if (!this.isVisible(isManualOperator)) return;
 
         tilemap.mapState.getPutableCoords(mark).forEach(coord => {
             const pos = tilemap.getWorldPos(coord);
@@ -26,6 +40,18 @@ export class MapService {
         this.blinking(this.putableCircles);
     };
 
+    /**
+     * 表示するかどうかを判定する
+     * @param isManualOperator 手動操作のプレイヤーかどうか
+     * @returns 表示するかどうか
+     */
+    private isVisible(isManualOperator: boolean): boolean {
+        return Param.SHOW_PUTABLE_CIRCLES && isManualOperator;
+    }
+
+    /**
+     * 置ける場所を表示している円を全て削除する
+     */
     private removeAllCircle() {
         this.putableCircles.forEach(circle => {
             circle.destroy();
@@ -33,6 +59,10 @@ export class MapService {
         this.putableCircles = [];
     }
 
+    /**
+     * 点滅させる
+     * @param target 対象
+     */
     private blinking(target: any) {
         this.scene.tweens.add({
             targets: target,
