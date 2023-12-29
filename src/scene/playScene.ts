@@ -14,11 +14,15 @@ export class PlayScene extends Phaser.Scene {
     private assist: AssistService = new AssistService(this);
 
     constructor() {
-        super({ key: 'PlayScene'});
+        super({ key: 'playScene'});
     }
 
-    init() {
-        this.operateManager = new OperateManager(this, OperateType.MANUAL, OperateType.ALPHA_BETA);
+    init(data: any) {
+        this.operateManager = new OperateManager(
+            this,
+            data.firstOperator as OperateType,
+            data.secondOperator as OperateType
+        );
     }
 
     preload() {
