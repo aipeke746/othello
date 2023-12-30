@@ -1,6 +1,5 @@
 import { OperateManager } from "../../entity/operateManager";
 import { Tilemap } from "../../entity/tilemap";
-import { MarkType } from "../../type/markType";
 import { PutMarkUtil } from "../../util/putMarkUtil";
 import { AssistService } from "./assistService";
 
@@ -29,15 +28,7 @@ export class PlayService {
     public do(tilemap: Tilemap) {
         PutMarkUtil.isPutable(tilemap.mapState)
             ? this.play(tilemap)
-            : this.finish(tilemap);
-    }
-
-    /**
-     * 終了処理
-     * @param tilemap タイルマップ
-     */
-    private finish(tilemap: Tilemap) {
-        console.log("黒: ", tilemap.mapState.getMarkCount(MarkType.BLACK), " / 白: ", tilemap.mapState.getMarkCount(MarkType.WHITE));
+            : this.finish();
     }
 
     /**
@@ -54,5 +45,12 @@ export class PlayService {
             const nextMark = tilemap.mapState.getNowTurnMark();
             this.assist.showPutableCoords(tilemap, this.operateManager.isManual(nextMark));
         }
+    }
+
+    /**
+     * 終了処理
+     * @param tilemap タイルマップ
+     */
+    private finish() {
     }
 }

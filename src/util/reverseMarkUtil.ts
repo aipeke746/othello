@@ -9,19 +9,6 @@ import { MarkTypeUtil } from "./markTypeUtil";
  */
 export class ReverseMarkUtil {
     /**
-     * 指定した座標に指定したマークを置けるかどうか
-     * @param coord 座標
-     * @param mark マーク
-     * @returns 置ける場合はtrue
-     */
-    public static isReversible(mapState: MapState, coord: Coord, mark: MarkType): boolean {
-        if (mapState.getField()[coord.y][coord.x] !== MarkType.NONE) {
-            return false;
-        }
-        return this.getReversibleCoords(mapState, mark, coord).length > 0;
-    }
-
-    /**
      * 指定した座標に指定したマークを置いて、ひっくり返す
      * @param coord 座標
      * @param mark マーク
@@ -33,6 +20,19 @@ export class ReverseMarkUtil {
         for (const coord of coords) {
             mapState.getField()[coord.y][coord.x] = mark;
         }
+    }
+
+    /**
+     * 指定した座標に指定したマークを置けるかどうか
+     * @param coord 座標
+     * @param mark マーク
+     * @returns 置ける場合はtrue
+     */
+    public static isReversible(mapState: MapState, coord: Coord, mark: MarkType): boolean {
+        if (mapState.getField()[coord.y][coord.x] !== MarkType.NONE) {
+            return false;
+        }
+        return this.getReversibleCoords(mapState, mark, coord).length > 0;
     }
 
     /**
