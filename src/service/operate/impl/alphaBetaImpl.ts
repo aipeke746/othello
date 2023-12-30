@@ -1,10 +1,12 @@
 import { Tilemap } from "../../../entity/tilemap";
+import { SimulateFactory } from "../../../factory/simulateFactory";
 import { MarkType } from "../../../type/markType";
 import { MarkTypeUtil } from "../../../util/markTypeUtil";
 import { Coord } from "../../../vo/coord";
-import { SimulateParam } from "../../simulate/simulateParam";
+import { SimulateParam } from "../../simulate/param/simulateParam";
 import { SimulateService } from "../../simulate/simulateService";
 import { OperateService } from "../operateService";
+import { SimulateType } from '../../../type/simulateType';
 
 /**
  * αβ法で操作するクラス
@@ -14,6 +16,11 @@ export class AlphaBetaImpl implements OperateService {
      * 探索する深さ
      */
     private depth: number = 7;
+    /**
+     * シミュレーションのタイプ（評価値の計算方法）
+     */
+    private simulateType: SimulateType = SimulateType.WEIGHT_MAP;
+
 
     /**
      * 次にオセロのマークを置く座標を返す
@@ -23,7 +30,7 @@ export class AlphaBetaImpl implements OperateService {
      */
     public getCoord(tilemap: Tilemap, myMark: MarkType): Coord | undefined {
         const param: SimulateParam = new SimulateParam(this.depth, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
-        const simulate: SimulateService = new SimulateService(tilemap.mapState.clone(), myMark, param);
+        const simulate: SimulateService = SimulateFactory.create(this.simulateType, tilemap.mapState.clone(), myMark, param);
         const result: [number, Coord | undefined] = this.getAlphaBetaCoord(simulate);
 
         return result[1];

@@ -1,7 +1,7 @@
 import { MapState } from "../../entity/mapState";
 import { MarkType } from "../../type/markType";
 import { MarkTypeUtil } from "../../util/markTypeUtil";
-import { SimulateParam } from "./simulateParam";
+import { SimulateParam } from "./param/simulateParam";
 
 /**
  * ミニマックス法でシミュレートするクラス

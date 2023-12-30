@@ -105,6 +105,24 @@ export class MapState {
     }
 
     /**
+     * 指定したマークが置かれている座標を取得する
+     * @param mark マーク
+     * @returns 座標
+     */
+    public getMarkCoords(mark: MarkType): Coord[] {
+        const coords: Coord[] = [];
+        for (let y=0; y<MapState.LENGTH; y++) {
+            for (let x=0; x<MapState.LENGTH; x++) {
+                if (this.field[y][x] === mark) {
+                    const pos = new Phaser.Math.Vector2(x, y);
+                    coords.push(new Coord(pos));
+                }
+            }
+        }
+        return coords;
+    }
+
+    /**
      * 指定したマークで置ける座標を取得する
      * @param mark マーク
      * @returns 置ける座標
