@@ -1,12 +1,11 @@
 import { MapState } from "../../entity/mapState";
 import { MarkType } from "../../type/markType";
-import { MarkTypeUtil } from "../../util/markTypeUtil";
 import { SimulateParam } from "./param/simulateParam";
 
 /**
  * ミニマックス法でシミュレートするクラス
  */
-export class SimulateService {
+export abstract class SimulateService {
     /**
      * シミュレートするマップの状態
     */
@@ -30,19 +29,13 @@ export class SimulateService {
      * シミュレーションを複製する
      * @returns 
      */
-    public clone(): SimulateService {
-        return new SimulateService(this.mapState.clone(), this.myMark, this.param.clone());
-    }
+    public abstract clone(): SimulateService;
 
     /**
      * 評価値を返す
      * @returns 評価値
      */
-    public evaluate(): number {
-        const myMarkCount = this.mapState.getMarkCount(this.myMark);
-        const opponentMarkCount = this.mapState.getMarkCount(MarkTypeUtil.getOpponent(this.myMark));
-        return myMarkCount - opponentMarkCount;
-    }
+    public abstract evaluate(): number;
 
     /**
      * ゲーム（シミュレーション）が終了したかどうかを返す
@@ -65,7 +58,7 @@ export class SimulateService {
      * @param minScore 最小スコア
      * @returns アルファカットが発生する場合はtrue
      */
-    public isAlphaCut(minScore: number): boolean {
+    public alphaCut(minScore: number): boolean {
         this.param.beta = Math.min(this.param.beta, minScore)
         return this.param.alpha >= this.param.beta
     }
@@ -75,7 +68,7 @@ export class SimulateService {
      * @param maxScore 最大スコア
      * @returns ベータカットが発生する場合はtrue
      */
-    public isBetaCut(maxScore: number): boolean {
+    public betaCut(maxScore: number): boolean {
         this.param.alpha = Math.max(this.param.alpha, maxScore)
         return this.param.alpha >= this.param.beta
     }

@@ -1,15 +1,23 @@
 import { MapState } from "../../../entity/mapState";
 import { MarkType } from "../../../type/markType";
-import { EvaluatedScoreUtil } from "../../../util/evaluatedScoreUtil";
+import { MarkTypeUtil } from "../../../util/markTypeUtil";
 import { SimulateParam } from "../param/simulateParam";
 import { SimulateService } from "../simulateService";
 
 /**
  * 重み付きマップでシミュレートするクラス
  */
-export class WeightMapEvaluate extends SimulateService {
+export class MaxScoreImpl extends SimulateService {
     constructor(mapState: MapState, myMark: MarkType, param: SimulateParam) {
         super(mapState, myMark, param);
+    }
+
+    /**
+     * シミュレーションを複製する
+     * @returns 
+     */
+    public clone(): MaxScoreImpl {
+        return new MaxScoreImpl(this.mapState.clone(), this.myMark, this.param.clone());
     }
 
     /**
@@ -17,8 +25,8 @@ export class WeightMapEvaluate extends SimulateService {
      * @returns 評価値
      */
     public evaluate(): number {
-        const putScore = EvaluatedScoreUtil.getByPutCoords(this.mapState, this.myMark);
-        const putableScore = EvaluatedScoreUtil.getByPutableCoords(this.mapState, this.myMark);
-        return putScore + putableScore;
+        const myMarkCount = this.mapState.getMarkCount(this.myMark);
+        const opponentMarkCount = this.mapState.getMarkCount(MarkTypeUtil.getOpponent(this.myMark));
+        return myMarkCount - opponentMarkCount;
     }
 }

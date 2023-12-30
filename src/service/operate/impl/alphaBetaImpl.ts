@@ -4,9 +4,9 @@ import { MarkType } from "../../../type/markType";
 import { MarkTypeUtil } from "../../../util/markTypeUtil";
 import { Coord } from "../../../vo/coord";
 import { SimulateParam } from "../../simulate/param/simulateParam";
-import { SimulateService } from "../../simulate/simulateService";
 import { OperateService } from "../operateService";
 import { SimulateType } from '../../../type/simulateType';
+import { SimulateService } from "../../simulate/simulateService";
 
 /**
  * αβ法で操作するクラス
@@ -15,7 +15,7 @@ export class AlphaBetaImpl implements OperateService {
     /**
      * 探索する深さ
      */
-    private depth: number = 7;
+    private depth: number = 5;
     /**
      * シミュレーションのタイプ（評価値の計算方法）
      */
@@ -66,7 +66,7 @@ export class AlphaBetaImpl implements OperateService {
                 maxScore[0] = childScore;
                 maxScore[1] = coord;
             }
-            if (simulate.isBetaCut(maxScore[0])) {
+            if (simulate.betaCut(maxScore[0])) {
                 break;
             }
         }
@@ -88,7 +88,7 @@ export class AlphaBetaImpl implements OperateService {
                 minScore[0] = childScore;
                 minScore[1] = coord;
             }
-            if (simulate.isAlphaCut(minScore[0])) {
+            if (simulate.alphaCut(minScore[0])) {
                 break;
             }
         }
@@ -110,7 +110,3 @@ export class AlphaBetaImpl implements OperateService {
         return this.getAlphaBetaCoord(nextSimulate)[0];
     }
 }
-
-
-
-
