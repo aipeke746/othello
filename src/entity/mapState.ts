@@ -1,7 +1,5 @@
 import { MarkType } from "../type/markType";
 import { MarkTypeUtil } from "../util/markTypeUtil";
-import { PutMarkUtil } from "../util/putMarkUtil";
-import { ReverseMarkUtil } from "../util/reverseMarkUtil";
 import { Coord } from "../vo/coord";
 
 /**
@@ -30,19 +28,6 @@ export class MapState {
      */
     constructor() {
         this.init();
-    }
-
-    /**
-     * 指定した座標に指定したマークを置き、ひっくり返す
-     * @param coord 座標
-     * @param mark マーク
-     */
-    public advance(coord: Coord, mark: MarkType): void {
-        ReverseMarkUtil.reverse(this, coord, mark);
-        this.nextTurn();
-        if (!PutMarkUtil.isPutable(this)) {
-            this.nextTurn();
-        }
     }
 
     /**

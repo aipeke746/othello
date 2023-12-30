@@ -8,6 +8,7 @@ import { OperateService } from "../operateService";
 import { SimulateType } from '../../../type/simulateType';
 import { SimulateService } from "../../simulate/simulateService";
 import { PutMarkUtil } from "../../../util/putMarkUtil";
+import { GameUtil } from "../../../util/gameUtil";
 
 /**
  * αβ法で操作するクラス
@@ -105,7 +106,7 @@ export class AlphaBetaImpl implements OperateService {
      */
     private getChildScore(simulate: SimulateService, mark: MarkType, coord: Coord): number {
         const nextSimulate = simulate.clone();
-        nextSimulate.mapState.advance(coord, mark);
+        GameUtil.simulateAdvance(nextSimulate, coord, mark);
         nextSimulate.param.depth--;
 
         return this.getAlphaBetaCoord(nextSimulate)[0];

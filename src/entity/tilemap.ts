@@ -1,5 +1,4 @@
 import { Param } from "../param";
-import { MarkType } from "../type/markType";
 import { Coord } from "../vo/coord";
 import { MapState } from "./mapState";
 
@@ -37,16 +36,6 @@ export class Tilemap {
     }
 
     /**
-     * オセロのマークをひっくり返して、タイルマップの更新する
-     * @param coord 座標
-     * @param mark マーク
-     */
-    public advance(coord: Coord, mark: MarkType): void {
-        this.mapState.advance(coord, mark);
-        this.update();
-    }
-
-    /**
      * タイルマップの座標からワールド（画面）の座標を取得する
      * @params pos ワールドの座標
      * @returns ワールドの座標
@@ -67,7 +56,7 @@ export class Tilemap {
     /**
      * MapStateの内容をTilemapに反映する
      */
-    private update() {
+    public update() {
         for (let y=0; y<MapState.LENGTH; y++) {
             for (let x=0; x<MapState.LENGTH; x++) {
                 this.layer.putTileAt(this.mapState.getField()[y][x], x, y);

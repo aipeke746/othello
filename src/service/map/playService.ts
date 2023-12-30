@@ -1,5 +1,6 @@
 import { OperateManager } from "../../entity/operateManager";
 import { Tilemap } from "../../entity/tilemap";
+import { GameUtil } from "../../util/gameUtil";
 import { PutMarkUtil } from "../../util/putMarkUtil";
 import { AssistService } from "./assistService";
 
@@ -41,7 +42,7 @@ export class PlayService {
         const coord = operateService.getCoord(tilemap, nowMark);
 
         if (coord) {
-            tilemap.advance(coord, nowMark);
+            GameUtil.advance(tilemap, coord, nowMark);
             const nextMark = tilemap.mapState.getNowTurnMark();
             this.assist.showPutableCoords(tilemap, this.operateManager.isManual(nextMark));
         }
