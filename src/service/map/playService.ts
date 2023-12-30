@@ -1,6 +1,7 @@
 import { OperateManager } from "../../entity/operateManager";
 import { Tilemap } from "../../entity/tilemap";
 import { MarkType } from "../../type/markType";
+import { PutMarkUtil } from "../../util/putMarkUtil";
 import { AssistService } from "./assistService";
 
 /**
@@ -26,9 +27,9 @@ export class PlayService {
      * @param tilemap タイルマップ
      */
     public do(tilemap: Tilemap) {
-        tilemap.mapState.isDone()
-            ? this.finish(tilemap)
-            : this.play(tilemap);
+        PutMarkUtil.isPutable(tilemap.mapState)
+            ? this.play(tilemap)
+            : this.finish(tilemap);
     }
 
     /**

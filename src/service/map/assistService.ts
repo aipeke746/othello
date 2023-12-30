@@ -1,6 +1,7 @@
 import { MapState } from "../../entity/mapState";
 import { Tilemap } from "../../entity/tilemap";
 import { Param } from '../../param';
+import { PutMarkUtil } from "../../util/putMarkUtil";
 
 /**
  * アシスト機能に関するサービス
@@ -30,7 +31,7 @@ export class AssistService {
         this.removeAllCircle();
         if (!this.isVisible(isManualOperator)) return;
 
-        tilemap.mapState.getPutableCoords(mark).forEach(coord => {
+        PutMarkUtil.getPutableCoords(tilemap.mapState, mark).forEach(coord => {
             const pos = tilemap.getWorldPos(coord);
             const graphics = this.scene.add.graphics();
             const circle = graphics.lineStyle(2, 0x0000ff)

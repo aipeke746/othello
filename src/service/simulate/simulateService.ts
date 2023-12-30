@@ -1,5 +1,6 @@
 import { MapState } from "../../entity/mapState";
 import { MarkType } from "../../type/markType";
+import { PutMarkUtil } from "../../util/putMarkUtil";
 import { SimulateParam } from "./param/simulateParam";
 
 /**
@@ -42,7 +43,7 @@ export abstract class SimulateService {
      * @returns ゲーム（シミュレーション）が終了した場合はtrue
      */
     public isDone(): boolean {
-        return this.mapState.isDone();
+        return !PutMarkUtil.isPutable(this.mapState);
     }
 
     /**

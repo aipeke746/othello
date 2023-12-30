@@ -7,6 +7,7 @@ import { SimulateParam } from "../../simulate/param/simulateParam";
 import { OperateService } from "../operateService";
 import { SimulateType } from '../../../type/simulateType';
 import { SimulateService } from "../../simulate/simulateService";
+import { PutMarkUtil } from "../../../util/putMarkUtil";
 
 /**
  * αβ法で操作するクラス
@@ -60,7 +61,7 @@ export class AlphaBetaImpl implements OperateService {
         const targetMark = simulate.myMark
         let maxScore: [number, Coord | undefined] = [Number.NEGATIVE_INFINITY, undefined];
 
-        for (const coord of simulate.mapState.getPutableCoords(targetMark)) {
+        for (const coord of PutMarkUtil.getPutableCoords(simulate.mapState, targetMark)) {
             const childScore = this.getChildScore(simulate, targetMark, coord);
             if (childScore > maxScore[0]) {
                 maxScore[0] = childScore;
@@ -82,7 +83,7 @@ export class AlphaBetaImpl implements OperateService {
         const targetMark = MarkTypeUtil.getOpponent(simulate.myMark);
         let minScore: [number, Coord | undefined] = [Number.POSITIVE_INFINITY, undefined];
 
-        for (const coord of simulate.mapState.getPutableCoords(targetMark)) {
+        for (const coord of PutMarkUtil.getPutableCoords(simulate.mapState, targetMark)) {
             const childScore = this.getChildScore(simulate, targetMark, coord);
             if (childScore < minScore[0]) {
                 minScore[0] = childScore;

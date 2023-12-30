@@ -3,6 +3,7 @@ import { WeightMap } from "../service/simulate/weight/weightMap";
 import { MarkType } from "../type/markType";
 import { Coord } from "../vo/coord";
 import { MarkTypeUtil } from "./markTypeUtil";
+import { PutMarkUtil } from "./putMarkUtil";
 
 /**
  * 評価値を計算するクラス
@@ -33,19 +34,11 @@ export class EvaluatedScoreUtil {
      * @returns 評価値
      */
     public static getByPutableCoords(mapState: MapState, mark: MarkType): number {
-        const coords: Coord[] = mapState.getPutableCoords(mark);
+        const coords: Coord[] = PutMarkUtil.getPutableCoords(mapState, mark);
         return coords.reduce(
             (score, coord) => score + WeightMap.WEIGHT_MAP[coord.y][coord.x] + EvaluatedScoreUtil.PUTABLE_WEIGHT, 0
         );
     }
-
-    //　確定石
-    // public static getByFixedCoords(mapState: MapState, mark: MarkType): number {
-    //     const coords: Coord[] = mapState.getFixedCoords(mark);
-    //     return coords.reduce(
-    //         (score, coord) => score + WeightMap.WEIGHT_MAP[coord.y][coord.x], 0
-    //     );
-    // }
 
     /**
      * 勝敗が決まった時の評価値を取得する
@@ -54,7 +47,7 @@ export class EvaluatedScoreUtil {
      * @returns 評価値
      */
     public static getByFinish(mapState: MapState, mark: MarkType): number {
-        if (!mapState.isDone()) {
+        if (PutMarkUtil.isPutable(mapState)) {
             return 0;
         }
 

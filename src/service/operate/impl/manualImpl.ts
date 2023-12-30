@@ -1,5 +1,6 @@
 import { Tilemap } from "../../../entity/tilemap";
 import { MarkType } from "../../../type/markType";
+import { ReverseMarkUtil } from "../../../util/reverseMarkUtil";
 import { Coord } from "../../../vo/coord";
 import { OperateService } from "../operateService";
 
@@ -48,7 +49,7 @@ export class ManualImpl implements OperateService {
         const pos = this.pointer.position;
         const coord = new Coord(tilemap.getTilePos(pos));
 
-        return tilemap.mapState.isReversible(coord, mark)
+        return ReverseMarkUtil.isReversible(tilemap.mapState, coord, mark)
             ? coord
             : undefined;
     }
