@@ -1,6 +1,6 @@
-import { OperateFactory } from "../factory/operateFactory";
-import { OperateService } from "../service/operate/operateService";
-import { OperateType } from "../type/operateType";
+import { OperateFactory } from "../../factory/operateFactory";
+import { OperateService } from "../../service/operate/operateService";
+import { OperateType } from "../../type/operateType";
 
 /**
  * 操作方法をまとめたクラス

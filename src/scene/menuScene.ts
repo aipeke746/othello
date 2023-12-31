@@ -3,10 +3,10 @@ import { OperateType } from "../type/operateType";
 /**
  * ゲームのタイトルシーン
  */
-export class TitleScene extends Phaser.Scene {
+export class MenuScene extends Phaser.Scene {
 
     constructor() {
-        super({ key: 'titleScene'});
+        super({ key: 'menuScene'});
     }
 
     preload() {

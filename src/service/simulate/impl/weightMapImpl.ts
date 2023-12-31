@@ -1,6 +1,6 @@
-import { MapState } from "../../../entity/mapState";
+import { MapState } from "../../../entity/map/mapState";
 import { MarkType } from "../../../type/markType";
-import { EvaluatedScoreUtil } from "../../../util/evaluatedScoreUtil";
+import { EvaluatedScoreUtil } from "../../../util/simulate/evaluatedScoreUtil";
 import { SimulateParam } from "../param/simulateParam";
 import { SimulateService } from "../simulateService";
 

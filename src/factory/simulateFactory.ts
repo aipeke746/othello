@@ -1,4 +1,4 @@
-import { MapState } from "../entity/mapState";
+import { MapState } from "../entity/map/mapState";
 import { MaxScoreImpl } from "../service/simulate/impl/maxScoreImpl";
 import { WeightMapImpl } from "../service/simulate/impl/weightMapImpl";
 import { SimulateParam } from "../service/simulate/param/simulateParam";

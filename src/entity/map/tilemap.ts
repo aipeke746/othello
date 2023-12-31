@@ -1,5 +1,5 @@
-import { Param } from "../param";
-import { Coord } from "../vo/coord";
+import { Param } from "../../param";
+import { Coord } from "../../vo/coord";
 import { MapState } from "./mapState";
 
 /**

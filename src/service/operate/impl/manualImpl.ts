@@ -1,6 +1,6 @@
-import { Tilemap } from "../../../entity/tilemap";
+import { Tilemap } from "../../../entity/map/tilemap";
 import { MarkType } from "../../../type/markType";
-import { ReverseMarkUtil } from "../../../util/reverseMarkUtil";
+import { ReverseMarkUtil } from "../../../util/map/reverseMarkUtil";
 import { Coord } from "../../../vo/coord";
 import { OperateService } from "../operateService";
 

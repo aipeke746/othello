@@ -1,7 +1,7 @@
-import { MapState } from "../../entity/mapState";
-import { Tilemap } from "../../entity/tilemap";
+import { MapState } from "../../entity/map/mapState";
+import { Tilemap } from "../../entity/map/tilemap";
 import { Param } from '../../param';
-import { PutMarkUtil } from "../../util/putMarkUtil";
+import { PutMarkUtil } from "../../util/map/putMarkUtil";
 
 /**
  * アシスト機能に関するサービス

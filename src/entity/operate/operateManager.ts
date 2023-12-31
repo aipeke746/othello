@@ -1,6 +1,6 @@
-import { OperateService } from "../service/operate/operateService";
-import { MarkType } from "../type/markType";
-import { OperateType } from "../type/operateType";
+import { OperateService } from "../../service/operate/operateService";
+import { MarkType } from "../../type/markType";
+import { OperateType } from "../../type/operateType";
 import { Operator } from "./operator";
 
 /**

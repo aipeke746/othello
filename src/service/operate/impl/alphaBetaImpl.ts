@@ -1,14 +1,14 @@
-import { Tilemap } from "../../../entity/tilemap";
+import { Tilemap } from "../../../entity/map/tilemap";
 import { SimulateFactory } from "../../../factory/simulateFactory";
 import { MarkType } from "../../../type/markType";
-import { MarkTypeUtil } from "../../../util/markTypeUtil";
+import { MarkTypeUtil } from "../../../util/mark/markTypeUtil";
 import { Coord } from "../../../vo/coord";
 import { SimulateParam } from "../../simulate/param/simulateParam";
 import { OperateService } from "../operateService";
 import { SimulateType } from '../../../type/simulateType';
 import { SimulateService } from "../../simulate/simulateService";
-import { PutMarkUtil } from "../../../util/putMarkUtil";
-import { GameUtil } from "../../../util/gameUtil";
+import { PutMarkUtil } from "../../../util/map/putMarkUtil";
+import { GameUtil } from "../../../util/map/gameUtil";
 
 /**
  * αβ法で操作するクラス

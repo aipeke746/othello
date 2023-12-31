@@ -1,8 +1,8 @@
-import { MapState } from "../entity/mapState";
-import { Tilemap } from "../entity/tilemap";
-import { SimulateService } from "../service/simulate/simulateService";
-import { MarkType } from "../type/markType";
-import { Coord } from "../vo/coord";
+import { MapState } from "../../entity/map/mapState";
+import { Tilemap } from "../../entity/map/tilemap";
+import { SimulateService } from "../../service/simulate/simulateService";
+import { MarkType } from "../../type/markType";
+import { Coord } from "../../vo/coord";
 import { PutMarkUtil } from "./putMarkUtil";
 import { ReverseMarkUtil } from "./reverseMarkUtil";
 

@@ -1,6 +1,6 @@
-import { MapState } from "../entity/mapState";
-import { MarkType } from "../type/markType";
-import { Coord } from "../vo/coord";
+import { MapState } from "../../entity/map/mapState";
+import { MarkType } from "../../type/markType";
+import { Coord } from "../../vo/coord";
 import { ReverseMarkUtil } from "./reverseMarkUtil";
 
 /**

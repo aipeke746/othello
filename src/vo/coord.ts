@@ -1,4 +1,4 @@
-import { MapState } from "../entity/mapState";
+import { MapState } from "../entity/map/mapState";
 
 /**
  * タイルマップ（オセロ）の座標を表すクラス

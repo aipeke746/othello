@@ -1,11 +1,11 @@
-import { Tilemap } from "../entity/tilemap";
+import { Tilemap } from "../entity/map/tilemap";
 import { MarkType } from "../type/markType";
 import { OperateType } from "../type/operateType";
 import { AssistService } from '../service/map/assistService';
-import { OperateManager } from "../entity/operateManager";
+import { OperateManager } from "../entity/operate/operateManager";
 import { PlayService } from "../service/map/playService";
 import { ScoreService } from "../service/map/scoreService";
-import { ReverseToMarkUtil } from "../util/reverseToMarkUtil";
+import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
 
 /**
  * ゲームのプレイシーン

@@ -1,9 +1,9 @@
-import { MapState } from "../entity/mapState";
-import { WeightMap } from "../service/simulate/weight/weightMap";
-import { MarkType } from "../type/markType";
-import { Coord } from "../vo/coord";
-import { MarkTypeUtil } from "./markTypeUtil";
-import { PutMarkUtil } from "./putMarkUtil";
+import { MapState } from "../../entity/map/mapState";
+import { WeightMap } from "../../service/simulate/weight/weightMap";
+import { MarkType } from "../../type/markType";
+import { Coord } from "../../vo/coord";
+import { MarkTypeUtil } from "../mark/markTypeUtil";
+import { PutMarkUtil } from "../map/putMarkUtil";
 
 /**
  * 評価値を計算するクラス

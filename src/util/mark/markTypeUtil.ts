@@ -1,4 +1,4 @@
-import { MarkType } from "../type/markType";
+import { MarkType } from "../../type/markType";
 
 /**
  * オセロのマークに関するユーティリティクラス

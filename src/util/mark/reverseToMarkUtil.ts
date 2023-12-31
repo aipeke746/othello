@@ -1,4 +1,4 @@
-import { MarkType } from "../type/markType";
+import { MarkType } from "../../type/markType";
 
 /**
  * マークをひっくり返す画像のキーを返すユーティリティクラス

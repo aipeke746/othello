@@ -1,8 +1,8 @@
-import { MapState } from "../entity/mapState";
-import { MarkType } from "../type/markType";
-import { Coord } from "../vo/coord";
+import { MapState } from "../../entity/map/mapState";
+import { MarkType } from "../../type/markType";
+import { Coord } from "../../vo/coord";
 import { DirectionUtil } from "./directionUtil";
-import { MarkTypeUtil } from "./markTypeUtil";
+import { MarkTypeUtil } from "../mark/markTypeUtil";
 
 /**
  * マークをひっくり返すユーティリティクラス

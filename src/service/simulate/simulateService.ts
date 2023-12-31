@@ -1,6 +1,6 @@
-import { MapState } from "../../entity/mapState";
+import { MapState } from "../../entity/map/mapState";
 import { MarkType } from "../../type/markType";
-import { PutMarkUtil } from "../../util/putMarkUtil";
+import { PutMarkUtil } from "../../util/map/putMarkUtil";
 import { SimulateParam } from "./param/simulateParam";
 
 /**

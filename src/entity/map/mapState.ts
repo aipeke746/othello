@@ -1,6 +1,6 @@
-import { MarkType } from "../type/markType";
-import { MarkTypeUtil } from "../util/markTypeUtil";
-import { Coord } from "../vo/coord";
+import { MarkType } from "../../type/markType";
+import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
+import { Coord } from "../../vo/coord";
 
 /**
  * マップの状態を表すクラス

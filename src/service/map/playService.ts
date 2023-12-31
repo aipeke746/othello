@@ -1,10 +1,10 @@
-import { OperateManager } from "../../entity/operateManager";
-import { Tilemap } from "../../entity/tilemap";
+import { OperateManager } from "../../entity/operate/operateManager";
+import { Tilemap } from "../../entity/map/tilemap";
 import { MarkType } from "../../type/markType";
-import { GameUtil } from "../../util/gameUtil";
-import { PutMarkUtil } from "../../util/putMarkUtil";
-import { ReverseToMarkUtil } from "../../util/reverseToMarkUtil";
-import { ReverseMarkUtil } from "../../util/reverseMarkUtil";
+import { GameUtil } from "../../util/map/gameUtil";
+import { PutMarkUtil } from "../../util/map/putMarkUtil";
+import { ReverseToMarkUtil } from "../../util/mark/reverseToMarkUtil";
+import { ReverseMarkUtil } from "../../util/map/reverseMarkUtil";
 import { Coord } from "../../vo/coord";
 import { AssistService } from "./assistService";
 
