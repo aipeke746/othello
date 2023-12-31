@@ -14,11 +14,11 @@ export class ReverseMarkUtil {
      * @param mark マーク
      */
     public static reverse(mapState: MapState, coord: Coord, mark: MarkType): void {
-        mapState.getField()[coord.y][coord.x] = mark;
+        mapState.setMark(mark, coord);
 
         const coords = this.getReversibleCoords(mapState, mark, coord);
         for (const coord of coords) {
-            mapState.getField()[coord.y][coord.x] = mark;
+            mapState.setMark(mark, coord);
         }
     }
 
@@ -29,7 +29,7 @@ export class ReverseMarkUtil {
      * @returns 置ける場合はtrue
      */
     public static isReversible(mapState: MapState, coord: Coord, mark: MarkType): boolean {
-        if (mapState.getField()[coord.y][coord.x] !== MarkType.NONE) {
+        if (mapState.getMark(coord) !== MarkType.NONE) {
             return false;
         }
         return this.getReversibleCoords(mapState, mark, coord).length > 0;
@@ -41,7 +41,7 @@ export class ReverseMarkUtil {
      * @param coord マークを置く座標
      * @returns ひっくり返せる全ての座標
      */
-    private static getReversibleCoords(mapState: MapState, mark: MarkType, coord: Coord): Coord[] {
+    public static getReversibleCoords(mapState: MapState, mark: MarkType, coord: Coord): Coord[] {
         return DirectionUtil.getDiff()
             .flatMap(
                 diff => this.reversibleCoords(mapState, mark, coord, diff)
@@ -64,9 +64,9 @@ export class ReverseMarkUtil {
             pos.add(diff);
             if (this.skip(mapState, pos)) break;
 
-            if (mapState.getField()[pos.y][pos.x] == MarkTypeUtil.getOpponent(mark)) {
+            if (mapState.getMark(pos) == MarkTypeUtil.getOpponent(mark)) {
                 count += 1;
-            } else if (mapState.getField()[pos.y][pos.x] == mark) {
+            } else if (mapState.getMark(pos) == mark) {
                 for (let i=0; i<count; i++) {
                     pos.subtract(diff);
                     coords.push(new Coord(pos));
@@ -84,6 +84,6 @@ export class ReverseMarkUtil {
      */
     private static skip(mapState: MapState, pos: Phaser.Math.Vector2): boolean {
         return (pos.x<0 || pos.x>MapState.LENGTH-1 || pos.y<0 || pos.y>MapState.LENGTH-1)
-            || (mapState.getField()[pos.y][pos.x] === MarkType.NONE);
+            || (mapState.getMark(pos) === MarkType.NONE);
     }
 }

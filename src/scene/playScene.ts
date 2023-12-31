@@ -5,6 +5,7 @@ import { AssistService } from '../service/map/assistService';
 import { OperateManager } from "../entity/operateManager";
 import { PlayService } from "../service/map/playService";
 import { ScoreService } from "../service/map/scoreService";
+import { ReverseToMarkUtil } from "../util/reverseToMarkUtil";
 
 /**
  * ゲームのプレイシーン
@@ -30,13 +31,15 @@ export class PlayScene extends Phaser.Scene {
 
     preload() {
         this.load.image('mapTiles', 'assets/images/mapTiles.png');
+        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.BLACK), 'assets/images/reverseToBlack.png', { frameWidth: 64, frameHeight: 64 })
+        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.WHITE), 'assets/images/reverseToWhite.png', { frameWidth: 64, frameHeight: 64 })
     }
 
     create() {
         this.tilemap = new Tilemap(this, 'mapTiles');
         this.assistService = new AssistService(this);
         this.scoreService = new ScoreService(this);
-        this.playService = new PlayService(this.operateManager, this.assistService);
+        this.playService = new PlayService(this, this.operateManager, this.assistService);
 
         this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
     }

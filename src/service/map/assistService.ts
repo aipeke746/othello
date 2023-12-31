@@ -42,22 +42,22 @@ export class AssistService {
     };
 
     /**
+     * 置ける場所を表示している円を全て削除する
+     */
+    public removeAllCircle() {
+        this.putableCircles.forEach(circle => {
+            circle.destroy();
+        });
+        this.putableCircles = [];
+    }
+
+    /**
      * 表示するかどうかを判定する
      * @param isManualOperator 手動操作のプレイヤーかどうか
      * @returns 表示するかどうか
      */
     private isVisible(isManualOperator: boolean): boolean {
         return Param.SHOW_PUTABLE_CIRCLES && isManualOperator;
-    }
-
-    /**
-     * 置ける場所を表示している円を全て削除する
-     */
-    private removeAllCircle() {
-        this.putableCircles.forEach(circle => {
-            circle.destroy();
-        });
-        this.putableCircles = [];
     }
 
     /**

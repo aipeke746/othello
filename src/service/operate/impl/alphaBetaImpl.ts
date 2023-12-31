@@ -106,7 +106,7 @@ export class AlphaBetaImpl implements OperateService {
      */
     private getChildScore(simulate: SimulateService, mark: MarkType, coord: Coord): number {
         const nextSimulate = simulate.clone();
-        GameUtil.simulateAdvance(nextSimulate, coord, mark);
+        GameUtil.simulateAdvance(nextSimulate, mark, coord);
         nextSimulate.param.depth--;
 
         return this.getAlphaBetaCoord(nextSimulate)[0];

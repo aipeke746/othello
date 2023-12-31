@@ -48,8 +48,8 @@ export class PutMarkUtil {
         const coords: Coord[] = [];
         for (let y=0; y<MapState.LENGTH; y++) {
             for (let x=0; x<MapState.LENGTH; x++) {
-                if (mapState.getField()[y][x] === MarkType.NONE) {
-                    const pos = new Phaser.Math.Vector2(x, y);
+                const pos = new Phaser.Math.Vector2(x, y);
+                if (mapState.getMark(pos) === MarkType.NONE) {
                     coords.push(new Coord(pos));
                 }
             }

@@ -59,7 +59,9 @@ export class Tilemap {
     public update() {
         for (let y=0; y<MapState.LENGTH; y++) {
             for (let x=0; x<MapState.LENGTH; x++) {
-                this.layer.putTileAt(this.mapState.getField()[y][x], x, y);
+                const pos = new Phaser.Math.Vector2(x, y);
+                this.layer.putTileAt(this.mapState.getMark(pos), x, y);
+                this.layer.putTileAt(this.mapState.getMark(pos), x, y);
             }
         }
     }

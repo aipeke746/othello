@@ -100,6 +100,24 @@ export class MapState {
     }
 
     /**
+     * 指定した座標のマークを取得する
+     * @param coord 座標
+     * @returns マーク
+     */
+    public getMark(pos: Coord | Phaser.Math.Vector2): MarkType {
+        return this.field[pos.y][pos.x];
+    }
+
+    /**
+     * 指定した座標にマークを置く
+     * @param mark マーク
+     * @param coord 座標
+     */
+    public setMark(mark: MarkType, coord: Coord): void {
+        this.field[coord.y][coord.x] = mark;
+    }
+
+    /**
      * マップの初期化（オセロの初期配置）
      * 4x4のマスに白黒を交互に配置する
      */

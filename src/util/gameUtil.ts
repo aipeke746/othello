@@ -16,7 +16,7 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    public static advance(tilemap: Tilemap, coord: Coord, mark: MarkType) {
+    public static advance(tilemap: Tilemap, mark: MarkType, coord: Coord) {
         this.advanceMap(tilemap.mapState, coord, mark);
         tilemap.update();
     }
@@ -27,7 +27,7 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    public static simulateAdvance(simulate: SimulateService, coord: Coord, mark: MarkType) {
+    public static simulateAdvance(simulate: SimulateService, mark: MarkType, coord: Coord) {
         this.advanceMap(simulate.mapState, coord, mark);
     }
 
