@@ -4,7 +4,7 @@ import { OperateType } from "../type/operateType";
 import { AssistService } from '../service/map/assistService';
 import { OperateManager } from "../entity/operate/operateManager";
 import { PlayService } from "../service/map/playService";
-import { ScoreService } from "../service/map/scoreService";
+import { ViewService } from "../service/map/viewService";
 import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
 
 /**
@@ -14,7 +14,7 @@ export class PlayScene extends Phaser.Scene {
     private tilemap: Tilemap;
     private operateManager: OperateManager;
     private assistService: AssistService;
-    private scoreService: ScoreService
+    private viewService: ViewService
     private playService: PlayService;
 
     constructor() {
@@ -38,7 +38,7 @@ export class PlayScene extends Phaser.Scene {
     create() {
         this.tilemap = new Tilemap(this, 'mapTiles');
         this.assistService = new AssistService(this);
-        this.scoreService = new ScoreService(this);
+        this.viewService = new ViewService(this);
         this.playService = new PlayService(this, this.operateManager, this.assistService);
 
         this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
@@ -46,6 +46,6 @@ export class PlayScene extends Phaser.Scene {
 
     update() {
         this.playService.do(this.tilemap);
-        this.scoreService.update(this.tilemap);
+        this.viewService.update(this.tilemap);
     }
 }

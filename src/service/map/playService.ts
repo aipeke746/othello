@@ -43,6 +43,10 @@ export class PlayService {
             : this.finish();
     }
 
+    public isAnimating(): boolean {
+        return this.isReversing;
+    }
+
     /**
      * プレイする
      * @param tilemap タイルマップ
