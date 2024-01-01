@@ -31,6 +31,7 @@ export class MenuScene extends Phaser.Scene {
     private createText(x: number, y: number, content: string, firstOperator: OperateType, secondOperator: OperateType): void {
         const text = this.add.text(x, y, content)
             .setOrigin(0.5)
+            .setFontSize(30)
             .setInteractive()
         text.on('pointerdown', () => {
             this.scene.start('playScene', { firstOperator: firstOperator, secondOperator: secondOperator });
