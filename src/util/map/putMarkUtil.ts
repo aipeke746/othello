@@ -37,7 +37,7 @@ export class PutMarkUtil {
      * @param mark マーク
      * @returns 置ける場所がある場合はtrue
      */
-    private static isPutableMark(mapState: MapState, mark: MarkType): boolean {
+    public static isPutableMark(mapState: MapState, mark: MarkType): boolean {
         return this.getPutableCoords(mapState, mark).length > 0;
     }
 

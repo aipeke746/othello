@@ -35,34 +35,30 @@ export class ViewService {
     private whiteScoreText: Phaser.GameObjects.Text;
 
     constructor(scene: Phaser.Scene) {
-        let x, y, width, height, tx, ty;
-
-        // 手番表示用の背景
-        x = Param.TILE_MARGIN;
-        y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;
-        width = scene.cameras.main.width / 2 - x - Param.TILE_MARGIN / 2;
-        height = scene.cameras.main.height - y - Param.TILE_MARGIN;
+        // 背景
+        const x = scene.cameras.main.width / 2 + Param.TILE_MARGIN;
+        const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;``
+        const width = scene.cameras.main.width - x - Param.TILE_MARGIN / 2;
+        const height = scene.cameras.main.height - y - Param.TILE_MARGIN;
         scene.add.rectangle(x, y, width, height, 0xbdbebd).setOrigin(0, 0);
 
+        let tx, ty;
+
+        // 手番表示用のテキスト
         tx = x + width / 2;
-        ty = y + height / 2;
-        this.turnText = this.createText(scene, tx, ty, "のターン");
+        ty = y + height / 2 - Param.BOTTOM_TILE_MARGIN / 4;
+        this.turnText = this.createText(scene, tx, ty, "黒のターン");
 
-        // スコア表示用の背景
-        x = scene.cameras.main.width / 2 + Param.TILE_MARGIN;
-        y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;``
-        width = scene.cameras.main.width - x - Param.TILE_MARGIN / 2;
-        height = scene.cameras.main.height - y - Param.TILE_MARGIN;
-        scene.add.rectangle(x, y, width, height, 0xbdbebd).setOrigin(0, 0);
-
+        // 黒のスコア表示用のテキスト
         tx = x + width / 2 + this.offset;
-        ty = y + height / 2 - Param.BOTTOM_TILE_MARGIN / 7;
-        this.blackScoreText = this.createText(scene, tx, ty, ": 2");
+        ty = y + height / 2;
+        this.blackScoreText = this.createText(scene, tx, ty, ":  2");
         scene.add.graphics().fillStyle(0x000000).fillCircle(tx - 70, ty, this.circleRadius);
 
-        tx = x + width / 2 + this.circleRadius;
-        ty = y + height / 2 + Param.BOTTOM_TILE_MARGIN / 7;
-        this.whiteScoreText = this.createText(scene, tx, ty, ": 2");
+        // 白のスコア表示用のテキスト
+        tx = x + width / 2 + this.offset;
+        ty = y + height / 2 + Param.BOTTOM_TILE_MARGIN / 4;
+        this.whiteScoreText = this.createText(scene, tx, ty, ":  2");
         scene.add.graphics().fillStyle(0xffffff).fillCircle(tx - 70, ty, this.circleRadius);
     }
 
@@ -71,13 +67,9 @@ export class ViewService {
      * @param tilemap タイルマップ
      */
     public update(tilemap: Tilemap) {
-        const mark = tilemap.mapState.getNowTurnMark();
-        this.turnText.setText(`${MarkTypeUtil.getString(mark)}のターン`);
-
-        const blackCount = tilemap.mapState.getMarkCount(MarkType.BLACK);
-        const whiteCount = tilemap.mapState.getMarkCount(MarkType.WHITE);
-        this.blackScoreText.setText(`: ${blackCount.toString().padStart(2, ' ')}`);
-        this.whiteScoreText.setText(`: ${whiteCount.toString().padStart(2, ' ')}`);
+        this.turnText.setText(this.getTurnString(tilemap));
+        this.blackScoreText.setText(this.getMarkCountString(tilemap, MarkType.BLACK));
+        this.whiteScoreText.setText(this.getMarkCountString(tilemap, MarkType.WHITE));
     }
 
     /**
@@ -93,5 +85,26 @@ export class ViewService {
             .setFontSize(this.fontSize)
             .setColor('#000000')
             .setOrigin(0.5, 0.5);
+    }
+
+    /**
+     * マークの数の文字列表示を取得する
+     * @param tilemap タイルマップ
+     * @param mark マーク
+     * @returns マークの数の文字列表示
+     */
+    private getMarkCountString(tilemap: Tilemap, mark: MarkType): string {
+        const count = tilemap.mapState.getMarkCount(mark);
+        return ": " + count.toString().padStart(2, ' ');
+    }
+
+    /**
+     * 手番の文字列を取得する
+     * @param tilemap タイルマップ
+     * @returns 手番の文字列
+     */
+    private getTurnString(tilemap: Tilemap): string {
+        const mark = tilemap.mapState.getNowTurnMark();
+        return `${MarkTypeUtil.getString(mark)}のターン`;
     }
 }

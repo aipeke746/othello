@@ -6,7 +6,7 @@ import { OperateManager } from "../entity/operate/operateManager";
 import { PlayService } from "../service/map/playService";
 import { ViewService } from "../service/map/viewService";
 import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
-import { Param } from "../param";
+import { FunctionService } from "../service/map/functionService";
 
 /**
  * ゲームのプレイシーン
@@ -15,7 +15,7 @@ export class PlayScene extends Phaser.Scene {
     private tilemap: Tilemap;
     private operateManager: OperateManager;
     private assistService: AssistService;
-    private viewService: ViewService
+    private viewService: ViewService;
     private playService: PlayService;
 
     constructor() {
@@ -40,17 +40,10 @@ export class PlayScene extends Phaser.Scene {
         this.tilemap = new Tilemap(this, 'mapTiles');
         this.assistService = new AssistService(this);
         this.viewService = new ViewService(this);
+        new FunctionService(this, this.tilemap, this.assistService, this.operateManager);
         this.playService = new PlayService(this, this.operateManager, this.assistService);
 
         this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
-
-        this.add.text(Param.TILE_MARGIN + 10, this.cameras.main.height - Param.TILE_MARGIN - 30, '⇦Menu画面')
-            .setFontSize(20)
-            .setColor('#000000')
-            .setInteractive()
-            .on('pointerdown', () => {
-                this.scene.start('menuScene');
-            });
     }
 
     update() {
