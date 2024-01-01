@@ -47,10 +47,13 @@ export class ManualImpl implements OperateService {
      */
     private getManualCoord(tilemap: Tilemap, mark: MarkType): Coord | undefined {
         const pos = this.pointer.position;
-        const coord = new Coord(tilemap.getTilePos(pos));
-
-        return ReverseMarkUtil.isReversible(tilemap.mapState, coord, mark)
-            ? coord
-            : undefined;
+        try {
+            const coord = new Coord(tilemap.getTilePos(pos));
+            return ReverseMarkUtil.isReversible(tilemap.mapState, coord, mark)
+                ? coord
+                : undefined;
+        } catch (e) {
+            return undefined;
+        }
     }
 }
