@@ -6,6 +6,7 @@ import { OperateManager } from "../entity/operate/operateManager";
 import { PlayService } from "../service/map/playService";
 import { ViewService } from "../service/map/viewService";
 import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
+import { Param } from "../param";
 
 /**
  * ゲームのプレイシーン
@@ -42,6 +43,14 @@ export class PlayScene extends Phaser.Scene {
         this.playService = new PlayService(this, this.operateManager, this.assistService);
 
         this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
+
+        this.add.text(Param.TILE_MARGIN + 10, this.cameras.main.height - Param.TILE_MARGIN - 30, '⇦Menu画面')
+            .setFontSize(20)
+            .setColor('#000000')
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.start('menuScene');
+            });
     }
 
     update() {
