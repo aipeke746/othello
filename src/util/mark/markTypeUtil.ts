@@ -4,7 +4,7 @@ import { MarkType } from "../../type/markType";
  * オセロのマークに関するユーティリティクラス
  */
 export class MarkTypeUtil {
-    public static readonly map: Map<MarkType, string> = new Map<MarkType, string>([
+    public static readonly MARK_TYPE_MAP: Map<MarkType, string> = new Map<MarkType, string>([
         [MarkType.NONE, 'なし'],
         [MarkType.BLACK, '黒'],
         [MarkType.WHITE, '白'],
@@ -31,7 +31,7 @@ export class MarkTypeUtil {
      * @returns 
      */
     public static getString(markType: MarkType): string {
-        return this.map.get(markType);
+        return this.MARK_TYPE_MAP.get(markType);
     }
 
     /**

@@ -11,15 +11,15 @@ export class ViewService {
     /**
      * 文字の大きさ
      */
-    private readonly fontSize = 30;
+    private readonly FONT_SIZE = 30;
     /**
      * 円の半径
      */
-    private readonly circleRadius = 20;
+    private readonly RADIUS = 20;
     /**
      * テキストのオフセット
      */
-    private readonly offset = 20;
+    private readonly OFFSET = 20;
 
     /**
      * 手番表示用のテキスト
@@ -50,16 +50,16 @@ export class ViewService {
         this.turnText = this.createText(scene, tx, ty, "黒のターン");
 
         // 黒のスコア表示用のテキスト
-        tx = x + width / 2 + this.offset;
+        tx = x + width / 2 + this.OFFSET;
         ty = y + height / 2;
         this.blackScoreText = this.createText(scene, tx, ty, ":  2");
-        scene.add.graphics().fillStyle(0x000000).fillCircle(tx - 70, ty, this.circleRadius);
+        scene.add.graphics().fillStyle(0x000000).fillCircle(tx - 70, ty, this.RADIUS);
 
         // 白のスコア表示用のテキスト
-        tx = x + width / 2 + this.offset;
+        tx = x + width / 2 + this.OFFSET;
         ty = y + height / 2 + Param.BOTTOM_TILE_MARGIN / 4;
         this.whiteScoreText = this.createText(scene, tx, ty, ":  2");
-        scene.add.graphics().fillStyle(0xffffff).fillCircle(tx - 70, ty, this.circleRadius);
+        scene.add.graphics().fillStyle(0xffffff).fillCircle(tx - 70, ty, this.RADIUS);
     }
 
     /**
@@ -82,7 +82,7 @@ export class ViewService {
      */
     private createText(scene: Phaser.Scene, x: number, y: number, text: string): Phaser.GameObjects.Text {
         return scene.add.text(x, y, text)
-            .setFontSize(this.fontSize)
+            .setFontSize(this.FONT_SIZE)
             .setColor('#000000')
             .setOrigin(0.5, 0.5);
     }

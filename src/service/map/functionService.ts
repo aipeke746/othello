@@ -7,11 +7,11 @@ export class FunctionService {
     /**
      * 文字のサイズ
      */
-    private readonly fontSize = 20;
+    private readonly FONT_SIZE = 20;
     /**
      * 文字のカラー
      */
-    private readonly fontColor = '#000000';
+    private readonly FONT_COLOR = '#000000';
     /**
      * アシスト表示用のテキスト
      */
@@ -70,8 +70,8 @@ export class FunctionService {
      */
     private createText(scene: Phaser.Scene, x: number, y: number, origin: number, text: string) {
         return scene.add.text(x, y, text)
-            .setFontSize(this.fontSize)
-            .setColor(this.fontColor)
+            .setFontSize(this.FONT_SIZE)
+            .setColor(this.FONT_COLOR)
             .setOrigin(origin)
             .setInteractive()
     }
