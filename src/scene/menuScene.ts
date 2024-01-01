@@ -29,8 +29,6 @@ export class MenuScene extends Phaser.Scene {
         this.createStartText(centerX, this.cameras.main.height - 100, 'ゲームスタート');
     }
 
-
-
     /**
      * 画面に表示するタイトル文字の作成
      * @param x ｘ座標
