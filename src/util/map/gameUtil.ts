@@ -40,7 +40,7 @@ export class GameUtil {
     private static advanceMap(mapState: MapState, coord: Coord, mark: MarkType) {
         ReverseMarkUtil.reverse(mapState, coord, mark);
         mapState.nextTurn();
-        if (!PutMarkUtil.isPutable(mapState)) {
+        if (!PutMarkUtil.isPutableMark(mapState, mapState.getNowTurnMark())) {
             mapState.nextTurn();
         }
     }
