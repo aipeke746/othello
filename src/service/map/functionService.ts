@@ -68,7 +68,7 @@ export class FunctionService {
      * @param origin 原点
      * @param text テキスト
      */
-    private createText(scene: Phaser.Scene, x: number, y: number, origin: number, text: string) {
+    private createText(scene: Phaser.Scene, x: number, y: number, origin: number, text: string): Phaser.GameObjects.Text {
         return scene.add.text(x, y, text)
             .setFontSize(this.FONT_SIZE)
             .setColor(this.FONT_COLOR)

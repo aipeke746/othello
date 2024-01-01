@@ -25,8 +25,8 @@ export class PlayScene extends Phaser.Scene {
     init(data: any) {
         this.operateManager = new OperateManager(
             this,
-            data.firstOperator as OperateType,
-            data.secondOperator as OperateType
+            data.firstOperateType as OperateType,
+            data.secondOperateType as OperateType
         );
     }
 
