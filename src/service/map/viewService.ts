@@ -37,8 +37,8 @@ export class ViewService {
     constructor(scene: Phaser.Scene) {
         // 背景
         const x = scene.cameras.main.width / 2 + Param.TILE_MARGIN;
-        const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;``
-        const width = scene.cameras.main.width - x - Param.TILE_MARGIN / 2;
+        const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;
+        const width = scene.cameras.main.width - x - Param.TILE_MARGIN;
         const height = scene.cameras.main.height - y - Param.TILE_MARGIN;
         scene.add.rectangle(x, y, width, height, 0xbdbebd).setOrigin(0, 0);
 
