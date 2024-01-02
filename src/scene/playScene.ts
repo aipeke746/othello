@@ -7,6 +7,7 @@ import { PlayService } from "../service/map/playService";
 import { ViewService } from "../service/map/viewService";
 import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
 import { FunctionService } from "../service/map/functionService";
+import { TakeBackService } from "../service/map/takeBackService";
 
 /**
  * ゲームのプレイシーン
@@ -16,6 +17,8 @@ export class PlayScene extends Phaser.Scene {
     private operateManager: OperateManager;
     private assistService: AssistService;
     private viewService: ViewService;
+    private takeBackService: TakeBackService;
+    private functionService: FunctionService;
     private playService: PlayService;
 
     constructor() {
@@ -40,14 +43,16 @@ export class PlayScene extends Phaser.Scene {
         this.tilemap = new Tilemap(this, 'mapTiles');
         this.assistService = new AssistService(this);
         this.viewService = new ViewService(this);
-        new FunctionService(this, this.tilemap, this.assistService, this.operateManager);
+        this.takeBackService = new TakeBackService();
+        this.functionService = new FunctionService(this, this.tilemap, this.assistService, this.operateManager, this.takeBackService);
         this.playService = new PlayService(this, this.operateManager, this.assistService);
 
         this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
     }
 
     update() {
-        this.playService.do(this.tilemap);
+        this.playService.do(this.tilemap, this.takeBackService);
         this.viewService.update(this.tilemap);
+        this.functionService.update(this.tilemap, this.takeBackService);
     }
 }

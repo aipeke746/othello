@@ -7,6 +7,7 @@ import { ReverseToMarkUtil } from "../../util/mark/reverseToMarkUtil";
 import { ReverseMarkUtil } from "../../util/map/reverseMarkUtil";
 import { Coord } from "../../vo/coord";
 import { AssistService } from "./assistService";
+import { TakeBackService } from "./takeBackService";
 
 /**
  * ゲームのプレイサービス
@@ -37,9 +38,9 @@ export class PlayService {
      * プレイする
      * @param tilemap タイルマップ
      */
-    public do(tilemap: Tilemap) {
+    public do(tilemap: Tilemap, takeBackService: TakeBackService) {
         PutMarkUtil.isPutable(tilemap.mapState)
-            ? this.play(tilemap)
+            ? this.play(tilemap, takeBackService)
             : this.finish();
     }
 
@@ -51,7 +52,7 @@ export class PlayService {
      * プレイする
      * @param tilemap タイルマップ
      */
-    private play(tilemap: Tilemap) {
+    private play(tilemap: Tilemap, takeBackService: TakeBackService) {
         if (this.isReversing) return;
 
         const nowMark = tilemap.mapState.getNowTurnMark();
@@ -59,6 +60,7 @@ export class PlayService {
         const coord = operate.getCoord(tilemap, nowMark);
 
         if (coord) {
+            takeBackService.update(nowMark, tilemap.mapState);
             this.assist.removeAllCircle();
             this.playAnimation(tilemap, nowMark, coord);
             GameUtil.advance(tilemap, nowMark, coord);
