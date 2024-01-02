@@ -17,11 +17,11 @@ export class AlphaBetaImpl implements OperateService {
     /**
      * 探索する深さ
      */
-    private depth: number = 5;
+    private depth: number = 7;
     /**
      * シミュレーションのタイプ（評価値の計算方法）
      */
-    private simulateType: SimulateType = SimulateType.WEIGHT_MAP;
+    private simulateType: SimulateType = SimulateType.MAX_SCORE;
 
 
     /**
