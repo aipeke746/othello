@@ -55,7 +55,7 @@ export class OperateManager {
      * @returns マークが無効かどうか
      */
     private inValidMarkType(mark: MarkType): boolean {
-        return mark === MarkType.NONE;
+        return mark === MarkType.EMPTY;
     }
 
     /**

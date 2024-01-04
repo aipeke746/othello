@@ -3,9 +3,9 @@
  */
 export enum MarkType {
     /**
-     * なし
+     * 空
      */
-    NONE,
+    EMPTY,
     /**
      * 黒
      */
@@ -14,4 +14,8 @@ export enum MarkType {
      * 白
      */
     WHITE,
+    /**
+     * なし
+     */
+    NONE
 }

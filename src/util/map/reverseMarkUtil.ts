@@ -29,7 +29,7 @@ export class ReverseMarkUtil {
      * @returns 置ける場合はtrue
      */
     public static isReversible(mapState: MapState, coord: Coord, mark: MarkType): boolean {
-        if (mapState.getMark(coord) !== MarkType.NONE) {
+        if (mapState.getMark(coord) !== MarkType.EMPTY) {
             return false;
         }
         return this.getReversibleCoords(mapState, mark, coord).length > 0;
@@ -84,6 +84,6 @@ export class ReverseMarkUtil {
      */
     private static skip(mapState: MapState, pos: Phaser.Math.Vector2): boolean {
         return (pos.x<0 || pos.x>MapState.LENGTH-1 || pos.y<0 || pos.y>MapState.LENGTH-1)
-            || (mapState.getMark(pos) === MarkType.NONE);
+            || (mapState.getMark(pos) === MarkType.EMPTY);
     }
 }

@@ -5,7 +5,7 @@ import { MarkType } from "../../type/markType";
  */
 export class MarkTypeUtil {
     public static readonly MARK_TYPE_MAP: Map<MarkType, string> = new Map<MarkType, string>([
-        [MarkType.NONE, 'なし'],
+        [MarkType.EMPTY, 'なし'],
         [MarkType.BLACK, '黒'],
         [MarkType.WHITE, '白'],
     ]);
@@ -16,8 +16,8 @@ export class MarkTypeUtil {
      * @returns 相手のマーク
      */
     public static getOpponent(markType: MarkType): MarkType {
-        if (markType == MarkType.NONE) {
-            return MarkType.NONE;
+        if (markType == MarkType.EMPTY) {
+            return MarkType.EMPTY;
         }
 
         return markType == MarkType.BLACK

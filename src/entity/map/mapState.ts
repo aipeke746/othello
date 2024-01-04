@@ -17,7 +17,7 @@ export class MapState {
     /**
      * オセロのマスを表す二次元配列
      */
-    private field: number[][] = Array.from(Array(MapState.LENGTH), () => new Array(MapState.LENGTH).fill(MarkType.NONE));
+    private field: number[][] = Array.from(Array(MapState.LENGTH), () => new Array(MapState.LENGTH).fill(MarkType.EMPTY));
     /**
      * 現在のターン
      */
@@ -122,7 +122,7 @@ export class MapState {
      * 4x4のマスに白黒を交互に配置する
      */
     private init(): void {
-        this.field = Array.from(Array(MapState.LENGTH), () => new Array(MapState.LENGTH).fill(MarkType.NONE));
+        this.field = Array.from(Array(MapState.LENGTH), () => new Array(MapState.LENGTH).fill(MarkType.EMPTY));
         this.field[3][3] = MarkType.WHITE;
         this.field[4][4] = MarkType.WHITE;
         this.field[3][4] = MarkType.BLACK;
