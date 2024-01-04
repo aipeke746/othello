@@ -1,4 +1,4 @@
-import { Param } from "../../param";
+import { Param } from "../../static/param";
 import { Coord } from "../../vo/coord";
 import { MapState } from "./mapState";
 

@@ -1,6 +1,6 @@
 import { MapState } from "../../entity/map/mapState";
 import { Tilemap } from "../../entity/map/tilemap";
-import { Param } from '../../param';
+import { Param } from '../../static/param';
 import { PutMarkUtil } from "../../util/map/putMarkUtil";
 
 /**

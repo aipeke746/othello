@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { PlayScene } from './scene/playScene';
 import { MapState } from './entity/map/mapState';
 import { MenuScene } from './scene/menuScene';
-import { Param } from './param';
+import { Param } from './static/param';
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,

@@ -1,6 +1,6 @@
 import { Tilemap } from "../../entity/map/tilemap";
 import { OperateManager } from "../../entity/operate/operateManager";
-import { Param } from "../../param";
+import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
 import { AssistService } from "./assistService";
 import { TakeBackService } from './takeBackService';

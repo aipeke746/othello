@@ -1,5 +1,5 @@
 import { Tilemap } from "../../entity/map/tilemap";
-import { Param } from "../../param";
+import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
 import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
 
