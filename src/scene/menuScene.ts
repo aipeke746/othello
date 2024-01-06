@@ -63,7 +63,7 @@ export class MenuScene extends Phaser.Scene {
      * @param y ｙ座標
      */
     private createNextFieldType(x: number, y: number): void {
-        this.createText(x, y, "▶️")
+        this.createText(x, y, "▶︎")
             .on('pointerdown', () => {
                 this.fieldType = FieldTypeUtil.getNext(this.fieldType);
                 this.fieldTypeText.setText(this.fieldType);
@@ -78,7 +78,7 @@ export class MenuScene extends Phaser.Scene {
      * @param y ｙ座標
      */
     private createPreviouseFieldType(x: number, y: number): void {
-        this.createText(x, y, "◀️")
+        this.createText(x, y, "◀︎")
             .on('pointerdown', () => {
                 this.fieldType = FieldTypeUtil.getPrevious(this.fieldType);
                 this.fieldTypeText.setText(this.fieldType);
