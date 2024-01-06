@@ -79,11 +79,31 @@ export class ReverseMarkUtil {
 
     /**
      * ひっくり返せない場合はスキップする
-     * @param pos 座標の位置
+     * @param pos タイルマップの座標
      * @returns スキップする場合はtrue
      */
     private static skip(mapState: MapState, pos: Phaser.Math.Vector2): boolean {
-        return (pos.x<0 || pos.x>MapState.LENGTH-1 || pos.y<0 || pos.y>MapState.LENGTH-1)
-            || (mapState.getMark(pos) === MarkType.EMPTY);
+        return this.outSidePos(pos) || this.skipMarkType(mapState, pos);
+    }
+
+    /**
+     * 指定した座標がフィールドの判定の範囲外かどうか
+     * @param pos タイルマップの座標
+     * @returns フィールドの範囲外の場合は、true
+     */
+    private static outSidePos(pos: Phaser.Math.Vector2): boolean {
+        return pos.x<0 || pos.x>MapState.LENGTH-1
+            || pos.y<0 || pos.y>MapState.LENGTH-1;
+    }
+
+    /**
+     * スキップ対象のマークかどうか
+     * @param mapState マップの状態
+     * @param pos タイルマップの座標
+     * @returns スキップ対象のマークの場合はtrue
+     */
+    private static skipMarkType(mapState: MapState, pos: Phaser.Math.Vector2): boolean {
+        return (mapState.getMark(pos) === MarkType.EMPTY)
+            || (mapState.getMark(pos) === MarkType.NONE);
     }
 }
