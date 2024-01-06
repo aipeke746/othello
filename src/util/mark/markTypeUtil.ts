@@ -5,9 +5,10 @@ import { MarkType } from "../../type/markType";
  */
 export class MarkTypeUtil {
     public static readonly MARK_TYPE_MAP: Map<MarkType, string> = new Map<MarkType, string>([
-        [MarkType.EMPTY, 'なし'],
+        [MarkType.EMPTY, '空'],
         [MarkType.BLACK, '黒'],
         [MarkType.WHITE, '白'],
+        [MarkType.NONE, 'なし']
     ]);
 
     /**

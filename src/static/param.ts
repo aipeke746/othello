@@ -1,3 +1,5 @@
+import { FieldType } from "../type/fieldType";
+
 export class Param {
     // ソースコード側で変更するパラメータ
     /**
@@ -10,7 +12,13 @@ export class Param {
      */
     public static readonly BOTTOM_TILE_MARGIN: number = 250;
 
-    // ゲーム中に変更することができるパラメーター
+    // タイトルで変更可能のパラメータ
+    /**
+     * フィールドのタイプ
+     */
+    public static FIELD_TYPE: FieldType = FieldType.NORMAL;
+
+    // ゲーム中に変更可能のパラメーター
     /**
      * オセロのマークを置ける場所を表示するかどうか
      * 対象の操作方法： 手動操作（MANUAL）

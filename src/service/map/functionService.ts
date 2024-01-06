@@ -1,5 +1,6 @@
 import { Tilemap } from "../../entity/map/tilemap";
 import { OperateManager } from "../../entity/operate/operateManager";
+import { Color } from "../../static/color";
 import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
 import { AssistService } from "./assistService";
@@ -13,7 +14,11 @@ export class FunctionService {
     /**
      * 文字のカラー
      */
-    private readonly FONT_COLOR = '#000000';
+    private readonly FONT_COLOR = Color.WHITE;
+    /**
+     * 背景の色
+     */
+    private readonly BACKGROUND_COLOR = Color.GRAY;
 
     private scene: Phaser.Scene;
     /**
@@ -36,7 +41,7 @@ export class FunctionService {
         const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;
         const width = scene.cameras.main.width / 2 - x - Param.TILE_MARGIN / 2;
         const height = scene.cameras.main.height - y - Param.TILE_MARGIN;
-        scene.add.rectangle(x, y, width, height, 0xbdbebd).setOrigin(0, 0);
+        scene.add.rectangle(x, y, width, height, this.BACKGROUND_COLOR).setOrigin(0, 0);
 
         let tx, ty;
 

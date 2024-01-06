@@ -1,4 +1,5 @@
 import { Tilemap } from "../../entity/map/tilemap";
+import { Color } from "../../static/color";
 import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
 import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
@@ -12,6 +13,14 @@ export class ViewService {
      * 文字の大きさ
      */
     private readonly FONT_SIZE = 30;
+    /**
+     * 文字の色
+     */
+    private readonly FONT_COLOR = Color.WHITE;
+    /**
+     * 背景の色
+     */
+    private readonly BACKGROUND_COLOR = Color.GRAY;
     /**
      * 円の半径
      */
@@ -40,7 +49,7 @@ export class ViewService {
         const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;
         const width = scene.cameras.main.width - x - Param.TILE_MARGIN;
         const height = scene.cameras.main.height - y - Param.TILE_MARGIN;
-        scene.add.rectangle(x, y, width, height, 0xbdbebd).setOrigin(0, 0);
+        scene.add.rectangle(x, y, width, height, this.BACKGROUND_COLOR).setOrigin(0, 0);
 
         let tx, ty;
 
@@ -83,7 +92,7 @@ export class ViewService {
     private createText(scene: Phaser.Scene, x: number, y: number, text: string): Phaser.GameObjects.Text {
         return scene.add.text(x, y, text)
             .setFontSize(this.FONT_SIZE)
-            .setColor('#000000')
+            .setColor(this.FONT_COLOR)
             .setOrigin(0.5, 0.5);
     }
 
