@@ -1,3 +1,4 @@
+import { Tilemap } from "../entity/map/tilemap";
 import { Param } from "../static/param";
 import { FieldType } from '../type/fieldType';
 import { OperateType } from "../type/operateType";
@@ -10,18 +11,18 @@ import { OperateTypeUtil } from "../util/operate/operateTypeUtil";
 export class MenuScene extends Phaser.Scene {
     private readonly FONT_SIZE = 30;
 
-    private firstOperateType: OperateType.MANUAL | OperateType.ALPHA_BETA
-        = OperateType.MANUAL;
-    private secondOperateType: OperateType.MANUAL | OperateType.ALPHA_BETA
-        = OperateType.ALPHA_BETA;
+    private firstOperateType: OperateType = OperateType.MANUAL;
+    private secondOperateType: OperateType = OperateType.ALPHA_BETA;
     private fieldType: FieldType = FieldType.NORMAL;
     private fieldTypeText: Phaser.GameObjects.Text;
+    private tilemap: Tilemap
 
     constructor() {
         super({ key: 'menuScene'});
     }
 
     preload() {
+        this.load.image('mapTiles', 'assets/images/mapTiles.png');
     }
 
     create() {
@@ -31,13 +32,18 @@ export class MenuScene extends Phaser.Scene {
         this.createTitleText(centerX, 100, 'オセロゲーム');
 
         // フィールドを選択
-        this.fieldTypeText = this.createText(centerX, centerY - 100, this.fieldType)
-        this.createNextFieldType(centerX + 150, centerY - 100);
-        this.createPreviouseFieldType(centerX - 150, centerY - 100);
+        this.fieldTypeText = this.createText(centerX, centerY - 200, this.fieldType)
+        this.createNextFieldType(centerX + 150, centerY - 200);
+        this.createPreviouseFieldType(centerX - 150, centerY - 200);
+
+        // 選択フィールドのマップを表示
+        this.tilemap = new Tilemap(this, 'mapTiles')
+        this.tilemap.setPosition(180, centerY - 150);
+        this.tilemap.setScale(0.4);
 
         // 先攻・後攻の操作方法を選択
-        this.createFirstOperateText(centerX, centerY + 100);
-        this.createSecondOperateText(centerX, centerY + 180);
+        this.createFirstOperateText(centerX, centerY + 130);
+        this.createSecondOperateText(centerX, centerY + 200);
         this.createStartText(centerX, this.cameras.main.height - 100, 'ゲームスタート');
     }
 
@@ -61,6 +67,8 @@ export class MenuScene extends Phaser.Scene {
             .on('pointerdown', () => {
                 this.fieldType = FieldTypeUtil.getNext(this.fieldType);
                 this.fieldTypeText.setText(this.fieldType);
+                this.tilemap.mapState.setField(this.fieldType);
+                this.tilemap.update();
             })
     }
 
@@ -74,6 +82,8 @@ export class MenuScene extends Phaser.Scene {
             .on('pointerdown', () => {
                 this.fieldType = FieldTypeUtil.getPrevious(this.fieldType);
                 this.fieldTypeText.setText(this.fieldType);
+                this.tilemap.mapState.setField(this.fieldType);
+                this.tilemap.update();
             })
     }
 

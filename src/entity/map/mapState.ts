@@ -1,5 +1,6 @@
 import { FieldFactory } from "../../factory/fieldFactory";
 import { Param } from "../../static/param";
+import { FieldType } from "../../type/fieldType";
 import { MarkType } from "../../type/markType";
 import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
 import { Coord } from "../../vo/coord";
@@ -50,6 +51,14 @@ export class MapState {
      */
     public getField(): number[][] {
         return this.field;
+    }
+
+    /**
+     * フィールドの種類を変更する
+     * @param fieldType フィールドタイプ
+     */
+    public setField(fieldType: FieldType): void {
+        this.field = FieldFactory.create(fieldType);
     }
 
     /**
