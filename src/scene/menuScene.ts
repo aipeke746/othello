@@ -93,10 +93,10 @@ export class MenuScene extends Phaser.Scene {
      * @param y ｙ座標
      */
     private createFirstOperateText(x: number, y: number): void {
-        const text = this.createText(x, y, "先手: " + OperateTypeUtil.getString(this.firstOperateType))
+        const text = this.createText(x, y, "先攻（黒）: " + OperateTypeUtil.getString(this.firstOperateType))
             .on('pointerdown', () => {
                 this.firstOperateType = OperateTypeUtil.getOpposition(this.firstOperateType);
-                text.setText("先手: " + OperateTypeUtil.getString(this.firstOperateType));
+                text.setText("先攻（黒）: " + OperateTypeUtil.getString(this.firstOperateType));
             });
     }
 
@@ -107,10 +107,10 @@ export class MenuScene extends Phaser.Scene {
      */
 
     private createSecondOperateText(x: number, y: number): void {
-        const text = this.createText(x, y, "後手: " + OperateTypeUtil.getString(this.secondOperateType))
+        const text = this.createText(x, y, "後攻（白）: " + OperateTypeUtil.getString(this.secondOperateType))
             .on('pointerdown', () => {
                 this.secondOperateType = OperateTypeUtil.getOpposition(this.secondOperateType);
-                text.setText("後手: " + OperateTypeUtil.getString(this.secondOperateType));
+                text.setText("後攻（白）: " + OperateTypeUtil.getString(this.secondOperateType));
             });
     }
 
