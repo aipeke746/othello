@@ -1,5 +1,5 @@
 import { FieldFactory } from "../../factory/fieldFactory";
-import { FieldType } from "../../type/fieldType";
+import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
 import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
 import { Coord } from "../../vo/coord";
@@ -29,7 +29,7 @@ export class MapState {
      * マップの初期化を行い、オセロの初期配置を行う
      */
     constructor() {
-        this.field = FieldFactory.create(FieldType.CROSS);
+        this.field = FieldFactory.create(Param.FIELD_TYPE);
         this.nowTurnMark = MarkType.BLACK
     }
 

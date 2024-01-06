@@ -1,5 +1,5 @@
 import { Param } from "../static/param";
-import { FieldType } from "../type/fieldType";
+import { FieldType } from '../type/fieldType';
 import { OperateType } from "../type/operateType";
 import { FieldTypeUtil } from "../util/map/fieldTypeUtil";
 import { OperateTypeUtil } from "../util/operate/operateTypeUtil";
