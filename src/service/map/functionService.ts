@@ -47,12 +47,12 @@ export class FunctionService {
 
         // アシスト機能の切り替えボタン
         tx = x + width / 2;
-        ty = y + height / 2 - Param.BOTTOM_TILE_MARGIN / 7;
+        ty = y + height / 2 - Param.BOTTOM_TILE_MARGIN / 5;
         this.createAssistText(tilemap, assistService, operateManager, tx, ty);
 
         // 一手戻るボタン
         tx = x + width / 2;
-        ty = y + height / 2 + Param.BOTTOM_TILE_MARGIN / 10;
+        ty = y + height / 2;
         this.createTakeBackText(tilemap, operateManager, takeBackService, tx, ty);
 
         // メニュー画面への遷移ボタン

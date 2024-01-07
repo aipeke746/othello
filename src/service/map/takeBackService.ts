@@ -66,7 +66,7 @@ export class TakeBackService {
     }
 
     public getCountString(): string {
-        return `使用回数: 黒=${this.blackCount} / 白=${this.whiteCount}`;
+        return `（ 使用回数: 黒=${this.blackCount} / 白=${this.whiteCount} ）`;
     }
 
     /**
