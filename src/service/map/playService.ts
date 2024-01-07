@@ -26,6 +26,10 @@ export class PlayService {
      * ひっくり返すアニメーションを実行中かどうか
      */
     private isReversing: boolean = false;
+    /**
+     * ゲームが終了したかどうか
+     */
+    private isFinished: boolean = false;
 
     constructor(scene: Phaser.Scene, operateManager: OperateManager, assist: AssistService) {
         this.scene = scene;
@@ -38,23 +42,19 @@ export class PlayService {
      * プレイする
      * @param tilemap タイルマップ
      */
-    public do(tilemap: Tilemap, takeBackService: TakeBackService) {
+    public do(tilemap: Tilemap, takeBackService: TakeBackService): void {
+        if (this.isReversing || this.isFinished) return;
+
         PutMarkUtil.isPutable(tilemap.mapState)
             ? this.play(tilemap, takeBackService)
-            : this.finish();
-    }
-
-    public isAnimating(): boolean {
-        return this.isReversing;
+            : this.finish(tilemap);
     }
 
     /**
      * プレイする
      * @param tilemap タイルマップ
      */
-    private play(tilemap: Tilemap, takeBackService: TakeBackService) {
-        if (this.isReversing) return;
-
+    private play(tilemap: Tilemap, takeBackService: TakeBackService): void {
         const nowMark = tilemap.mapState.getNowTurnMark();
         const operate = this.operateManager.getOperateService(nowMark);
         const coord = operate.getCoord(tilemap, nowMark);
@@ -69,9 +69,12 @@ export class PlayService {
 
     /**
      * 終了処理
+     * ポップアップで勝敗表示を行う
      * @param tilemap タイルマップ
      */
-    private finish() {
+    private finish(tilemap: Tilemap): void {
+        this.isFinished = true;
+        this.scene.scene.launch('finishScene', { winner: this.getWinnerContent(tilemap) });
     }
 
     /**
@@ -80,7 +83,7 @@ export class PlayService {
      * @param mark 置いたマーク
      * @param putCoord 置かれた座標
      */
-    private playAnimation(tilemap: Tilemap, mark: MarkType, putCoord: Coord) {
+    private playAnimation(tilemap: Tilemap, mark: MarkType, putCoord: Coord): void {
         this.isReversing = true;
 
         const reversibleCoords = ReverseMarkUtil.getReversibleCoords(tilemap.mapState, mark, putCoord);
@@ -104,7 +107,7 @@ export class PlayService {
      * ひっくり返すアニメーションを作成する
      * @param scene シーン
      */
-    private createAnimation(scene: Phaser.Scene) {
+    private createAnimation(scene: Phaser.Scene): void {
         const keys: string[] = ReverseToMarkUtil.getAll();
 
         for (const key of keys) {
@@ -115,6 +118,24 @@ export class PlayService {
                 delay: 300,
                 repeat: 0,
             });
+        }
+    }
+
+    /**
+     * 勝敗判定を行い、結果を文字列で返す
+     * @param tilemap タイルマップ
+     * @returns 勝敗結果の文字列
+     */
+    private getWinnerContent(tilemap: Tilemap): string {
+        const blackCount: number = tilemap.mapState.getMarkCount(MarkType.BLACK);
+        const whiteCount: number = tilemap.mapState.getMarkCount(MarkType.WHITE);
+
+        if (blackCount > whiteCount) {
+            return '黒の勝ち';
+        } else if (blackCount < whiteCount) {
+            return '白の勝ち';
+        } else {
+            return '引き分け';
         }
     }
 }

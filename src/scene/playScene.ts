@@ -22,7 +22,7 @@ export class PlayScene extends Phaser.Scene {
     private playService: PlayService;
 
     constructor() {
-        super({ key: 'playScene'});
+        super({ key: 'playScene' });
     }
 
     init(data: any) {

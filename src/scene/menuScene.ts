@@ -18,7 +18,7 @@ export class MenuScene extends Phaser.Scene {
     private tilemap: Tilemap
 
     constructor() {
-        super({ key: 'menuScene'});
+        super({ key: 'menuScene' });
     }
 
     preload() {

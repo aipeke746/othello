@@ -3,7 +3,7 @@
  */
 export class Color {
     /**
-     * 白
+     * 白色
      */
     public static readonly WHITE: string = '#000000';
     /**

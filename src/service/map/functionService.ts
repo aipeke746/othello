@@ -123,6 +123,7 @@ export class FunctionService {
     private createBackMenuText(tx: number, ty: number): void {
         this.createText(this.scene, tx, ty, 0, '⇦Menu画面')
             .on('pointerdown', () => {
+                this.scene.scene.stop('finishScene');
                 this.scene.scene.start('menuScene');
             });
     }
