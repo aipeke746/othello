@@ -30,11 +30,21 @@ export class PlayService {
      * ゲームが終了したかどうか
      */
     private isFinished: boolean = false;
+    /**
+     * マークをセットした時の音
+     */
+    private putMarkSound: Phaser.Sound.BaseSound;
+    /**
+     * マークをひっくり返した時の音
+     */
+    private reverseMarkSound: Phaser.Sound.BaseSound;
 
     constructor(scene: Phaser.Scene, operateManager: OperateManager, assist: AssistService) {
         this.scene = scene;
         this.operateManager = operateManager;
         this.assist = assist;
+        this.putMarkSound = scene.sound.add('putMarkSound');
+        this.reverseMarkSound = scene.sound.add('reverseMarkSound');
         this.createAnimation(scene);
     }
 
@@ -60,6 +70,7 @@ export class PlayService {
         const coord = operate.getCoord(tilemap, nowMark);
 
         if (coord) {
+            this.putMarkSound.play();
             takeBackService.update(nowMark, tilemap.mapState);
             this.assist.removeAllCircle();
             this.playAnimation(tilemap, nowMark, coord);
@@ -95,6 +106,7 @@ export class PlayService {
                 .setOrigin(0, 0);
 
             sprite.anims.play(key).on('animationcomplete', () => {
+                this.reverseMarkSound.play();
                 sprite.destroy();
                 const nextMark = tilemap.mapState.getNowTurnMark();
                 this.assist.showPutableCoords(tilemap, this.operateManager.isManual(nextMark));

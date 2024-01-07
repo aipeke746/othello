@@ -17,6 +17,10 @@ export class Param {
      * フィールドのタイプ
      */
     public static FIELD_TYPE: FieldType = FieldType.NORMAL;
+    /**
+     * 音楽を再生するかどうか
+     */
+    public static PLAY_MUSIC: boolean = false;
 
     // ゲーム中に変更可能のパラメーター
     /**

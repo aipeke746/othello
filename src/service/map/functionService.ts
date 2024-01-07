@@ -31,9 +31,12 @@ export class FunctionService {
      * 一手戻ることができない場合は半透明の状態で表示する
      */
     private takeBackTextButton: Phaser.GameObjects.Text;
+    /**
+     * 一手戻るを使用した回数を表示
+     */
     private takeBackCountText: Phaser.GameObjects.Text;
 
-    constructor(scene: Phaser.Scene, tilemap: Tilemap, assistService: AssistService, operateManager: OperateManager, takeBackService: TakeBackService) {
+    constructor(scene: Phaser.Scene, tilemap: Tilemap, assistService: AssistService, operateManager: OperateManager, takeBackService: TakeBackService, music: Phaser.Sound.BaseSound) {
         this.scene = scene;
 
         // 手番表示用の背景
@@ -58,7 +61,7 @@ export class FunctionService {
         // メニュー画面への遷移ボタン
         tx = x + 10;
         ty = scene.cameras.main.height - Param.TILE_MARGIN - 30;
-        this.createBackMenuText(tx, ty);
+        this.createBackMenuText(tx, ty, music);
     }
 
     /**
@@ -120,9 +123,10 @@ export class FunctionService {
      * @param tx 表示する文字左上のｘ座標
      * @param ty 表示する文字左上のｙ座標
      */
-    private createBackMenuText(tx: number, ty: number): void {
+    private createBackMenuText(tx: number, ty: number, music: Phaser.Sound.BaseSound): void {
         this.createText(this.scene, tx, ty, 0, '⇦Menu画面')
             .on('pointerdown', () => {
+                music.stop();
                 this.scene.scene.stop('finishScene');
                 this.scene.scene.start('menuScene');
             });

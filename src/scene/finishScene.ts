@@ -13,7 +13,7 @@ export class FinishScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('frame', 'assets/images/frame.png');
+        this.load.image('frame', 'asset/image/frame.png');
     }
 
     create() {

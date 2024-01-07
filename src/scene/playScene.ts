@@ -8,6 +8,7 @@ import { ViewService } from "../service/map/viewService";
 import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
 import { FunctionService } from "../service/map/functionService";
 import { TakeBackService } from "../service/map/takeBackService";
+import { Param } from "../static/param";
 
 /**
  * ゲームのプレイシーン
@@ -20,6 +21,7 @@ export class PlayScene extends Phaser.Scene {
     private takeBackService: TakeBackService;
     private functionService: FunctionService;
     private playService: PlayService;
+    private music: Phaser.Sound.BaseSound;
 
     constructor() {
         super({ key: 'playScene' });
@@ -34,17 +36,25 @@ export class PlayScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mapTiles', 'assets/images/mapTiles.png');
-        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.BLACK), 'assets/images/reverseToBlack.png', { frameWidth: 64, frameHeight: 64 })
-        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.WHITE), 'assets/images/reverseToWhite.png', { frameWidth: 64, frameHeight: 64 })
+        this.load.image('mapTiles', 'asset/image/mapTiles.png');
+        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.BLACK), 'asset/image/reverseToBlack.png', { frameWidth: 64, frameHeight: 64 })
+        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.WHITE), 'asset/image/reverseToWhite.png', { frameWidth: 64, frameHeight: 64 })
+        this.load.audio('putMarkSound', 'asset/sound/putMark.mp3');
+        this.load.audio('reverseMarkSound', 'asset/sound/reverseMark.mp3');
+        this.load.audio('music', 'asset/music/Digital_Ghosts-Unicorn_Heads.mp3');
     }
 
     create() {
+        this.music = this.sound.add('music', { volume: 0.5, loop: true });
+        if (Param.PLAY_MUSIC) {
+            this.music.play();
+        }
+
         this.tilemap = new Tilemap(this, 'mapTiles');
         this.assistService = new AssistService(this);
         this.viewService = new ViewService(this);
         this.takeBackService = new TakeBackService();
-        this.functionService = new FunctionService(this, this.tilemap, this.assistService, this.operateManager, this.takeBackService);
+        this.functionService = new FunctionService(this, this.tilemap, this.assistService, this.operateManager, this.takeBackService, this.music);
         this.playService = new PlayService(this, this.operateManager, this.assistService);
 
         this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));

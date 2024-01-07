@@ -22,7 +22,7 @@ export class MenuScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mapTiles', 'assets/images/mapTiles.png');
+        this.load.image('mapTiles', 'asset/image/mapTiles.png');
     }
 
     create() {
