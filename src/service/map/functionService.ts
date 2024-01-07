@@ -20,6 +20,9 @@ export class FunctionService {
      */
     private readonly BACKGROUND_COLOR = Color.GRAY;
 
+    /**
+     * シーン
+     */
     private scene: Phaser.Scene;
     /**
      * アシスト表示用のテキスト

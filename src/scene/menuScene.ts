@@ -44,7 +44,12 @@ export class MenuScene extends Phaser.Scene {
         // 先攻・後攻の操作方法を選択
         this.createFirstOperateText(centerX, centerY + 130);
         this.createSecondOperateText(centerX, centerY + 200);
-        this.createStartText(centerX, this.cameras.main.height - 100, 'ゲームスタート');
+
+        // 音楽をかけるかどうか
+        this.createMusicText(centerX, this.cameras.main.height - 130);
+
+        // ゲームスタートボタン
+        this.createStartText(centerX, this.cameras.main.height - 50, 'ゲームスタート');
     }
 
     /**
@@ -112,6 +117,21 @@ export class MenuScene extends Phaser.Scene {
                 this.secondOperateType = OperateTypeUtil.getOpposition(this.secondOperateType);
                 text.setText("後攻（白）: " + OperateTypeUtil.getString(this.secondOperateType));
             });
+    }
+
+    /**
+     * 音楽を再生するかどうかを選択できる文字を作成
+     * @param x ｘ座標
+     * @param y ｙ座標
+     */
+    private createMusicText(x: number, y: number): void {
+        const isPlay: string = Param.PLAY_MUSIC ? ' ON' : 'OFF';
+        const text = this.createText(x, y, `音楽再生: ${isPlay}`, 25)
+            .on('pointerdown', () => {
+                Param.PLAY_MUSIC = !Param.PLAY_MUSIC;
+                const isPlay: string = Param.PLAY_MUSIC ? ' ON' : 'OFF';
+                text.setText(`音楽再生: ${isPlay}`);
+            })
     }
 
     /**
