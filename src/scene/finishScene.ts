@@ -1,3 +1,5 @@
+import { TextUtil } from "../util/scene/textUtil";
+
 export class FinishScene extends Phaser.Scene {
     /**
      * 勝者の文字列
@@ -23,27 +25,12 @@ export class FinishScene extends Phaser.Scene {
         this.add.image(centerX, centerY, "frame");
 
         // 勝敗表示
-        this.createText(centerX, centerY, this.winner, 50);
+        TextUtil.createText(this, centerX, centerY, this.winner, 50);
 
         // 閉じるボタン
-        this.createText(centerX + 150, centerY + 80, "閉じる", 20)
+        TextUtil.createTextButton(this, centerX + 150, centerY + 80, "閉じる", 20)
             .on('pointerdown', () => {
                 this.scene.stop('finishScene');
             })
-    }
-
-    /**
-     * 文字を作成する
-     * @param x ｘ座標
-     * @param y ｙ座標
-     * @param content 表示する文字列
-     * @param fontSize 文字の大きさ
-     * @returns 作成した文字
-     */
-    private createText(x: number, y: number, content: string, fontSize: number): Phaser.GameObjects.Text {
-        return this.add.text(x, y, content)
-            .setOrigin(0.5)
-            .setFontSize(fontSize)
-            .setInteractive();
     }
 }

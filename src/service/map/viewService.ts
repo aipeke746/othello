@@ -3,6 +3,7 @@ import { Color } from "../../static/color";
 import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
 import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
+import { TextUtil } from "../../util/scene/textUtil";
 
 /**
  * スコア・ターン表示サービス
@@ -16,7 +17,7 @@ export class ViewService {
     /**
      * 文字の色
      */
-    private readonly FONT_COLOR = Color.WHITE;
+    private readonly FONT_COLOR = Color.BLACK;
     /**
      * 背景の色
      */
@@ -56,18 +57,18 @@ export class ViewService {
         // 手番表示用のテキスト
         tx = x + width / 2;
         ty = y + height / 2 - Param.BOTTOM_TILE_MARGIN / 4;
-        this.turnText = this.createText(scene, tx, ty, "黒のターン");
+        this.turnText = TextUtil.createText(scene, tx, ty, "黒のターン", this.FONT_SIZE, this.FONT_COLOR);
 
         // 黒のスコア表示用のテキスト
         tx = x + width / 2 + this.OFFSET;
         ty = y + height / 2;
-        this.blackScoreText = this.createText(scene, tx, ty, ":  2");
+        this.blackScoreText = TextUtil.createText(scene, tx, ty, ":  2", this.FONT_SIZE, this.FONT_COLOR);
         scene.add.graphics().fillStyle(0x000000).fillCircle(tx - 70, ty, this.RADIUS);
 
         // 白のスコア表示用のテキスト
         tx = x + width / 2 + this.OFFSET;
         ty = y + height / 2 + Param.BOTTOM_TILE_MARGIN / 4;
-        this.whiteScoreText = this.createText(scene, tx, ty, ":  2");
+        this.whiteScoreText = TextUtil.createText(scene, tx, ty, ":  2", this.FONT_SIZE, this.FONT_COLOR);
         scene.add.graphics().fillStyle(0xffffff).fillCircle(tx - 70, ty, this.RADIUS);
     }
 
@@ -79,21 +80,6 @@ export class ViewService {
         this.turnText.setText(this.getTurnString(tilemap));
         this.blackScoreText.setText(this.getMarkCountString(tilemap, MarkType.BLACK));
         this.whiteScoreText.setText(this.getMarkCountString(tilemap, MarkType.WHITE));
-    }
-
-    /**
-     * テキストを作成する
-     * @param scene シーン
-     * @param x x座標
-     * @param y y座標
-     * @param text テキスト
-     * @returns テキスト
-     */
-    private createText(scene: Phaser.Scene, x: number, y: number, text: string): Phaser.GameObjects.Text {
-        return scene.add.text(x, y, text)
-            .setFontSize(this.FONT_SIZE)
-            .setColor(this.FONT_COLOR)
-            .setOrigin(0.5, 0.5);
     }
 
     /**

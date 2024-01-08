@@ -1,7 +1,7 @@
 /**
  * シーンに関係するユーティリティ
  */
-export class SceneUtil {
+export class TweenUtil {
     /**
      * 点滅させる
      * @param scene シーン

@@ -3,6 +3,7 @@ import { OperateManager } from "../../entity/operate/operateManager";
 import { Color } from "../../static/color";
 import { Param } from "../../static/param";
 import { MarkType } from "../../type/markType";
+import { TextUtil } from "../../util/scene/textUtil";
 import { AssistService } from "./assistService";
 import { TakeBackService } from './takeBackService';
 
@@ -14,7 +15,7 @@ export class FunctionService {
     /**
      * 文字のカラー
      */
-    private readonly FONT_COLOR = Color.WHITE;
+    private readonly FONT_COLOR = Color.BLACK;
     /**
      * 背景の色
      */
@@ -62,8 +63,8 @@ export class FunctionService {
         this.createTakeBackText(tilemap, operateManager, takeBackService, tx, ty);
 
         // メニュー画面への遷移ボタン
-        tx = x + 10;
-        ty = scene.cameras.main.height - Param.TILE_MARGIN - 30;
+        tx = x + 60;
+        ty = scene.cameras.main.height - Param.TILE_MARGIN - 20;
         this.createBackMenuText(tx, ty, music);
     }
 
@@ -89,17 +90,17 @@ export class FunctionService {
      * @param ty 表示する文字中央のｙ座標
      */
     private createAssistText(tilemap: Tilemap, assistService: AssistService, operateManager: OperateManager, tx: number, ty: number) {
-        this.assistTextToggle = this.createText(this.scene, tx, ty, 0.5, this.getAssistString())
-        .on('pointerdown', () => {
-            Param.SHOW_PUTABLE_CIRCLES = !Param.SHOW_PUTABLE_CIRCLES;
-            if (Param.SHOW_PUTABLE_CIRCLES) {
-                assistService.showPutableCoords(tilemap, operateManager.isManual(tilemap.mapState.getNowTurnMark()));
-                this.assistTextToggle.setText(this.getAssistString());
-            } else {
-                assistService.removeAllCircle();
-                this.assistTextToggle.setText(this.getAssistString());
-            }
-        });
+        this.assistTextToggle = TextUtil.createTextButton(this.scene, tx, ty, this.getAssistString(), this.FONT_SIZE, this.FONT_COLOR)
+            .on('pointerdown', () => {
+                Param.SHOW_PUTABLE_CIRCLES = !Param.SHOW_PUTABLE_CIRCLES;
+                if (Param.SHOW_PUTABLE_CIRCLES) {
+                    assistService.showPutableCoords(tilemap, operateManager.isManual(tilemap.mapState.getNowTurnMark()));
+                    this.assistTextToggle.setText(this.getAssistString());
+                } else {
+                    assistService.removeAllCircle();
+                    this.assistTextToggle.setText(this.getAssistString());
+                }
+            });
     }
 
     /**
@@ -111,14 +112,14 @@ export class FunctionService {
      * @param ty 表示する文字中央のｙ座標
      */
     private createTakeBackText(tilemap: Tilemap, operateManager: OperateManager, takeBackService: TakeBackService, tx: number, ty: number) {
-        this.takeBackTextButton = this.createText(this.scene, tx, ty, 0.5, '一手戻る')
+        this.takeBackTextButton = TextUtil.createTextButton(this.scene, tx, ty, '一手戻る', this.FONT_SIZE, this.FONT_COLOR)
             .on('pointerdown', () => {
                 const nowTurnMark = tilemap.mapState.getNowTurnMark();
                 if (operateManager.isManual(nowTurnMark)) {
                     takeBackService.takeBack(nowTurnMark, tilemap);
                 }
             });
-        this.takeBackCountText = this.createText(this.scene, tx, ty+25, 0.5, `${takeBackService.getCountString()}`, 15)
+        this.takeBackCountText = TextUtil.createText(this.scene, tx, ty+25, `${takeBackService.getCountString()}`, this.FONT_SIZE - 5, this.FONT_COLOR)
     }
 
     /**
@@ -127,7 +128,7 @@ export class FunctionService {
      * @param ty 表示する文字左上のｙ座標
      */
     private createBackMenuText(tx: number, ty: number, music: Phaser.Sound.BaseSound): void {
-        this.createText(this.scene, tx, ty, 0, '⇦Menu画面')
+        TextUtil.createTextButton(this.scene, tx, ty, '⇦Menu画面', this.FONT_SIZE, this.FONT_COLOR)
             .on('pointerdown', () => {
                 music.stop();
                 this.scene.scene.stop('finishScene');
@@ -142,22 +143,6 @@ export class FunctionService {
         return Param.SHOW_PUTABLE_CIRCLES
             ? 'アシスト表示:  ON'
             : 'アシスト表示: OFF';
-    }
-
-    /**
-     * テキストを作成する
-     * @param scene シーン
-     * @param x x座標
-     * @param y y座標
-     * @param origin 原点
-     * @param text テキスト
-     */
-    private createText(scene: Phaser.Scene, x: number, y: number, origin: number, text: string, size: number = this.FONT_SIZE): Phaser.GameObjects.Text {
-        return scene.add.text(x, y, text)
-            .setFontSize(size)
-            .setColor(this.FONT_COLOR)
-            .setOrigin(origin)
-            .setInteractive()
     }
 }
 
