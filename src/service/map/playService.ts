@@ -45,7 +45,6 @@ export class PlayService {
         this.assist = assist;
         this.putMarkSound = scene.sound.add('putMarkSound');
         this.reverseMarkSound = scene.sound.add('reverseMarkSound');
-        this.createAnimation(scene);
     }
 
     /**
@@ -113,24 +112,6 @@ export class PlayService {
                 this.isReversing = false;
             })
         });
-    }
-
-    /**
-     * ひっくり返すアニメーションを作成する
-     * @param scene シーン
-     */
-    private createAnimation(scene: Phaser.Scene): void {
-        const keys: string[] = ReverseToMarkUtil.getAll();
-
-        for (const key of keys) {
-            scene.anims.create({
-                key: key,
-                frames: scene.anims.generateFrameNumbers(key, {start: 0, end: 4}),
-                frameRate: 10,
-                delay: 300,
-                repeat: 0,
-            });
-        }
     }
 
     /**

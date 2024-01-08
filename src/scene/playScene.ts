@@ -9,6 +9,7 @@ import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
 import { FunctionService } from "../service/map/functionService";
 import { TakeBackService } from "../service/map/takeBackService";
 import { Param } from "../static/param";
+import { Animation } from "../static/animation";
 
 /**
  * ゲームのプレイシーン
@@ -45,6 +46,7 @@ export class PlayScene extends Phaser.Scene {
     }
 
     create() {
+        Animation.createMarkReverseAnim(this);
         this.music = this.sound.add('music', { volume: 0.5, loop: true });
         if (Param.PLAY_MUSIC) {
             this.music.play();
