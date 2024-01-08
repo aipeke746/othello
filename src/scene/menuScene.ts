@@ -4,6 +4,7 @@ import { FieldType } from '../type/fieldType';
 import { OperateType } from "../type/operateType";
 import { FieldTypeUtil } from "../util/map/fieldTypeUtil";
 import { OperateTypeUtil } from "../util/operate/operateTypeUtil";
+import { SceneUtil } from "../util/scene/sceneUtil";
 
 /**
  * ゲームのタイトルシーン
@@ -141,11 +142,12 @@ export class MenuScene extends Phaser.Scene {
      * @param content 表示する文字列
      */
     private createStartText(x: number, y: number, content: string): void {
-        this.createText(x, y, content)
+        const text = this.createText(x, y, content)
             .on('pointerdown', () => {
                 Param.FIELD_TYPE = this.fieldType;
                 this.scene.start('playScene', { firstOperateType: this.firstOperateType, secondOperateType: this.secondOperateType });
             });
+        SceneUtil.blinking(this, text, 1000);
     }
 
     /**

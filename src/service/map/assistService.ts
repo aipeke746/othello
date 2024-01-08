@@ -2,6 +2,7 @@ import { MapState } from "../../entity/map/mapState";
 import { Tilemap } from "../../entity/map/tilemap";
 import { Param } from '../../static/param';
 import { PutMarkUtil } from "../../util/map/putMarkUtil";
+import { SceneUtil } from "../../util/scene/sceneUtil";
 
 /**
  * アシスト機能に関するサービス
@@ -38,7 +39,7 @@ export class AssistService {
                 .strokeCircle(pos.x + MapState.SIZE/2, pos.y + MapState.SIZE/2, 25);
             this.putableCircles.push(circle);
         });
-        this.blinking(this.putableCircles);
+        SceneUtil.blinking(this.scene, this.putableCircles);
     };
 
     /**
@@ -58,20 +59,5 @@ export class AssistService {
      */
     private isVisible(isManualOperator: boolean): boolean {
         return Param.SHOW_PUTABLE_CIRCLES && isManualOperator;
-    }
-
-    /**
-     * 点滅させる
-     * @param target 対象
-     */
-    private blinking(target: any) {
-        this.scene.tweens.add({
-            targets: target,
-            alpha: 0,
-            duration: 700,
-            ease: 'Sine.easeIn',
-            repeat: -1,
-            yoyo: true
-        });
     }
 }
