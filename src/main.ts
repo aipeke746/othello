@@ -8,12 +8,14 @@ import { FinishScene } from './scene/finishScene';
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: MapState.LENGTH * MapState.SIZE + Param.TILE_MARGIN * 2,
-    height: MapState.LENGTH * MapState.SIZE + Param.TILE_MARGIN * 2 + Param.BOTTOM_TILE_MARGIN,
+    height:
+        MapState.LENGTH * MapState.SIZE +
+        Param.TILE_MARGIN * 2 +
+        Param.BOTTOM_TILE_MARGIN,
     parent: 'app',
     physics: {
         default: 'arcade',
-        arcade: {
-        },
+        arcade: {},
     },
     scale: {
         mode: Phaser.Scale.FIT,

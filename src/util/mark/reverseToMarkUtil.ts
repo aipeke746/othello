@@ -1,4 +1,4 @@
-import { MarkType } from "../../type/markType";
+import { MarkType } from '../../type/markType';
 
 /**
  * マークをひっくり返す画像のキーを返すユーティリティクラス
@@ -15,16 +15,18 @@ export class ReverseToMarkUtil {
 
     /**
      * 指定したマークのひっくり返す画像のキーを返す
-     * @param markType 
-     * @returns 
+     * @param markType
+     * @returns
      */
     public static get(markType: MarkType): string {
-        return markType === MarkType.BLACK ? 'reverseToBlack' : 'reverseToWhite';
+        return markType === MarkType.BLACK
+            ? 'reverseToBlack'
+            : 'reverseToWhite';
     }
 
     /**
      * ひっくり返す画像のキーを全て返す
-     * @returns 
+     * @returns
      */
     public static getAll(): string[] {
         return ['reverseToBlack', 'reverseToWhite'];

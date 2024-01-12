@@ -1,6 +1,6 @@
-import { AlphaBetaImpl } from "../service/operate/impl/alphaBetaImpl";
-import { ManualImpl } from "../service/operate/impl/manualImpl";
-import { OperateType } from "../type/operateType";
+import { AlphaBetaImpl } from '../service/operate/impl/alphaBetaImpl';
+import { ManualImpl } from '../service/operate/impl/manualImpl';
+import { OperateType } from '../type/operateType';
 
 /**
  * 操作方法を生成するクラス

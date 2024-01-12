@@ -1,10 +1,10 @@
-import { MapState } from "../../entity/map/mapState";
-import { Tilemap } from "../../entity/map/tilemap";
-import { SimulateService } from "../../service/simulate/simulateService";
-import { MarkType } from "../../type/markType";
-import { Coord } from "../../vo/coord";
-import { PutMarkUtil } from "./putMarkUtil";
-import { ReverseMarkUtil } from "./reverseMarkUtil";
+import { MapState } from '../../entity/map/mapState';
+import { Tilemap } from '../../entity/map/tilemap';
+import { SimulateService } from '../../service/simulate/simulateService';
+import { MarkType } from '../../type/markType';
+import { Coord } from '../../vo/coord';
+import { PutMarkUtil } from './putMarkUtil';
+import { ReverseMarkUtil } from './reverseMarkUtil';
 
 /**
  * ゲームの進行を行うユーティリティクラス
@@ -27,7 +27,11 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    public static simulateAdvance(simulate: SimulateService, mark: MarkType, coord: Coord) {
+    public static simulateAdvance(
+        simulate: SimulateService,
+        mark: MarkType,
+        coord: Coord
+    ) {
         this.advanceMap(simulate.mapState, coord, mark);
     }
 
@@ -38,7 +42,11 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    private static advanceMap(mapState: MapState, coord: Coord, mark: MarkType) {
+    private static advanceMap(
+        mapState: MapState,
+        coord: Coord,
+        mark: MarkType
+    ) {
         ReverseMarkUtil.reverse(mapState, coord, mark);
         mapState.nextTurn();
         if (!PutMarkUtil.isPutableMark(mapState, mapState.getNowTurnMark())) {

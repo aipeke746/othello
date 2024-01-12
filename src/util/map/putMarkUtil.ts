@@ -1,7 +1,7 @@
-import { MapState } from "../../entity/map/mapState";
-import { MarkType } from "../../type/markType";
-import { Coord } from "../../vo/coord";
-import { ReverseMarkUtil } from "./reverseMarkUtil";
+import { MapState } from '../../entity/map/mapState';
+import { MarkType } from '../../type/markType';
+import { Coord } from '../../vo/coord';
+import { ReverseMarkUtil } from './reverseMarkUtil';
 
 /**
  * マークのセットに関連するユーティリティクラス
@@ -14,8 +14,10 @@ export class PutMarkUtil {
      * @returns ゲーム終了の場合はtrue
      */
     public static isPutable(mapState: MapState): boolean {
-        return this.isPutableMark(mapState, MarkType.BLACK)
-            || this.isPutableMark(mapState, MarkType.WHITE);
+        return (
+            this.isPutableMark(mapState, MarkType.BLACK) ||
+            this.isPutableMark(mapState, MarkType.WHITE)
+        );
     }
 
     /**
@@ -24,7 +26,10 @@ export class PutMarkUtil {
      * @param mark マーク
      * @returns セットできる全座標
      */
-    public static getPutableCoords(mapState: MapState, mark: MarkType): Coord[] {
+    public static getPutableCoords(
+        mapState: MapState,
+        mark: MarkType
+    ): Coord[] {
         const putableCoords: Coord[] = [];
         for (const coord of this.getCoordNoneMark(mapState)) {
             if (ReverseMarkUtil.isReversible(mapState, coord, mark)) {
@@ -50,8 +55,8 @@ export class PutMarkUtil {
      */
     private static getCoordNoneMark(mapState: MapState): Coord[] {
         const coords: Coord[] = [];
-        for (let y=0; y<MapState.LENGTH; y++) {
-            for (let x=0; x<MapState.LENGTH; x++) {
+        for (let y = 0; y < MapState.LENGTH; y++) {
+            for (let x = 0; x < MapState.LENGTH; x++) {
                 const pos = new Phaser.Math.Vector2(x, y);
                 if (mapState.getMark(pos) === MarkType.EMPTY) {
                     coords.push(new Coord(pos));

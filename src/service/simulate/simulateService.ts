@@ -1,7 +1,7 @@
-import { MapState } from "../../entity/map/mapState";
-import { MarkType } from "../../type/markType";
-import { PutMarkUtil } from "../../util/map/putMarkUtil";
-import { SimulateParam } from "./param/simulateParam";
+import { MapState } from '../../entity/map/mapState';
+import { MarkType } from '../../type/markType';
+import { PutMarkUtil } from '../../util/map/putMarkUtil';
+import { SimulateParam } from './param/simulateParam';
 
 /**
  * αβ法でシミュレーションするクラス
@@ -9,11 +9,11 @@ import { SimulateParam } from "./param/simulateParam";
 export abstract class SimulateService {
     /**
      * シミュレーションするマップの状態
-    */
+     */
     public mapState: MapState;
-   /**
-    * 自分のマーク
-    */
+    /**
+     * 自分のマーク
+     */
     public myMark: MarkType;
     /**
      * 探索パラメータ
@@ -28,7 +28,7 @@ export abstract class SimulateService {
 
     /**
      * シミュレーションを複製する
-     * @returns 
+     * @returns
      */
     public abstract clone(): SimulateService;
 
@@ -60,8 +60,8 @@ export abstract class SimulateService {
      * @returns アルファカットが発生する場合はtrue
      */
     public alphaCut(minScore: number): boolean {
-        this.param.beta = Math.min(this.param.beta, minScore)
-        return this.param.alpha >= this.param.beta
+        this.param.beta = Math.min(this.param.beta, minScore);
+        return this.param.alpha >= this.param.beta;
     }
 
     /**
@@ -70,7 +70,7 @@ export abstract class SimulateService {
      * @returns ベータカットが発生する場合はtrue
      */
     public betaCut(maxScore: number): boolean {
-        this.param.alpha = Math.max(this.param.alpha, maxScore)
-        return this.param.alpha >= this.param.beta
+        this.param.alpha = Math.max(this.param.alpha, maxScore);
+        return this.param.alpha >= this.param.beta;
     }
 }

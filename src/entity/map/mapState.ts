@@ -1,13 +1,13 @@
-import { FieldFactory } from "../../factory/fieldFactory";
-import { Param } from "../../static/param";
-import { FieldType } from "../../type/fieldType";
-import { MarkType } from "../../type/markType";
-import { MarkTypeUtil } from "../../util/mark/markTypeUtil";
-import { Coord } from "../../vo/coord";
+import { FieldFactory } from '../../factory/fieldFactory';
+import { Param } from '../../static/param';
+import { FieldType } from '../../type/fieldType';
+import { MarkType } from '../../type/markType';
+import { MarkTypeUtil } from '../../util/mark/markTypeUtil';
+import { Coord } from '../../vo/coord';
 
 /**
  * マップの状態を表すクラス
- * 
+ *
  * オセロのフィールド上の状態（オセロのマークの配置、現在のターン）を管理する
  * TilemapクラスにMapStateクラスを渡して、オセロのフィールドを描画・更新する
  */
@@ -35,7 +35,7 @@ export class MapState {
      */
     constructor() {
         this.field = FieldFactory.create(Param.FIELD_TYPE);
-        this.nowTurnMark = MarkType.BLACK
+        this.nowTurnMark = MarkType.BLACK;
     }
 
     /**
@@ -89,8 +89,8 @@ export class MapState {
      */
     public getMarkCount(mark: MarkType): number {
         let count = 0;
-        for (let y=0; y<MapState.LENGTH; y++) {
-            for (let x=0; x<MapState.LENGTH; x++) {
+        for (let y = 0; y < MapState.LENGTH; y++) {
+            for (let x = 0; x < MapState.LENGTH; x++) {
                 if (this.field[y][x] === mark) {
                     count += 1;
                 }
@@ -106,8 +106,8 @@ export class MapState {
      */
     public getMarkCoords(mark: MarkType): Coord[] {
         const coords: Coord[] = [];
-        for (let y=0; y<MapState.LENGTH; y++) {
-            for (let x=0; x<MapState.LENGTH; x++) {
+        for (let y = 0; y < MapState.LENGTH; y++) {
+            for (let x = 0; x < MapState.LENGTH; x++) {
                 if (this.field[y][x] === mark) {
                     const pos = new Phaser.Math.Vector2(x, y);
                     coords.push(new Coord(pos));

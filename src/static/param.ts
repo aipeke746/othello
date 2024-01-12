@@ -1,4 +1,4 @@
-import { FieldType } from "../type/fieldType";
+import { FieldType } from '../type/fieldType';
 
 export class Param {
     // ソースコード側で変更するパラメータ

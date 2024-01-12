@@ -1,7 +1,7 @@
-import { OperateService } from "../../service/operate/operateService";
-import { MarkType } from "../../type/markType";
-import { OperateType } from "../../type/operateType";
-import { Operator } from "./operator";
+import { OperateService } from '../../service/operate/operateService';
+import { MarkType } from '../../type/markType';
+import { OperateType } from '../../type/operateType';
+import { Operator } from './operator';
 
 /**
  * オセロのマーク（黒、白）の操作方法を管理するクラス
@@ -18,7 +18,11 @@ export class OperateManager {
      * @param blackType 黒の操作方法
      * @param whiteType 白の操作方法
      */
-    constructor(scene: Phaser.Scene, blackType: OperateType, whiteType: OperateType) {
+    constructor(
+        scene: Phaser.Scene,
+        blackType: OperateType,
+        whiteType: OperateType
+    ) {
         this.operators.set(MarkType.BLACK, new Operator(scene, blackType));
         this.operators.set(MarkType.WHITE, new Operator(scene, whiteType));
     }
@@ -30,7 +34,7 @@ export class OperateManager {
      */
     public isManual(mark: MarkType): boolean {
         if (this.inValidMarkType(mark)) {
-            throw new Error("Invalid mark type: NONE");
+            throw new Error('Invalid mark type: NONE');
         }
 
         return this.getOperator(mark).isManual();
@@ -43,7 +47,7 @@ export class OperateManager {
      */
     public getOperateService(mark: MarkType): OperateService {
         if (this.inValidMarkType(mark)) {
-            throw new Error("Invalid mark type: NONE");
+            throw new Error('Invalid mark type: NONE');
         }
 
         return this.getOperator(mark).getOperateService();

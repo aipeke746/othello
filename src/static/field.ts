@@ -1,4 +1,4 @@
-import { MarkType } from "../type/markType";
+import { MarkType } from '../type/markType';
 
 /**
  * フィールドのパターン
@@ -12,7 +12,7 @@ export class Field {
         [0, 0, 0, 2, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0, 0, 0],
     ];
 
     public static readonly CROSS: MarkType[][] = [
@@ -23,7 +23,7 @@ export class Field {
         [0, 0, 0, 2, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [3, 3, 0, 0, 0, 0, 3, 3],
-        [3, 3, 0, 0, 0, 0, 3, 3]
+        [3, 3, 0, 0, 0, 0, 3, 3],
     ];
 
     public static readonly BATSU: MarkType[][] = [
@@ -34,7 +34,7 @@ export class Field {
         [3, 3, 0, 2, 1, 0, 3, 3],
         [3, 0, 0, 0, 0, 0, 0, 3],
         [0, 0, 0, 3, 3, 0, 0, 0],
-        [0, 0, 3, 3, 3, 3, 0, 0]
+        [0, 0, 3, 3, 3, 3, 0, 0],
     ];
 
     public static readonly MARU: MarkType[][] = [
@@ -45,7 +45,7 @@ export class Field {
         [0, 0, 0, 2, 1, 0, 0, 0],
         [3, 0, 0, 0, 0, 0, 0, 3],
         [3, 0, 0, 0, 0, 0, 0, 3],
-        [3, 3, 3, 0, 0, 3, 3, 3]
+        [3, 3, 3, 0, 0, 3, 3, 3],
     ];
 
     public static readonly WIND_MILL: MarkType[][] = [
@@ -56,7 +56,7 @@ export class Field {
         [3, 3, 0, 2, 1, 0, 0, 0],
         [3, 3, 0, 0, 0, 0, 0, 0],
         [3, 0, 0, 0, 3, 3, 0, 0],
-        [0, 0, 0, 0, 3, 3, 3, 0]
+        [0, 0, 0, 0, 3, 3, 3, 0],
     ];
 
     public static readonly NO_CORNERS: MarkType[][] = [
@@ -67,7 +67,7 @@ export class Field {
         [0, 0, 0, 2, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
-        [3, 0, 0, 0, 0, 0, 0, 3]
+        [3, 0, 0, 0, 0, 0, 0, 3],
     ];
 
     public static readonly BLOCK1: MarkType[][] = [
@@ -78,7 +78,7 @@ export class Field {
         [0, 3, 0, 2, 1, 0, 3, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 3, 3, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0, 0, 0],
     ];
 
     public static readonly BLOCK2: MarkType[][] = [
@@ -89,7 +89,7 @@ export class Field {
         [0, 0, 0, 2, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 3, 0, 0, 0, 0, 3, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0, 0, 0],
     ];
 
     public static readonly BLOCK3: MarkType[][] = [
@@ -100,6 +100,6 @@ export class Field {
         [3, 0, 0, 2, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 3],
         [3, 0, 0, 0, 0, 0, 0, 0],
-        [0, 3, 0, 3, 0, 3, 0, 3]
+        [0, 3, 0, 3, 0, 3, 0, 3],
     ];
 }

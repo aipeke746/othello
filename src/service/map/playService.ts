@@ -1,17 +1,17 @@
-import { OperateManager } from "../../entity/operate/operateManager";
-import { Tilemap } from "../../entity/map/tilemap";
-import { MarkType } from "../../type/markType";
-import { GameUtil } from "../../util/map/gameUtil";
-import { PutMarkUtil } from "../../util/map/putMarkUtil";
-import { ReverseToMarkUtil } from "../../util/mark/reverseToMarkUtil";
-import { ReverseMarkUtil } from "../../util/map/reverseMarkUtil";
-import { Coord } from "../../vo/coord";
-import { AssistService } from "./assistService";
-import { TakeBackService } from "./takeBackService";
+import { OperateManager } from '../../entity/operate/operateManager';
+import { Tilemap } from '../../entity/map/tilemap';
+import { MarkType } from '../../type/markType';
+import { GameUtil } from '../../util/map/gameUtil';
+import { PutMarkUtil } from '../../util/map/putMarkUtil';
+import { ReverseToMarkUtil } from '../../util/mark/reverseToMarkUtil';
+import { ReverseMarkUtil } from '../../util/map/reverseMarkUtil';
+import { Coord } from '../../vo/coord';
+import { AssistService } from './assistService';
+import { TakeBackService } from './takeBackService';
 
 /**
  * ゲームのプレイを管理するサービス
- * 
+ *
  * プレイヤー、ゲームAIの操作を受け付け、ゲームの進行を行う
  */
 export class PlayService {
@@ -41,7 +41,11 @@ export class PlayService {
      */
     private reverseMarkSound: Phaser.Sound.BaseSound;
 
-    constructor(scene: Phaser.Scene, operateManager: OperateManager, assist: AssistService) {
+    constructor(
+        scene: Phaser.Scene,
+        operateManager: OperateManager,
+        assist: AssistService
+    ) {
         this.scene = scene;
         this.operateManager = operateManager;
         this.assist = assist;
@@ -86,7 +90,9 @@ export class PlayService {
      */
     private finish(tilemap: Tilemap): void {
         this.isFinished = true;
-        this.scene.scene.launch('finishScene', { winner: this.getWinnerContent(tilemap) });
+        this.scene.scene.launch('finishScene', {
+            winner: this.getWinnerContent(tilemap),
+        });
     }
 
     /**
@@ -96,24 +102,36 @@ export class PlayService {
      * @param mark セットしたマーク
      * @param putCoord セットした座標
      */
-    private playAnimation(tilemap: Tilemap, mark: MarkType, putCoord: Coord): void {
+    private playAnimation(
+        tilemap: Tilemap,
+        mark: MarkType,
+        putCoord: Coord
+    ): void {
         this.isReversing = true;
 
-        const reversibleCoords = ReverseMarkUtil.getReversibleCoords(tilemap.mapState, mark, putCoord);
+        const reversibleCoords = ReverseMarkUtil.getReversibleCoords(
+            tilemap.mapState,
+            mark,
+            putCoord
+        );
         const key = ReverseToMarkUtil.get(mark);
 
-        reversibleCoords.forEach(reversibleCoord => {
+        reversibleCoords.forEach((reversibleCoord) => {
             const pos = tilemap.getWorldPos(reversibleCoord);
-            const sprite = this.scene.add.sprite(pos.x, pos.y, key)
+            const sprite = this.scene.add
+                .sprite(pos.x, pos.y, key)
                 .setOrigin(0, 0);
 
             sprite.anims.play(key).on('animationcomplete', () => {
                 this.reverseMarkSound.play();
                 sprite.destroy();
                 const nextMark = tilemap.mapState.getNowTurnMark();
-                this.assist.showPutableCoords(tilemap, this.operateManager.isManual(nextMark));
+                this.assist.showPutableCoords(
+                    tilemap,
+                    this.operateManager.isManual(nextMark)
+                );
                 this.isReversing = false;
-            })
+            });
         });
     }
 
@@ -123,8 +141,12 @@ export class PlayService {
      * @returns 勝敗結果の文字列
      */
     private getWinnerContent(tilemap: Tilemap): string {
-        const blackCount: number = tilemap.mapState.getMarkCount(MarkType.BLACK);
-        const whiteCount: number = tilemap.mapState.getMarkCount(MarkType.WHITE);
+        const blackCount: number = tilemap.mapState.getMarkCount(
+            MarkType.BLACK
+        );
+        const whiteCount: number = tilemap.mapState.getMarkCount(
+            MarkType.WHITE
+        );
 
         if (blackCount > whiteCount) {
             return '黒の勝ち';

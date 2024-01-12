@@ -1,8 +1,8 @@
-import { Tilemap } from "../../../entity/map/tilemap";
-import { MarkType } from "../../../type/markType";
-import { ReverseMarkUtil } from "../../../util/map/reverseMarkUtil";
-import { Coord } from "../../../vo/coord";
-import { OperateService } from "../operateService";
+import { Tilemap } from '../../../entity/map/tilemap';
+import { MarkType } from '../../../type/markType';
+import { ReverseMarkUtil } from '../../../util/map/reverseMarkUtil';
+import { Coord } from '../../../vo/coord';
+import { OperateService } from '../operateService';
 
 /**
  * 手動操作するクラス
@@ -23,8 +23,8 @@ export class ManualImpl implements OperateService {
      */
     constructor(scene: Phaser.Scene) {
         this.pointer = scene.input.activePointer;
-        scene.input.on('pointerdown', () => this.isPointerDown = true, this);
-        scene.input.on('pointerup', () => this.isPointerDown = false, this);
+        scene.input.on('pointerdown', () => (this.isPointerDown = true), this);
+        scene.input.on('pointerup', () => (this.isPointerDown = false), this);
     }
 
     /**
@@ -45,7 +45,10 @@ export class ManualImpl implements OperateService {
      * @param mark マーク
      * @returns 座標
      */
-    private getManualCoord(tilemap: Tilemap, mark: MarkType): Coord | undefined {
+    private getManualCoord(
+        tilemap: Tilemap,
+        mark: MarkType
+    ): Coord | undefined {
         const pos = this.pointer.position;
         try {
             const coord = new Coord(tilemap.getTilePos(pos));

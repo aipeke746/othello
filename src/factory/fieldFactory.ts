@@ -1,6 +1,6 @@
-import { Field } from "../static/field";
-import { FieldType } from "../type/fieldType";
-import { MarkType } from "../type/markType";
+import { Field } from '../static/field';
+import { FieldType } from '../type/fieldType';
+import { MarkType } from '../type/markType';
 
 /**
  * オセロのフィールドを生成するファクトリークラス
@@ -12,7 +12,7 @@ export class FieldFactory {
      * @returns オセロのフィールド
      */
     public static create(type: FieldType): MarkType[][] {
-        switch(type) {
+        switch (type) {
             case FieldType.NORMAL:
                 return this.getField(Field.NORMAL);
             case FieldType.CROSS:

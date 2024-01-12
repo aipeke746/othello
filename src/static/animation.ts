@@ -1,4 +1,4 @@
-import { ReverseToMarkUtil } from "../util/mark/reverseToMarkUtil";
+import { ReverseToMarkUtil } from '../util/mark/reverseToMarkUtil';
 
 /**
  * アニメーションを作成する
@@ -16,7 +16,10 @@ export class Animation {
 
             scene.anims.create({
                 key: key,
-                frames: scene.anims.generateFrameNumbers(key, {start: 0, end: 4}),
+                frames: scene.anims.generateFrameNumbers(key, {
+                    start: 0,
+                    end: 4,
+                }),
                 frameRate: 10,
                 delay: 300,
                 repeat: 0,

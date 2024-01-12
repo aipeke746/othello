@@ -1,4 +1,4 @@
-import { Color } from "../../static/color";
+import { Color } from '../../static/color';
 
 /**
  * 文字を作成するユーティリティクラス
@@ -13,8 +13,16 @@ export class TextUtil {
      * @param fontSize 文字の大きさ
      * @returns 作成した文字
      */
-    public static createText(scene: Phaser.Scene, x: number, y: number, content: string, fontSize: number, fontColor: string = Color.WHITE): Phaser.GameObjects.Text {
-        return scene.add.text(x, y, content)
+    public static createText(
+        scene: Phaser.Scene,
+        x: number,
+        y: number,
+        content: string,
+        fontSize: number,
+        fontColor: string = Color.WHITE
+    ): Phaser.GameObjects.Text {
+        return scene.add
+            .text(x, y, content)
             .setOrigin(0.5)
             .setFontSize(fontSize)
             .setColor(fontColor);
@@ -29,8 +37,21 @@ export class TextUtil {
      * @param fontSize 文字の大きさ
      * @returns 作成したボタン機能を持った文字
      */
-    public static createTextButton(scene: Phaser.Scene, x: number, y: number, content: string, fontSize: number, fontColor: string = Color.WHITE): Phaser.GameObjects.Text {
-        return this.createText(scene, x, y, content, fontSize, fontColor)
-            .setInteractive();
+    public static createTextButton(
+        scene: Phaser.Scene,
+        x: number,
+        y: number,
+        content: string,
+        fontSize: number,
+        fontColor: string = Color.WHITE
+    ): Phaser.GameObjects.Text {
+        return this.createText(
+            scene,
+            x,
+            y,
+            content,
+            fontSize,
+            fontColor
+        ).setInteractive();
     }
 }

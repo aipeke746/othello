@@ -1,6 +1,6 @@
-import { Tilemap } from "../../entity/map/tilemap";
-import { MarkType } from "../../type/markType";
-import { Coord } from "../../vo/coord";
+import { Tilemap } from '../../entity/map/tilemap';
+import { MarkType } from '../../type/markType';
+import { Coord } from '../../vo/coord';
 
 /**
  * 操作方法のインターフェース

@@ -1,12 +1,12 @@
-import { MapState } from "../../../entity/map/mapState";
-import { MarkType } from "../../../type/markType";
-import { MarkTypeUtil } from "../../../util/mark/markTypeUtil";
-import { SimulateParam } from "../param/simulateParam";
-import { SimulateService } from "../simulateService";
+import { MapState } from '../../../entity/map/mapState';
+import { MarkType } from '../../../type/markType';
+import { MarkTypeUtil } from '../../../util/mark/markTypeUtil';
+import { SimulateParam } from '../param/simulateParam';
+import { SimulateService } from '../simulateService';
 
 /**
  * 最大の評価値でシミュレートするクラス
- * 
+ *
  * 評価方法：自分のマークの数 - 相手のマークの数が最大になるようにシミュレートする
  */
 export class MaxScoreImpl extends SimulateService {
@@ -16,10 +16,14 @@ export class MaxScoreImpl extends SimulateService {
 
     /**
      * シミュレーションを複製する
-     * @returns 
+     * @returns
      */
     public clone(): MaxScoreImpl {
-        return new MaxScoreImpl(this.mapState.clone(), this.myMark, this.param.clone());
+        return new MaxScoreImpl(
+            this.mapState.clone(),
+            this.myMark,
+            this.param.clone()
+        );
     }
 
     /**
@@ -28,7 +32,9 @@ export class MaxScoreImpl extends SimulateService {
      */
     public evaluate(): number {
         const myMarkCount = this.mapState.getMarkCount(this.myMark);
-        const opponentMarkCount = this.mapState.getMarkCount(MarkTypeUtil.getOpponent(this.myMark));
+        const opponentMarkCount = this.mapState.getMarkCount(
+            MarkTypeUtil.getOpponent(this.myMark)
+        );
         return myMarkCount - opponentMarkCount;
     }
 }

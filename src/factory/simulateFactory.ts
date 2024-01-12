@@ -1,8 +1,8 @@
-import { MapState } from "../entity/map/mapState";
-import { MaxScoreImpl } from "../service/simulate/impl/maxScoreImpl";
-import { WeightMapImpl } from "../service/simulate/impl/weightMapImpl";
-import { SimulateParam } from "../service/simulate/param/simulateParam";
-import { MarkType } from "../type/markType";
+import { MapState } from '../entity/map/mapState';
+import { MaxScoreImpl } from '../service/simulate/impl/maxScoreImpl';
+import { WeightMapImpl } from '../service/simulate/impl/weightMapImpl';
+import { SimulateParam } from '../service/simulate/param/simulateParam';
+import { MarkType } from '../type/markType';
 import { SimulateType } from '../type/simulateType';
 
 /**
@@ -17,7 +17,12 @@ export class SimulateFactory {
      * @param param αβ法の探索パラメータ
      * @returns シミュレーション
      */
-    public static create(type: SimulateType, mapState: MapState, myMark: MarkType, param: SimulateParam) {
+    public static create(
+        type: SimulateType,
+        mapState: MapState,
+        myMark: MarkType,
+        param: SimulateParam
+    ) {
         switch (type) {
             case SimulateType.MAX_SCORE:
                 return new MaxScoreImpl(mapState, myMark, param);

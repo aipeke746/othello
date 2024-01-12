@@ -1,10 +1,10 @@
-import { Param } from "../../static/param";
-import { Coord } from "../../vo/coord";
-import { MapState } from "./mapState";
+import { Param } from '../../static/param';
+import { Coord } from '../../vo/coord';
+import { MapState } from './mapState';
 
 /**
  * タイルマップを表すクラス
- * 
+ *
  * MapStateの内容をタイルマップに反映させることで、オセロのフィールドを描画する
  */
 export class Tilemap {
@@ -32,7 +32,11 @@ export class Tilemap {
      */
     constructor(scene: Phaser.Scene, tilesetName: string) {
         this.mapState = new MapState();
-        this.map = scene.make.tilemap({ data: this.mapState.getField(), tileWidth: MapState.SIZE, tileHeight: MapState.SIZE });
+        this.map = scene.make.tilemap({
+            data: this.mapState.getField(),
+            tileWidth: MapState.SIZE,
+            tileHeight: MapState.SIZE,
+        });
         this.tileset = this.getTileset(tilesetName, this.map);
         this.layer = this.getLayer(this.tileset);
     }
@@ -60,8 +64,8 @@ export class Tilemap {
      * （TilemapにMapStateのfieldを反映することで、反映されたオセロのフィールドが描画される）
      */
     public update() {
-        for (let y=0; y<MapState.LENGTH; y++) {
-            for (let x=0; x<MapState.LENGTH; x++) {
+        for (let y = 0; y < MapState.LENGTH; y++) {
+            for (let x = 0; x < MapState.LENGTH; x++) {
                 const pos = new Phaser.Math.Vector2(x, y);
                 this.layer.putTileAt(this.mapState.getMark(pos), x, y);
                 this.layer.putTileAt(this.mapState.getMark(pos), x, y);
@@ -88,13 +92,13 @@ export class Tilemap {
 
     /**
      *　タイルセットを取得する
-    * @param name タイルセットの名前
-    * @param map タイルマップ
-    * @returns　タイルセット
-    */
+     * @param name タイルセットの名前
+     * @param map タイルマップ
+     * @returns　タイルセット
+     */
     private getTileset(name: string, map: Phaser.Tilemaps.Tilemap) {
         const tileset = map.addTilesetImage(name);
-        if (tileset == null)  {
+        if (tileset == null) {
             throw new Error('tileset is null');
         }
         return tileset;
@@ -106,8 +110,13 @@ export class Tilemap {
      * @returns レイヤー
      */
     private getLayer(tileset: Phaser.Tilemaps.Tileset) {
-        const layer = this.map?.createLayer(0, tileset, Param.TILE_MARGIN, Param.TILE_MARGIN);
-        if (layer == null)  {
+        const layer = this.map?.createLayer(
+            0,
+            tileset,
+            Param.TILE_MARGIN,
+            Param.TILE_MARGIN
+        );
+        if (layer == null) {
             throw new Error('layer is null');
         }
         return layer;

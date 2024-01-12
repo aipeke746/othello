@@ -1,6 +1,6 @@
-import { MapState } from "../../entity/map/mapState";
-import { Tilemap } from "../../entity/map/tilemap";
-import { MarkType } from "../../type/markType";
+import { MapState } from '../../entity/map/mapState';
+import { Tilemap } from '../../entity/map/tilemap';
+import { MarkType } from '../../type/markType';
 
 /**
  * 一手戻る（待った）機能
@@ -83,8 +83,8 @@ export class TakeBackService {
      */
     private countUp(mark: MarkType) {
         mark === MarkType.BLACK
-            ? this.blackCount += 1
-            : this.whiteCount += 1;
+            ? (this.blackCount += 1)
+            : (this.whiteCount += 1);
     }
 
     /**

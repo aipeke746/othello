@@ -1,14 +1,14 @@
-import { Tilemap } from "../../../entity/map/tilemap";
-import { SimulateFactory } from "../../../factory/simulateFactory";
-import { MarkType } from "../../../type/markType";
-import { MarkTypeUtil } from "../../../util/mark/markTypeUtil";
-import { Coord } from "../../../vo/coord";
-import { SimulateParam } from "../../simulate/param/simulateParam";
-import { OperateService } from "../operateService";
+import { Tilemap } from '../../../entity/map/tilemap';
+import { SimulateFactory } from '../../../factory/simulateFactory';
+import { MarkType } from '../../../type/markType';
+import { MarkTypeUtil } from '../../../util/mark/markTypeUtil';
+import { Coord } from '../../../vo/coord';
+import { SimulateParam } from '../../simulate/param/simulateParam';
+import { OperateService } from '../operateService';
 import { SimulateType } from '../../../type/simulateType';
-import { SimulateService } from "../../simulate/simulateService";
-import { PutMarkUtil } from "../../../util/map/putMarkUtil";
-import { GameUtil } from "../../../util/map/gameUtil";
+import { SimulateService } from '../../simulate/simulateService';
+import { PutMarkUtil } from '../../../util/map/putMarkUtil';
+import { GameUtil } from '../../../util/map/gameUtil';
 
 /**
  * αβ法で操作するクラス
@@ -30,9 +30,19 @@ export class AlphaBetaImpl implements OperateService {
      * @returns 座標
      */
     public getCoord(tilemap: Tilemap, myMark: MarkType): Coord | undefined {
-        const param: SimulateParam = new SimulateParam(this.depth, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
-        const simulate: SimulateService = SimulateFactory.create(this.simulateType, tilemap.mapState.clone(), myMark, param);
-        const result: [number, Coord | undefined] = this.getAlphaBetaCoord(simulate);
+        const param: SimulateParam = new SimulateParam(
+            this.depth,
+            Number.NEGATIVE_INFINITY,
+            Number.POSITIVE_INFINITY
+        );
+        const simulate: SimulateService = SimulateFactory.create(
+            this.simulateType,
+            tilemap.mapState.clone(),
+            myMark,
+            param
+        );
+        const result: [number, Coord | undefined] =
+            this.getAlphaBetaCoord(simulate);
 
         return result[1];
     }
@@ -42,7 +52,9 @@ export class AlphaBetaImpl implements OperateService {
      * @param simulate シミュレーション
      * @returns スコアと座標
      */
-    private getAlphaBetaCoord(simulate: SimulateService): [number, Coord | undefined] {
+    private getAlphaBetaCoord(
+        simulate: SimulateService
+    ): [number, Coord | undefined] {
         if (simulate.isDone() || simulate.param.depth === 0) {
             return [simulate.evaluate(), undefined];
         }
@@ -58,11 +70,19 @@ export class AlphaBetaImpl implements OperateService {
      * @param simulate シミュレーション
      * @returns 最大スコアと座標
      */
-    private getMaxScoreCoord(simulate: SimulateService): [number, Coord | undefined] {
-        const targetMark = simulate.myMark
-        let maxScore: [number, Coord | undefined] = [Number.NEGATIVE_INFINITY, undefined];
+    private getMaxScoreCoord(
+        simulate: SimulateService
+    ): [number, Coord | undefined] {
+        const targetMark = simulate.myMark;
+        let maxScore: [number, Coord | undefined] = [
+            Number.NEGATIVE_INFINITY,
+            undefined,
+        ];
 
-        for (const coord of PutMarkUtil.getPutableCoords(simulate.mapState, targetMark)) {
+        for (const coord of PutMarkUtil.getPutableCoords(
+            simulate.mapState,
+            targetMark
+        )) {
             const childScore = this.getChildScore(simulate, targetMark, coord);
             if (childScore > maxScore[0]) {
                 maxScore[0] = childScore;
@@ -81,11 +101,19 @@ export class AlphaBetaImpl implements OperateService {
      * @param simulate シミュレーション
      * @returns 最小スコアと座標
      */
-    private getMiniScoreCoord(simulate: SimulateService): [number, Coord | undefined] {
+    private getMiniScoreCoord(
+        simulate: SimulateService
+    ): [number, Coord | undefined] {
         const targetMark = MarkTypeUtil.getOpponent(simulate.myMark);
-        let minScore: [number, Coord | undefined] = [Number.POSITIVE_INFINITY, undefined];
+        let minScore: [number, Coord | undefined] = [
+            Number.POSITIVE_INFINITY,
+            undefined,
+        ];
 
-        for (const coord of PutMarkUtil.getPutableCoords(simulate.mapState, targetMark)) {
+        for (const coord of PutMarkUtil.getPutableCoords(
+            simulate.mapState,
+            targetMark
+        )) {
             const childScore = this.getChildScore(simulate, targetMark, coord);
             if (childScore < minScore[0]) {
                 minScore[0] = childScore;
@@ -105,7 +133,11 @@ export class AlphaBetaImpl implements OperateService {
      * @param coord 座標
      * @returns スコア
      */
-    private getChildScore(simulate: SimulateService, mark: MarkType, coord: Coord): number {
+    private getChildScore(
+        simulate: SimulateService,
+        mark: MarkType,
+        coord: Coord
+    ): number {
         const nextSimulate = simulate.clone();
         GameUtil.simulateAdvance(nextSimulate, mark, coord);
         nextSimulate.param.depth--;

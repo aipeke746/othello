@@ -1,4 +1,4 @@
-import { OperateType } from "../../type/operateType";
+import { OperateType } from '../../type/operateType';
 
 /**
  * 操作タイプに関連するユーティリティクラス
@@ -7,7 +7,10 @@ export class OperateTypeUtil {
     /**
      * 操作タイプと画面に表示する文字列のマップ
      */
-    public static readonly OPERATE_TYPE_MAP: Map<OperateType, string> = new Map<OperateType, string>([
+    public static readonly OPERATE_TYPE_MAP: Map<OperateType, string> = new Map<
+        OperateType,
+        string
+    >([
         [OperateType.MANUAL, 'MANUAL'],
         [OperateType.ALPHA_BETA, '  AUTO'],
     ]);

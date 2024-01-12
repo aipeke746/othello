@@ -14,7 +14,7 @@ export class DirectionUtil {
         new Phaser.Math.Vector2(1, -1),
         new Phaser.Math.Vector2(1, 0),
         new Phaser.Math.Vector2(1, 1),
-    ]
+    ];
 
     /**
      * 上下左右方向の座標の差分を返す

@@ -1,8 +1,8 @@
-import { MapState } from "../../entity/map/mapState";
-import { MarkType } from "../../type/markType";
-import { Coord } from "../../vo/coord";
-import { DirectionUtil } from "./directionUtil";
-import { MarkTypeUtil } from "../mark/markTypeUtil";
+import { MapState } from '../../entity/map/mapState';
+import { MarkType } from '../../type/markType';
+import { Coord } from '../../vo/coord';
+import { DirectionUtil } from './directionUtil';
+import { MarkTypeUtil } from '../mark/markTypeUtil';
 
 /**
  * マークをひっくり返すことに関連するユーティリティクラス
@@ -14,7 +14,11 @@ export class ReverseMarkUtil {
      * @param putCoord 座標
      * @param mark マーク
      */
-    public static reverse(mapState: MapState, putCoord: Coord, mark: MarkType): void {
+    public static reverse(
+        mapState: MapState,
+        putCoord: Coord,
+        mark: MarkType
+    ): void {
         mapState.setMark(mark, putCoord);
 
         const coords = this.getReversibleCoords(mapState, mark, putCoord);
@@ -30,7 +34,11 @@ export class ReverseMarkUtil {
      * @param mark マーク
      * @returns セットできる場合はtrue
      */
-    public static isReversible(mapState: MapState, putCoord: Coord, mark: MarkType): boolean {
+    public static isReversible(
+        mapState: MapState,
+        putCoord: Coord,
+        mark: MarkType
+    ): boolean {
         if (mapState.getMark(putCoord) !== MarkType.EMPTY) {
             return false;
         }
@@ -44,11 +52,14 @@ export class ReverseMarkUtil {
      * @param putCoord マークをセットする座標
      * @returns ひっくり返せる全ての座標
      */
-    public static getReversibleCoords(mapState: MapState, mark: MarkType, putCoord: Coord): Coord[] {
-        return DirectionUtil.getDiff()
-            .flatMap(
-                diff => this.reversibleCoords(mapState, mark, putCoord, diff)
-            );
+    public static getReversibleCoords(
+        mapState: MapState,
+        mark: MarkType,
+        putCoord: Coord
+    ): Coord[] {
+        return DirectionUtil.getDiff().flatMap((diff) =>
+            this.reversibleCoords(mapState, mark, putCoord, diff)
+        );
     }
 
     /**
@@ -58,7 +69,12 @@ export class ReverseMarkUtil {
      * @param diff 座標の差分（上下左右に移動するための値）
      * @returns ひっくり返せる座標
      */
-    private static reversibleCoords(mapState: MapState, mark: MarkType, putCoord: Coord, diff: Phaser.Math.Vector2): Coord[] {
+    private static reversibleCoords(
+        mapState: MapState,
+        mark: MarkType,
+        putCoord: Coord,
+        diff: Phaser.Math.Vector2
+    ): Coord[] {
         let coords: Coord[] = [];
         let count = 0;
         let pos = new Phaser.Math.Vector2(putCoord.x, putCoord.y);
@@ -70,7 +86,7 @@ export class ReverseMarkUtil {
             if (mapState.getMark(pos) == MarkTypeUtil.getOpponent(mark)) {
                 count += 1;
             } else if (mapState.getMark(pos) == mark) {
-                for (let i=0; i<count; i++) {
+                for (let i = 0; i < count; i++) {
                     pos.subtract(diff);
                     coords.push(new Coord(pos));
                 }
@@ -96,8 +112,12 @@ export class ReverseMarkUtil {
      * @returns フィールドの範囲外の場合は、true
      */
     private static outSidePos(pos: Phaser.Math.Vector2): boolean {
-        return pos.x<0 || pos.x>MapState.LENGTH-1
-            || pos.y<0 || pos.y>MapState.LENGTH-1;
+        return (
+            pos.x < 0 ||
+            pos.x > MapState.LENGTH - 1 ||
+            pos.y < 0 ||
+            pos.y > MapState.LENGTH - 1
+        );
     }
 
     /**
@@ -106,8 +126,13 @@ export class ReverseMarkUtil {
      * @param pos タイルマップの座標
      * @returns スキップ対象のマークの場合はtrue
      */
-    private static skipMarkType(mapState: MapState, pos: Phaser.Math.Vector2): boolean {
-        return (mapState.getMark(pos) === MarkType.EMPTY)
-            || (mapState.getMark(pos) === MarkType.NONE);
+    private static skipMarkType(
+        mapState: MapState,
+        pos: Phaser.Math.Vector2
+    ): boolean {
+        return (
+            mapState.getMark(pos) === MarkType.EMPTY ||
+            mapState.getMark(pos) === MarkType.NONE
+        );
     }
 }

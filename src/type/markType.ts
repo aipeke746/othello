@@ -17,5 +17,5 @@ export enum MarkType {
     /**
      * なし（白と黒のマークをセットすることができない）
      */
-    NONE
+    NONE,
 }
