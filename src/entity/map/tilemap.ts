@@ -4,10 +4,12 @@ import { MapState } from "./mapState";
 
 /**
  * タイルマップを表すクラス
+ * 
+ * MapStateの内容をタイルマップに反映させることで、オセロのフィールドを描画する
  */
 export class Tilemap {
     /**
-     * タイルマップの状態
+     * マップの状態
      */
     public mapState: MapState;
     /**
@@ -36,18 +38,18 @@ export class Tilemap {
     }
 
     /**
-     * タイルマップの座標からワールド（画面）の座標を取得する
+     * ワールド（画面上）の座標からタイルマップ（オセロのマス目）の座標を取得する
      * @params pos ワールドの座標
-     * @returns ワールドの座標
+     * @returns タイルマップの座標
      */
     public getTilePos(pos: Phaser.Math.Vector2): Phaser.Math.Vector2 {
         return this.layer.worldToTileXY(pos.x, pos.y);
     }
 
     /**
-     * ワールド（画面）の座標からタイルマップの座標を取得する
+     * タイルマップ（オセロのマス目）の座標からワールド（画面上）の座標を取得する
      * @params coord タイルマップの座標
-     * @returns タイルマップの座標
+     * @returns ワールドの座標
      */
     public getWorldPos(coord: Coord): Phaser.Math.Vector2 {
         return this.layer.tileToWorldXY(coord.x, coord.y);
@@ -55,6 +57,7 @@ export class Tilemap {
 
     /**
      * MapStateの内容をTilemapに反映する
+     * （TilemapにMapStateのfieldを反映することで、反映されたオセロのフィールドが描画される）
      */
     public update() {
         for (let y=0; y<MapState.LENGTH; y++) {
@@ -75,7 +78,7 @@ export class Tilemap {
     }
 
     /**
-     * 指定した座標に描画する
+     * 指定した位置にオセロを描画する
      * @param x ｘ座標
      * @param y ｙ座標
      */

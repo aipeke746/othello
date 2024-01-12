@@ -1,7 +1,9 @@
 import { FieldType } from "../../type/fieldType";
 
 /**
- * フィールドタイプのユーティリティー
+ * フィールドタイプのユーティリティクラス
+ * 
+ * メニュー画面でフィールドタイプを切り替える際に使用する
  */
 export class FieldTypeUtil {
     /**

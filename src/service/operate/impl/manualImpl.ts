@@ -5,7 +5,7 @@ import { Coord } from "../../../vo/coord";
 import { OperateService } from "../operateService";
 
 /**
- * 手動操作の実装
+ * 手動操作するクラス
  */
 export class ManualImpl implements OperateService {
     /**
@@ -28,7 +28,7 @@ export class ManualImpl implements OperateService {
     }
 
     /**
-     * オセロのマークを置く座標を取得する
+     * オセロのマークをセットする座標を取得する
      * @param tilemap タイルマップ
      * @param mark マーク
      * @returns 座標
@@ -40,7 +40,7 @@ export class ManualImpl implements OperateService {
     }
 
     /**
-     * 手動操作でオセロのマークを置く座標を取得する
+     * 手動操作でオセロのマークをセットする座標を取得する
      * @param tilemap タイルマップ
      * @param mark マーク
      * @returns 座標

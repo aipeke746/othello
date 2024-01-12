@@ -4,12 +4,13 @@ import { Coord } from "../../vo/coord";
 import { ReverseMarkUtil } from "./reverseMarkUtil";
 
 /**
- * マークを置くユーティリティクラス
+ * マークのセットに関連するユーティリティクラス
  */
 export class PutMarkUtil {
     /**
      * ゲームの終了判定
-     * マークを置ける場所がない場合はゲーム終了
+     * マークをセットする場所がない場合はゲーム終了
+     * @param mapState マップの状態
      * @returns ゲーム終了の場合はtrue
      */
     public static isPutable(mapState: MapState): boolean {
@@ -18,9 +19,10 @@ export class PutMarkUtil {
     }
 
     /**
-     * 指定したマークで置ける座標を取得する
+     * 指定したマークでセットできる全座標を取得する
+     * @param mapState マップの状態
      * @param mark マーク
-     * @returns 置ける座標
+     * @returns セットできる全座標
      */
     public static getPutableCoords(mapState: MapState, mark: MarkType): Coord[] {
         const putableCoords: Coord[] = [];
@@ -33,7 +35,8 @@ export class PutMarkUtil {
     }
 
     /**
-     * 指定したマークを置ける場所があるかどうか
+     * 指定したマークをセットできる場所があるかどうか
+     * @param mapState マップの状態
      * @param mark マーク
      * @returns 置ける場所がある場合はtrue
      */
@@ -42,7 +45,8 @@ export class PutMarkUtil {
     }
 
     /**
-     * マークが置かれていない座標を取得する
+     * マークがセットされていない座標を取得する
+     * @param mapState マップの状態
      */
     private static getCoordNoneMark(mapState: MapState): Coord[] {
         const coords: Coord[] = [];

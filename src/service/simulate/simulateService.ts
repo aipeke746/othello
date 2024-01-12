@@ -4,11 +4,11 @@ import { PutMarkUtil } from "../../util/map/putMarkUtil";
 import { SimulateParam } from "./param/simulateParam";
 
 /**
- * ミニマックス法でシミュレートするクラス
+ * αβ法でシミュレーションするクラス
  */
 export abstract class SimulateService {
     /**
-     * シミュレートするマップの状態
+     * シミュレーションするマップの状態
     */
     public mapState: MapState;
    /**
@@ -33,14 +33,14 @@ export abstract class SimulateService {
     public abstract clone(): SimulateService;
 
     /**
-     * 評価値を返す
+     * オセロのフィールドに対して評価を行い、評価値を返す
      * @returns 評価値
      */
     public abstract evaluate(): number;
 
     /**
-     * ゲーム（シミュレーション）が終了したかどうかを返す
-     * @returns ゲーム（シミュレーション）が終了した場合はtrue
+     * シミュレーションが終了したかどうかを返す
+     * @returns シミュレーションが終了した場合はtrue
      */
     public isDone(): boolean {
         return !PutMarkUtil.isPutable(this.mapState);

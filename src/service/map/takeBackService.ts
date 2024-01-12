@@ -7,22 +7,16 @@ import { MarkType } from "../../type/markType";
  */
 export class TakeBackService {
     /**
-     * 黒の一手戻るを使用した回数
+     * 黒/白の一手戻るを使用した回数
      */
     private blackCount: number = 0;
-    /**
-     * 白の一手戻るを使用した回数
-     */
     private whiteCount: number = 0;
     /**
-     * 黒の一手前のマップの状態
+     * 黒/白の一手前のマップの状態
      * 一手戻るを使用した時に表示するマップの状態
+     * undefinedの場合は一手戻るを使用できない
      */
     private blackMapState?: MapState;
-    /**
-     * 白の一手前のマップの状態
-     * 一手戻るを使用した時に表示するマップの状態
-     */
     private whiteMapState?: MapState;
 
     /**
@@ -40,10 +34,9 @@ export class TakeBackService {
 
     /**
      * 一手戻るを使用した時の処理
-     * 戻してカウントを行う
+     * 戻してカウントを1増やす
      * @param mark マーク
      * @param tilemap タイルマップ
-     * @returns 
      */
     public takeBack(mark: MarkType, tilemap: Tilemap): void {
         const mapState = this.getMapStateByMark(mark);
@@ -65,6 +58,10 @@ export class TakeBackService {
         return this.getMapStateByMark(mark) !== undefined;
     }
 
+    /**
+     * 一手戻るを使用した回数を文字列で返す
+     * @returns 一手戻るを使用した回数の文字列
+     */
     public getCountString(): string {
         return `（ 使用回数: 黒=${this.blackCount} / 白=${this.whiteCount} ）`;
     }

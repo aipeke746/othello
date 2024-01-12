@@ -10,7 +10,9 @@ import { AssistService } from "./assistService";
 import { TakeBackService } from "./takeBackService";
 
 /**
- * ゲームのプレイサービス
+ * ゲームのプレイを管理するサービス
+ * 
+ * プレイヤー、ゲームAIの操作を受け付け、ゲームの進行を行う
  */
 export class PlayService {
     private scene: Phaser.Scene;
@@ -48,7 +50,7 @@ export class PlayService {
     }
 
     /**
-     * プレイする
+     * ゲームをプレイする
      * @param tilemap タイルマップ
      */
     public do(tilemap: Tilemap, takeBackService: TakeBackService): void {
@@ -60,7 +62,7 @@ export class PlayService {
     }
 
     /**
-     * プレイする
+     * プレイヤー、ゲームAIの操作を受け付け、マークをセットする
      * @param tilemap タイルマップ
      */
     private play(tilemap: Tilemap, takeBackService: TakeBackService): void {
@@ -78,7 +80,7 @@ export class PlayService {
     }
 
     /**
-     * 終了処理
+     * ゲームの勝敗が決まった時に呼び出される
      * ポップアップで勝敗表示を行う
      * @param tilemap タイルマップ
      */
@@ -88,10 +90,11 @@ export class PlayService {
     }
 
     /**
-     * ひっくり返すアニメーションを実行する
+     * マークをセットした時に、ひっくり返されるマークのアニメーションを実行する
+     * アニメーション中は操作を受け付けないようにする
      * @param tilemap タイルマップ
-     * @param mark 置いたマーク
-     * @param putCoord 置かれた座標
+     * @param mark セットしたマーク
+     * @param putCoord セットした座標
      */
     private playAnimation(tilemap: Tilemap, mark: MarkType, putCoord: Coord): void {
         this.isReversing = true;

@@ -21,6 +21,10 @@ export class SimulateParam {
         this.beta = beta;
     }
 
+    /**
+     * パラメータを複製する
+     * @returns 複製したパラメータ
+     */
     clone(): SimulateParam {
         return new SimulateParam(this.depth, this.alpha, this.beta);
     }

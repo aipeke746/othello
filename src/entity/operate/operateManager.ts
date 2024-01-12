@@ -4,11 +4,11 @@ import { OperateType } from "../../type/operateType";
 import { Operator } from "./operator";
 
 /**
- * オセロの黒、白の操作方法を管理するクラス
+ * オセロのマーク（黒、白）の操作方法を管理するクラス
  */
 export class OperateManager {
     /**
-     * 操作方法
+     * 操作方法のマップ
      */
     private operators: Map<MarkType, Operator> = new Map();
 
@@ -24,9 +24,9 @@ export class OperateManager {
     }
 
     /**
-     * 操作方法を取得する
+     * 指定したマークの操作方法が手動操作かどうか
      * @param mark マーク
-     * @returns 操作方法
+     * @returns 手動操作の場合はtrue
      */
     public isManual(mark: MarkType): boolean {
         if (this.inValidMarkType(mark)) {
@@ -51,11 +51,12 @@ export class OperateManager {
 
     /**
      * マークが無効かどうかを判定する
+     * 指定したマークが黒でも白でもない場合は無効（true）
      * @param mark マーク
-     * @returns マークが無効かどうか
+     * @returns マークが無効の場合はtrue
      */
     private inValidMarkType(mark: MarkType): boolean {
-        return mark === MarkType.EMPTY;
+        return mark !== MarkType.BLACK && mark !== MarkType.WHITE;
     }
 
     /**

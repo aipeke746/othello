@@ -22,7 +22,7 @@ export class GameUtil {
     }
 
     /**
-     * シミュレートでターンを進める
+     * シミュレーションでターンを進める
      * @param simulate シミュレート
      * @param coord 座標
      * @param mark マーク
@@ -33,6 +33,7 @@ export class GameUtil {
 
     /**
      * マークをひっくり返してターンを進める
+     * 次のターンのマークがセットすることができない場合はターンをスキップする
      * @param mapState マップの状態
      * @param coord 座標
      * @param mark マーク

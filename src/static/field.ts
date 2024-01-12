@@ -1,5 +1,8 @@
 import { MarkType } from "../type/markType";
 
+/**
+ * フィールドのパターン
+ */
 export class Field {
     public static readonly NORMAL: MarkType[][] = [
         [0, 0, 0, 0, 0, 0, 0, 0],

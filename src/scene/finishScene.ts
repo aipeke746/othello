@@ -1,5 +1,8 @@
 import { TextUtil } from "../util/scene/textUtil";
 
+/**
+ * ゲームの勝敗が決まったときのシーン
+ */
 export class FinishScene extends Phaser.Scene {
     /**
      * 勝者の文字列

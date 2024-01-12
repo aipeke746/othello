@@ -6,6 +6,8 @@ import { TweenUtil } from "../../util/scene/tweenUtil";
 
 /**
  * アシスト機能に関するサービス
+ * 
+ * 次にセットできる場所を表示する
  * 対象：手動操作のプレイヤー
  */
 export class AssistService {
@@ -14,7 +16,7 @@ export class AssistService {
      */
     private scene: Phaser.Scene;
     /**
-     * 置ける場所を示す円
+     * セットできる場所を示す円
      */
     private putableCircles: Phaser.GameObjects.Graphics[] = [];
 
@@ -23,7 +25,7 @@ export class AssistService {
     }
 
     /**
-     * 置ける場所を表示する
+     * セットできる場所を表示する
      * @param tilemap タイルマップ
      * @param isManualOperator 手動操作のプレイヤーかどうか
      */
@@ -43,7 +45,7 @@ export class AssistService {
     };
 
     /**
-     * 置ける場所を表示している円を全て削除する
+     * セットできる場所を表示している円を全て削除する
      */
     public removeAllCircle() {
         this.putableCircles.forEach(circle => {

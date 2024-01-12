@@ -7,7 +7,9 @@ import { TextUtil } from "../../util/scene/textUtil";
 
 /**
  * スコア・ターン表示サービス
- * 盤面の黒の数と白の数を表示する
+ * 
+ * オセロのフィールドの黒の数と白の数を表示する
+ * 現在のターンを表示する
  */
 export class ViewService {
     /**

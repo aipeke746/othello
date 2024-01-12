@@ -5,7 +5,18 @@ import { SimulateParam } from "../service/simulate/param/simulateParam";
 import { MarkType } from "../type/markType";
 import { SimulateType } from '../type/simulateType';
 
+/**
+ * シミュレーションのファクトリークラス
+ */
 export class SimulateFactory {
+    /**
+     * シミュレーション方法を生成する
+     * @param type シミュレーションの種類
+     * @param mapState マップの状態
+     * @param myMark 対象のマーク
+     * @param param αβ法の探索パラメータ
+     * @returns シミュレーション
+     */
     public static create(type: SimulateType, mapState: MapState, myMark: MarkType, param: SimulateParam) {
         switch (type) {
             case SimulateType.MAX_SCORE:

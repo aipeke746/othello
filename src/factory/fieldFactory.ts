@@ -2,7 +2,15 @@ import { Field } from "../static/field";
 import { FieldType } from "../type/fieldType";
 import { MarkType } from "../type/markType";
 
+/**
+ * オセロのフィールドを生成するファクトリークラス
+ */
 export class FieldFactory {
+    /**
+     * オセロのフィールドを生成する
+     * @param type オセロのフィールドの種類
+     * @returns オセロのフィールド
+     */
     public static create(type: FieldType): MarkType[][] {
         switch(type) {
             case FieldType.NORMAL:
@@ -26,6 +34,12 @@ export class FieldFactory {
         }
     }
 
+    /**
+     * オセロのフィールドを取得する
+     * （配列は参照渡しになるため、JSONを経由して値渡しにする）
+     * @param field オセロのフィールド
+     * @returns オセロのフィールド
+     */
     public static getField(field: Field) {
         return JSON.parse(JSON.stringify(field));
     }

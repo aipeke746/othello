@@ -6,7 +6,7 @@ import { MarkTypeUtil } from "../mark/markTypeUtil";
 import { PutMarkUtil } from "../map/putMarkUtil";
 
 /**
- * 評価値を計算するクラス
+ * 評価値を計算するユーティリティクラス
  */
 export class EvaluatedScoreUtil {
     /**
@@ -15,7 +15,7 @@ export class EvaluatedScoreUtil {
     public static readonly PUTABLE_WEIGHT: number = 20;
 
     /**
-     * 置かれたマークの評価値を取得する
+     * セットされたマークの評価値を取得する
      * @param mapState マップの状態
      * @param mark マーク
      * @returns 評価値

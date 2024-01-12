@@ -1,5 +1,8 @@
 import { Color } from "../../static/color";
 
+/**
+ * 文字を作成するユーティリティクラス
+ */
 export class TextUtil {
     /**
      * 文字を作成する

@@ -3,7 +3,7 @@
  */
 export enum MarkType {
     /**
-     * 空
+     * 空（白と黒のマークをセットすることができる）
      */
     EMPTY,
     /**
@@ -15,7 +15,7 @@ export enum MarkType {
      */
     WHITE,
     /**
-     * なし
+     * なし（白と黒のマークをセットすることができない）
      */
     NONE
 }

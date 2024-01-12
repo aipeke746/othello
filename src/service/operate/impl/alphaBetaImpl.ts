@@ -23,12 +23,11 @@ export class AlphaBetaImpl implements OperateService {
      */
     private simulateType: SimulateType = SimulateType.MAX_SCORE;
 
-
     /**
-     * 次にオセロのマークを置く座標を返す
+     * 次にオセロのマークをセットする座標を返す
      * @param tilemap タイルマップ
      * @param myMark 自分のマーク
-     * @returns 次の座標
+     * @returns 座標
      */
     public getCoord(tilemap: Tilemap, myMark: MarkType): Coord | undefined {
         const param: SimulateParam = new SimulateParam(this.depth, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
@@ -55,6 +54,7 @@ export class AlphaBetaImpl implements OperateService {
 
     /**
      * 最大スコアと座標を返す
+     * （自身のターン場合）
      * @param simulate シミュレーション
      * @returns 最大スコアと座標
      */
@@ -77,6 +77,7 @@ export class AlphaBetaImpl implements OperateService {
 
     /**
      * 最小スコアと座標を返す
+     * （相手のターン場合）
      * @param simulate シミュレーション
      * @returns 最小スコアと座標
      */

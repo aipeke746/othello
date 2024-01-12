@@ -5,60 +5,63 @@ import { DirectionUtil } from "./directionUtil";
 import { MarkTypeUtil } from "../mark/markTypeUtil";
 
 /**
- * マークをひっくり返すユーティリティクラス
+ * マークをひっくり返すことに関連するユーティリティクラス
  */
 export class ReverseMarkUtil {
     /**
-     * 指定した座標に指定したマークを置いて、ひっくり返す
-     * @param coord 座標
+     * 指定した座標にマークをセットして、ひっくり返す
+     * @param mapState マップの状態
+     * @param putCoord 座標
      * @param mark マーク
      */
-    public static reverse(mapState: MapState, coord: Coord, mark: MarkType): void {
-        mapState.setMark(mark, coord);
+    public static reverse(mapState: MapState, putCoord: Coord, mark: MarkType): void {
+        mapState.setMark(mark, putCoord);
 
-        const coords = this.getReversibleCoords(mapState, mark, coord);
+        const coords = this.getReversibleCoords(mapState, mark, putCoord);
         for (const coord of coords) {
             mapState.setMark(mark, coord);
         }
     }
 
     /**
-     * 指定した座標に指定したマークを置けるかどうか
-     * @param coord 座標
+     * 指定した座標に指定したマークをセットできるかどうか
+     * @param mapState マップの状態
+     * @param putCoord 座標
      * @param mark マーク
-     * @returns 置ける場合はtrue
+     * @returns セットできる場合はtrue
      */
-    public static isReversible(mapState: MapState, coord: Coord, mark: MarkType): boolean {
-        if (mapState.getMark(coord) !== MarkType.EMPTY) {
+    public static isReversible(mapState: MapState, putCoord: Coord, mark: MarkType): boolean {
+        if (mapState.getMark(putCoord) !== MarkType.EMPTY) {
             return false;
         }
-        return this.getReversibleCoords(mapState, mark, coord).length > 0;
+        return this.getReversibleCoords(mapState, mark, putCoord).length > 0;
     }
 
     /**
-     * 指定した座標に指定したマークを置いた場合にひっくり返せる全ての座標を取得する
-     * @param mark 使用するマーク
-     * @param coord マークを置く座標
+     * 指定した座標にマークをセットした場合にひっくり返せる全ての座標を取得する
+     * @param mapState マップの状態
+     * @param mark マーク
+     * @param putCoord マークをセットする座標
      * @returns ひっくり返せる全ての座標
      */
-    public static getReversibleCoords(mapState: MapState, mark: MarkType, coord: Coord): Coord[] {
+    public static getReversibleCoords(mapState: MapState, mark: MarkType, putCoord: Coord): Coord[] {
         return DirectionUtil.getDiff()
             .flatMap(
-                diff => this.reversibleCoords(mapState, mark, coord, diff)
+                diff => this.reversibleCoords(mapState, mark, putCoord, diff)
             );
     }
 
     /**
      * 指定した座標の位置から上下左右に移動していき、ひっくり返せる座標を取得する
      * @param mark 使用するマーク
-     * @param coord マークを置く座標
+     * @param putCoord マークをセットする座標
      * @param diff 座標の差分（上下左右に移動するための値）
      * @returns ひっくり返せる座標
      */
-    private static reversibleCoords(mapState: MapState, mark: MarkType, coord: Coord, diff: Phaser.Math.Vector2): Coord[] {
+    private static reversibleCoords(mapState: MapState, mark: MarkType, putCoord: Coord, diff: Phaser.Math.Vector2): Coord[] {
         let coords: Coord[] = [];
         let count = 0;
-        let pos = new Phaser.Math.Vector2(coord.x, coord.y);
+        let pos = new Phaser.Math.Vector2(putCoord.x, putCoord.y);
 
         while (true) {
             pos.add(diff);
@@ -78,7 +81,8 @@ export class ReverseMarkUtil {
     }
 
     /**
-     * ひっくり返せない場合はスキップする
+     * スキップするかどうか
+     * ひっくり返せない場合はスキップ
      * @param pos タイルマップの座標
      * @returns スキップする場合はtrue
      */

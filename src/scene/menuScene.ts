@@ -8,7 +8,7 @@ import { TextUtil } from "../util/scene/textUtil";
 import { TweenUtil } from "../util/scene/tweenUtil";
 
 /**
- * ゲームのタイトルシーン
+ * ゲームのメニューシーン
  */
 export class MenuScene extends Phaser.Scene {
     private readonly FONT_SIZE = 30;

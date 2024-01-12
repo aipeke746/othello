@@ -7,6 +7,11 @@ import { TextUtil } from "../../util/scene/textUtil";
 import { AssistService } from "./assistService";
 import { TakeBackService } from './takeBackService';
 
+/**
+ * 機能表示用のサービス
+ * 
+ * ゲームのプレイ中に機能の切り替えや実行を管理する
+ */
 export class FunctionService {
     /**
      * 文字のサイズ
@@ -126,6 +131,7 @@ export class FunctionService {
      * メニュー画面に戻る用のテキストを作成（ボタン）
      * @param tx 表示する文字左上のｘ座標
      * @param ty 表示する文字左上のｙ座標
+     * @param music 音楽
      */
     private createBackMenuText(tx: number, ty: number, music: Phaser.Sound.BaseSound): void {
         TextUtil.createTextButton(this.scene, tx, ty, '⇦Menu画面', this.FONT_SIZE, this.FONT_COLOR)

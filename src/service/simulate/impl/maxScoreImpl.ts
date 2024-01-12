@@ -5,7 +5,9 @@ import { SimulateParam } from "../param/simulateParam";
 import { SimulateService } from "../simulateService";
 
 /**
- * 重み付きマップでシミュレートするクラス
+ * 最大の評価値でシミュレートするクラス
+ * 
+ * 評価方法：自分のマークの数 - 相手のマークの数が最大になるようにシミュレートする
  */
 export class MaxScoreImpl extends SimulateService {
     constructor(mapState: MapState, myMark: MarkType, param: SimulateParam) {
