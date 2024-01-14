@@ -1,6 +1,6 @@
 import { OperateService } from '../../service/operate/operateService';
 import { MarkType } from '../../type/markType';
-import { OperateType } from '../../type/operateType';
+import type { OperateType } from '../../type/operateType';
 import { Operator } from './operator';
 
 /**
@@ -10,7 +10,7 @@ export class OperateManager {
     /**
      * 操作方法のマップ
      */
-    private operators: Map<MarkType, Operator> = new Map();
+    private readonly operators: Map<MarkType, Operator>;
 
     /**
      * コンストラクタ
@@ -23,6 +23,7 @@ export class OperateManager {
         blackType: OperateType,
         whiteType: OperateType
     ) {
+        this.operators = new Map();
         this.operators.set(MarkType.BLACK, new Operator(scene, blackType));
         this.operators.set(MarkType.WHITE, new Operator(scene, whiteType));
     }
@@ -70,7 +71,7 @@ export class OperateManager {
      */
     private getOperator(mark: MarkType): Operator {
         const operator = this.operators.get(mark);
-        if (!operator) {
+        if (operator === undefined) {
             throw new Error(`No operator found for mark type: ${mark}`);
         }
 

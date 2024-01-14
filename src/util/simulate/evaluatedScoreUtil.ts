@@ -1,7 +1,7 @@
 import { MapState } from '../../entity/map/mapState';
 import { WeightMap } from '../../service/simulate/weight/weightMap';
-import { MarkType } from '../../type/markType';
-import { Coord } from '../../vo/coord';
+import type { MarkType } from '../../type/markType';
+import type { Coord } from '../../vo/coord';
 import { MarkTypeUtil } from '../mark/markTypeUtil';
 import { PutMarkUtil } from '../map/putMarkUtil';
 

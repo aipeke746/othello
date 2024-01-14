@@ -1,17 +1,10 @@
-import { MapState } from '../../../entity/map/mapState';
-import { MarkType } from '../../../type/markType';
 import { EvaluatedScoreUtil } from '../../../util/simulate/evaluatedScoreUtil';
-import { SimulateParam } from '../param/simulateParam';
 import { SimulateService } from '../simulateService';
 
 /**
  * 重み付きマップでシミュレートするクラス
  */
 export class WeightMapImpl extends SimulateService {
-    constructor(mapState: MapState, myMark: MarkType, param: SimulateParam) {
-        super(mapState, myMark, param);
-    }
-
     /**
      * シミュレーションを複製する
      * @returns

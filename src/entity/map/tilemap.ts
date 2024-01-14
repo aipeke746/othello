@@ -1,5 +1,5 @@
 import { Param } from '../../static/param';
-import { Coord } from '../../vo/coord';
+import type { Coord } from '../../vo/coord';
 import { MapState } from './mapState';
 
 /**
@@ -15,15 +15,15 @@ export class Tilemap {
     /**
      * タイルマップ
      */
-    private map: Phaser.Tilemaps.Tilemap;
+    private readonly map: Phaser.Tilemaps.Tilemap;
     /**
      * タイルセット
      */
-    private tileset: Phaser.Tilemaps.Tileset;
+    private readonly tileset: Phaser.Tilemaps.Tileset;
     /**
      * レイヤー
      */
-    private layer: Phaser.Tilemaps.TilemapLayer;
+    private readonly layer: Phaser.Tilemaps.TilemapLayer;
 
     /**
      * タイルマップを生成する
@@ -63,7 +63,7 @@ export class Tilemap {
      * MapStateの内容をTilemapに反映する
      * （TilemapにMapStateのfieldを反映することで、反映されたオセロのフィールドが描画される）
      */
-    public update() {
+    public update(): void {
         for (let y = 0; y < MapState.LENGTH; y++) {
             for (let x = 0; x < MapState.LENGTH; x++) {
                 const pos = new Phaser.Math.Vector2(x, y);
@@ -91,12 +91,15 @@ export class Tilemap {
     }
 
     /**
-     *　タイルセットを取得する
+     * タイルセットを取得する
      * @param name タイルセットの名前
      * @param map タイルマップ
-     * @returns　タイルセット
+     * @returns タイルセット
      */
-    private getTileset(name: string, map: Phaser.Tilemaps.Tilemap) {
+    private getTileset(
+        name: string,
+        map: Phaser.Tilemaps.Tilemap
+    ): Phaser.Tilemaps.Tileset {
         const tileset = map.addTilesetImage(name);
         if (tileset == null) {
             throw new Error('tileset is null');
@@ -109,7 +112,9 @@ export class Tilemap {
      * @param tileset タイルセット
      * @returns レイヤー
      */
-    private getLayer(tileset: Phaser.Tilemaps.Tileset) {
+    private getLayer(
+        tileset: Phaser.Tilemaps.Tileset
+    ): Phaser.Tilemaps.TilemapLayer {
         const layer = this.map?.createLayer(
             0,
             tileset,

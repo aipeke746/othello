@@ -1,5 +1,6 @@
 import { AlphaBetaImpl } from '../service/operate/impl/alphaBetaImpl';
 import { ManualImpl } from '../service/operate/impl/manualImpl';
+import { type OperateService } from '../service/operate/operateService';
 import { OperateType } from '../type/operateType';
 
 /**
@@ -12,7 +13,10 @@ export class OperateFactory {
      * @param operateType 操作方法の種類
      * @returns 操作方法
      */
-    static create(scene: Phaser.Scene, operateType: OperateType) {
+    static create(
+        scene: Phaser.Scene,
+        operateType: OperateType
+    ): OperateService {
         switch (operateType) {
             case OperateType.MANUAL:
                 return new ManualImpl(scene);

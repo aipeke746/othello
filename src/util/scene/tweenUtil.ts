@@ -12,11 +12,11 @@ export class TweenUtil {
         scene: Phaser.Scene,
         target: any,
         duration: number = 700
-    ) {
+    ): void {
         scene.tweens.add({
             targets: target,
             alpha: 0,
-            duration: duration,
+            duration,
             ease: 'Sine.easeIn',
             repeat: -1,
             yoyo: true,

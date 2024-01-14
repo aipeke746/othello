@@ -40,7 +40,7 @@ export class FieldFactory {
      * @param field オセロのフィールド
      * @returns オセロのフィールド
      */
-    public static getField(field: Field) {
+    public static getField(field: Field): MarkType[][] {
         return JSON.parse(JSON.stringify(field));
     }
 }

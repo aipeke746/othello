@@ -24,4 +24,4 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [MenuScene, PlayScene, FinishScene],
 };
 
-new Phaser.Game(config);
+new Phaser.Game(config); // eslint-disable-line no-new

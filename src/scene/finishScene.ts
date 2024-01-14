@@ -13,15 +13,15 @@ export class FinishScene extends Phaser.Scene {
         super({ key: 'finishScene' });
     }
 
-    init(data: any) {
+    init(data: any): void {
         this.winner = data.winner as string;
     }
 
-    preload() {
+    preload(): void {
         this.load.image('frame', 'asset/image/frame.png');
     }
 
-    create() {
+    create(): void {
         // 枠の表示
         const centerX = this.cameras.main.width / 2;
         const centerY = this.cameras.main.width / 2;

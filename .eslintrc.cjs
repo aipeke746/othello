@@ -19,5 +19,8 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    rules: {},
+    rules: {
+        '@typescript-eslint/no-extraneous-class': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
+    },
 };

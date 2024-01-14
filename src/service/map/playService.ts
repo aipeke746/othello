@@ -1,13 +1,13 @@
 import { OperateManager } from '../../entity/operate/operateManager';
-import { Tilemap } from '../../entity/map/tilemap';
+import type { Tilemap } from '../../entity/map/tilemap';
 import { MarkType } from '../../type/markType';
 import { GameUtil } from '../../util/map/gameUtil';
 import { PutMarkUtil } from '../../util/map/putMarkUtil';
 import { ReverseToMarkUtil } from '../../util/mark/reverseToMarkUtil';
 import { ReverseMarkUtil } from '../../util/map/reverseMarkUtil';
-import { Coord } from '../../vo/coord';
-import { AssistService } from './assistService';
-import { TakeBackService } from './takeBackService';
+import type { Coord } from '../../vo/coord';
+import type { AssistService } from './assistService';
+import type { TakeBackService } from './takeBackService';
 
 /**
  * ゲームのプレイを管理するサービス
@@ -15,15 +15,15 @@ import { TakeBackService } from './takeBackService';
  * プレイヤー、ゲームAIの操作を受け付け、ゲームの進行を行う
  */
 export class PlayService {
-    private scene: Phaser.Scene;
+    private readonly scene: Phaser.Scene;
     /**
      * 操作方法のマネージャー
      */
-    private operateManager: OperateManager;
+    private readonly operateManager: OperateManager;
     /**
      * アシストサービス
      */
-    private assist: AssistService;
+    private readonly assist: AssistService;
     /**
      * ひっくり返すアニメーションを実行中かどうか
      */
@@ -35,11 +35,11 @@ export class PlayService {
     /**
      * マークをセットした時の音
      */
-    private putMarkSound: Phaser.Sound.BaseSound;
+    private readonly putMarkSound: Phaser.Sound.BaseSound;
     /**
      * マークをひっくり返した時の音
      */
-    private reverseMarkSound: Phaser.Sound.BaseSound;
+    private readonly reverseMarkSound: Phaser.Sound.BaseSound;
 
     constructor(
         scene: Phaser.Scene,
@@ -74,13 +74,13 @@ export class PlayService {
         const operate = this.operateManager.getOperateService(nowMark);
         const coord = operate.getCoord(tilemap, nowMark);
 
-        if (coord) {
-            this.putMarkSound.play();
-            takeBackService.update(nowMark, tilemap.mapState);
-            this.assist.removeAllCircle();
-            this.playAnimation(tilemap, nowMark, coord);
-            GameUtil.advance(tilemap, nowMark, coord);
-        }
+        if (coord === undefined) return;
+
+        this.putMarkSound.play();
+        takeBackService.update(nowMark, tilemap.mapState);
+        this.assist.removeAllCircle();
+        this.playAnimation(tilemap, nowMark, coord);
+        GameUtil.advance(tilemap, nowMark, coord);
     }
 
     /**

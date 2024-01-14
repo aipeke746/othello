@@ -1,8 +1,8 @@
 import { Tilemap } from '../../../entity/map/tilemap';
-import { MarkType } from '../../../type/markType';
+import type { MarkType } from '../../../type/markType';
 import { ReverseMarkUtil } from '../../../util/map/reverseMarkUtil';
 import { Coord } from '../../../vo/coord';
-import { OperateService } from '../operateService';
+import type { OperateService } from '../operateService';
 
 /**
  * 手動操作するクラス
@@ -11,7 +11,7 @@ export class ManualImpl implements OperateService {
     /**
      * ポインター
      */
-    private pointer: Phaser.Input.Pointer;
+    private readonly pointer: Phaser.Input.Pointer;
     /**
      * ポインターが押されているかどうか
      */

@@ -1,6 +1,6 @@
 import { FieldFactory } from '../../factory/fieldFactory';
 import { Param } from '../../static/param';
-import { FieldType } from '../../type/fieldType';
+import type { FieldType } from '../../type/fieldType';
 import { MarkType } from '../../type/markType';
 import { MarkTypeUtil } from '../../util/mark/markTypeUtil';
 import { Coord } from '../../vo/coord';

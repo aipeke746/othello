@@ -23,11 +23,11 @@ export class MenuScene extends Phaser.Scene {
         super({ key: 'menuScene' });
     }
 
-    preload() {
+    preload(): void {
         this.load.image('mapTiles', 'asset/image/mapTiles.png');
     }
 
-    create() {
+    create(): void {
         const centerX = this.cameras.main.width / 2;
         const centerY = this.cameras.main.height / 2;
 

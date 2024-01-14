@@ -36,15 +36,15 @@ export class ViewService {
     /**
      * 手番表示用のテキスト
      */
-    private turnText: Phaser.GameObjects.Text;
+    private readonly turnText: Phaser.GameObjects.Text;
     /**
      * 黒のスコア表示用のテキスト
      */
-    private blackScoreText: Phaser.GameObjects.Text;
+    private readonly blackScoreText: Phaser.GameObjects.Text;
     /**
      * 白のスコア表示用のテキスト
      */
-    private whiteScoreText: Phaser.GameObjects.Text;
+    private readonly whiteScoreText: Phaser.GameObjects.Text;
 
     constructor(scene: Phaser.Scene) {
         // 背景
@@ -56,7 +56,7 @@ export class ViewService {
             .rectangle(x, y, width, height, this.BACKGROUND_COLOR)
             .setOrigin(0, 0);
 
-        let tx, ty;
+        let tx: number, ty: number;
 
         // 手番表示用のテキスト
         tx = x + width / 2;
@@ -107,7 +107,7 @@ export class ViewService {
      * スコアを更新する
      * @param tilemap タイルマップ
      */
-    public update(tilemap: Tilemap) {
+    public update(tilemap: Tilemap): void {
         this.turnText.setText(this.getTurnString(tilemap));
         this.blackScoreText.setText(
             this.getMarkCountString(tilemap, MarkType.BLACK)

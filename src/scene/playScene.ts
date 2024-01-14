@@ -28,7 +28,7 @@ export class PlayScene extends Phaser.Scene {
         super({ key: 'playScene' });
     }
 
-    init(data: any) {
+    init(data: any): void {
         this.operateManager = new OperateManager(
             this,
             data.firstOperateType as OperateType,
@@ -36,7 +36,7 @@ export class PlayScene extends Phaser.Scene {
         );
     }
 
-    preload() {
+    preload(): void {
         this.load.image('mapTiles', 'asset/image/mapTiles.png');
         this.load.spritesheet(
             ReverseToMarkUtil.get(MarkType.BLACK),
@@ -56,7 +56,7 @@ export class PlayScene extends Phaser.Scene {
         );
     }
 
-    create() {
+    create(): void {
         Animation.createMarkReverseAnim(this);
         this.music = this.sound.add('music', { volume: 0.5, loop: true });
         if (Param.PLAY_MUSIC) {
@@ -87,7 +87,7 @@ export class PlayScene extends Phaser.Scene {
         );
     }
 
-    update() {
+    update(): void {
         this.playService.do(this.tilemap, this.takeBackService);
         this.viewService.update(this.tilemap);
         this.functionService.update(this.tilemap, this.takeBackService);

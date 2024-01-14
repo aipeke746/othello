@@ -1,6 +1,6 @@
 import { Tilemap } from '../../entity/map/tilemap';
-import { MarkType } from '../../type/markType';
-import { Coord } from '../../vo/coord';
+import type { MarkType } from '../../type/markType';
+import type { Coord } from '../../vo/coord';
 
 /**
  * 操作方法のインターフェース
@@ -12,5 +12,5 @@ export interface OperateService {
      * @param tilemap タイルマップ
      * @param myMark 自分のマーク
      */
-    getCoord(tilemap: Tilemap, myMark: MarkType): Coord | undefined;
+    getCoord: (tilemap: Tilemap, myMark: MarkType) => Coord | undefined;
 }

@@ -1,7 +1,7 @@
-import { MapState } from '../../entity/map/mapState';
-import { MarkType } from '../../type/markType';
+import { type MapState } from '../../entity/map/mapState';
+import type { MarkType } from '../../type/markType';
 import { PutMarkUtil } from '../../util/map/putMarkUtil';
-import { SimulateParam } from './param/simulateParam';
+import type { SimulateParam } from './param/simulateParam';
 
 /**
  * αβ法でシミュレーションするクラス

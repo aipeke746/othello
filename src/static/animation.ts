@@ -15,7 +15,7 @@ export class Animation {
             if (this.isExist(scene, key)) continue;
 
             scene.anims.create({
-                key: key,
+                key,
                 frames: scene.anims.generateFrameNumbers(key, {
                     start: 0,
                     end: 4,

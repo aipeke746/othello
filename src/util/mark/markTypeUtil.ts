@@ -20,11 +20,11 @@ export class MarkTypeUtil {
      * @returns 相手のマーク
      */
     public static getOpponent(markType: MarkType): MarkType {
-        if (markType == MarkType.EMPTY) {
+        if (markType === MarkType.EMPTY) {
             return MarkType.EMPTY;
         }
 
-        return markType == MarkType.BLACK ? MarkType.WHITE : MarkType.BLACK;
+        return markType === MarkType.BLACK ? MarkType.WHITE : MarkType.BLACK;
     }
 
     /**

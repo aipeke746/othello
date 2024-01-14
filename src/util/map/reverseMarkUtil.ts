@@ -75,17 +75,17 @@ export class ReverseMarkUtil {
         putCoord: Coord,
         diff: Phaser.Math.Vector2
     ): Coord[] {
-        let coords: Coord[] = [];
+        const coords: Coord[] = [];
         let count = 0;
-        let pos = new Phaser.Math.Vector2(putCoord.x, putCoord.y);
+        const pos = new Phaser.Math.Vector2(putCoord.x, putCoord.y);
 
         while (true) {
             pos.add(diff);
             if (this.skip(mapState, pos)) break;
 
-            if (mapState.getMark(pos) == MarkTypeUtil.getOpponent(mark)) {
+            if (mapState.getMark(pos) === MarkTypeUtil.getOpponent(mark)) {
                 count += 1;
-            } else if (mapState.getMark(pos) == mark) {
+            } else if (mapState.getMark(pos) === mark) {
                 for (let i = 0; i < count; i++) {
                     pos.subtract(diff);
                     coords.push(new Coord(pos));

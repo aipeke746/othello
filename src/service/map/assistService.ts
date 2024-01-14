@@ -1,5 +1,5 @@
 import { MapState } from '../../entity/map/mapState';
-import { Tilemap } from '../../entity/map/tilemap';
+import type { Tilemap } from '../../entity/map/tilemap';
 import { Param } from '../../static/param';
 import { PutMarkUtil } from '../../util/map/putMarkUtil';
 import { TweenUtil } from '../../util/scene/tweenUtil';
@@ -14,7 +14,7 @@ export class AssistService {
     /**
      * シーン
      */
-    private scene: Phaser.Scene;
+    private readonly scene: Phaser.Scene;
     /**
      * セットできる場所を示す円
      */
@@ -57,7 +57,7 @@ export class AssistService {
     /**
      * セットできる場所を表示している円を全て削除する
      */
-    public removeAllCircle() {
+    public removeAllCircle(): void {
         this.putableCircles.forEach((circle) => {
             circle.destroy();
         });

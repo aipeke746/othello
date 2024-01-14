@@ -1,7 +1,4 @@
-import { MapState } from '../../../entity/map/mapState';
-import { MarkType } from '../../../type/markType';
 import { MarkTypeUtil } from '../../../util/mark/markTypeUtil';
-import { SimulateParam } from '../param/simulateParam';
 import { SimulateService } from '../simulateService';
 
 /**
@@ -10,10 +7,6 @@ import { SimulateService } from '../simulateService';
  * 評価方法：自分のマークの数 - 相手のマークの数が最大になるようにシミュレートする
  */
 export class MaxScoreImpl extends SimulateService {
-    constructor(mapState: MapState, myMark: MarkType, param: SimulateParam) {
-        super(mapState, myMark, param);
-    }
-
     /**
      * シミュレーションを複製する
      * @returns

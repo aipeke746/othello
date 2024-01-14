@@ -1,5 +1,5 @@
 import { MapState } from '../../entity/map/mapState';
-import { Tilemap } from '../../entity/map/tilemap';
+import type { Tilemap } from '../../entity/map/tilemap';
 import { MarkType } from '../../type/markType';
 
 /**
@@ -24,7 +24,7 @@ export class TakeBackService {
      * @param mark マーク
      * @param mapState セット前のマップの状態
      */
-    public update(mark: MarkType, mapState: MapState) {
+    public update(mark: MarkType, mapState: MapState): void {
         if (mark === MarkType.BLACK) {
             this.blackMapState = mapState.clone();
         } else {
@@ -81,7 +81,7 @@ export class TakeBackService {
      * 指定したマークの一手戻るを使用した回数を1増やす
      * @param mark マーク
      */
-    private countUp(mark: MarkType) {
+    private countUp(mark: MarkType): void {
         mark === MarkType.BLACK
             ? (this.blackCount += 1)
             : (this.whiteCount += 1);
@@ -91,7 +91,7 @@ export class TakeBackService {
      * 一手前のマップの状態を消す
      * 一手戻るを使用した場合に使用する
      */
-    private clear() {
+    private clear(): void {
         this.blackMapState = undefined;
         this.whiteMapState = undefined;
     }

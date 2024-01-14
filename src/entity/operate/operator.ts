@@ -9,11 +9,11 @@ export class Operator {
     /**
      * 操作方法
      */
-    private operateType: OperateType;
+    private readonly operateType: OperateType;
     /**
      * 操作方法のサービス
      */
-    private operateService: OperateService;
+    private readonly operateService: OperateService;
 
     /**
      * コンストラクタ

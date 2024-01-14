@@ -1,12 +1,12 @@
 import { Tilemap } from '../../../entity/map/tilemap';
 import { SimulateFactory } from '../../../factory/simulateFactory';
-import { MarkType } from '../../../type/markType';
+import type { MarkType } from '../../../type/markType';
 import { MarkTypeUtil } from '../../../util/mark/markTypeUtil';
-import { Coord } from '../../../vo/coord';
+import type { Coord } from '../../../vo/coord';
 import { SimulateParam } from '../../simulate/param/simulateParam';
-import { OperateService } from '../operateService';
+import type { OperateService } from '../operateService';
 import { SimulateType } from '../../../type/simulateType';
-import { SimulateService } from '../../simulate/simulateService';
+import type { SimulateService } from '../../simulate/simulateService';
 import { PutMarkUtil } from '../../../util/map/putMarkUtil';
 import { GameUtil } from '../../../util/map/gameUtil';
 
@@ -17,11 +17,11 @@ export class AlphaBetaImpl implements OperateService {
     /**
      * 探索する深さ
      */
-    private depth: number = 7;
+    private readonly depth: number = 7;
     /**
      * シミュレーションのタイプ（評価値の計算方法）
      */
-    private simulateType: SimulateType = SimulateType.MAX_SCORE;
+    private readonly simulateType: SimulateType = SimulateType.MAX_SCORE;
 
     /**
      * 次にオセロのマークをセットする座標を返す
@@ -74,7 +74,7 @@ export class AlphaBetaImpl implements OperateService {
         simulate: SimulateService
     ): [number, Coord | undefined] {
         const targetMark = simulate.myMark;
-        let maxScore: [number, Coord | undefined] = [
+        const maxScore: [number, Coord | undefined] = [
             Number.NEGATIVE_INFINITY,
             undefined,
         ];
@@ -105,7 +105,7 @@ export class AlphaBetaImpl implements OperateService {
         simulate: SimulateService
     ): [number, Coord | undefined] {
         const targetMark = MarkTypeUtil.getOpponent(simulate.myMark);
-        let minScore: [number, Coord | undefined] = [
+        const minScore: [number, Coord | undefined] = [
             Number.POSITIVE_INFINITY,
             undefined,
         ];

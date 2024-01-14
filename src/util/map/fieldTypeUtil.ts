@@ -47,7 +47,7 @@ export class FieldTypeUtil {
      * @param fieldType 現在表示しているフィールドタイプ
      * @returns フィールドタイプの要素数
      */
-    private static getCurrentIndex(fieldType): number {
+    private static getCurrentIndex(fieldType: FieldType): number {
         return FieldTypeUtil.FIELD_TYPS.indexOf(fieldType);
     }
 }

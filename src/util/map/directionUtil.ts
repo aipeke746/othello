@@ -5,7 +5,7 @@ export class DirectionUtil {
     /**
      * 上下左右方向の座標の差分
      */
-    private static DIFF: Phaser.Math.Vector2[] = [
+    private static readonly DIFF: Phaser.Math.Vector2[] = [
         new Phaser.Math.Vector2(-1, -1),
         new Phaser.Math.Vector2(-1, 0),
         new Phaser.Math.Vector2(-1, 1),

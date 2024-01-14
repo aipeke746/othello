@@ -1,11 +1,11 @@
 import { Tilemap } from '../../entity/map/tilemap';
-import { OperateManager } from '../../entity/operate/operateManager';
+import type { OperateManager } from '../../entity/operate/operateManager';
 import { Color } from '../../static/color';
 import { Param } from '../../static/param';
-import { MarkType } from '../../type/markType';
+import type { MarkType } from '../../type/markType';
 import { TextUtil } from '../../util/scene/textUtil';
-import { AssistService } from './assistService';
-import { TakeBackService } from './takeBackService';
+import type { AssistService } from './assistService';
+import type { TakeBackService } from './takeBackService';
 
 /**
  * 機能表示用のサービス
@@ -29,7 +29,7 @@ export class FunctionService {
     /**
      * シーン
      */
-    private scene: Phaser.Scene;
+    private readonly scene: Phaser.Scene;
     /**
      * アシスト表示用のテキスト
      * ON/OFFの切り替えを行う
@@ -64,7 +64,7 @@ export class FunctionService {
             .rectangle(x, y, width, height, this.BACKGROUND_COLOR)
             .setOrigin(0, 0);
 
-        let tx, ty;
+        let tx: number, ty: number;
 
         // アシスト機能の切り替えボタン
         tx = x + width / 2;
@@ -116,7 +116,7 @@ export class FunctionService {
         operateManager: OperateManager,
         tx: number,
         ty: number
-    ) {
+    ): void {
         this.assistTextToggle = TextUtil.createTextButton(
             this.scene,
             tx,
@@ -153,7 +153,7 @@ export class FunctionService {
         takeBackService: TakeBackService,
         tx: number,
         ty: number
-    ) {
+    ): void {
         this.takeBackTextButton = TextUtil.createTextButton(
             this.scene,
             tx,
