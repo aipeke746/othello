@@ -30,7 +30,7 @@ export class SimulateFactory {
             case SimulateType.WEIGHT_MAP:
                 return new WeightMapImpl(mapState, myMark, param);
             default:
-                throw new Error("SimulateFactory.create type error");
+                throw new Error('SimulateFactory.create type error');
         }
     }
 }

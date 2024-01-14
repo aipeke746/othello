@@ -16,7 +16,11 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    public static advance(tilemap: Tilemap, mark: MarkType, coord: Coord): void {
+    public static advance(
+        tilemap: Tilemap,
+        mark: MarkType,
+        coord: Coord
+    ): void {
         this.advanceMap(tilemap.mapState, coord, mark);
         tilemap.update();
     }
