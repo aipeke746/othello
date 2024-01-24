@@ -14,10 +14,7 @@ export class PutMarkUtil {
      * @returns ゲーム終了の場合はtrue
      */
     public static isPutable(mapState: MapState): boolean {
-        return (
-            this.isPutableMark(mapState, MarkType.BLACK) ||
-            this.isPutableMark(mapState, MarkType.WHITE)
-        );
+        return this.isPutableMark(mapState, MarkType.BLACK) || this.isPutableMark(mapState, MarkType.WHITE);
     }
 
     /**
@@ -26,10 +23,7 @@ export class PutMarkUtil {
      * @param mark マーク
      * @returns セットできる全座標
      */
-    public static getPutableCoords(
-        mapState: MapState,
-        mark: MarkType
-    ): Coord[] {
+    public static getPutableCoords(mapState: MapState, mark: MarkType): Coord[] {
         const putableCoords: Coord[] = [];
         for (const coord of this.getCoordNoneMark(mapState)) {
             if (ReverseMarkUtil.isReversible(mapState, coord, mark)) {

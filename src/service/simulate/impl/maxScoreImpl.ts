@@ -12,11 +12,7 @@ export class MaxScoreImpl extends SimulateService {
      * @returns
      */
     public clone(): MaxScoreImpl {
-        return new MaxScoreImpl(
-            this.mapState.clone(),
-            this.myMark,
-            this.param.clone()
-        );
+        return new MaxScoreImpl(this.mapState.clone(), this.myMark, this.param.clone());
     }
 
     /**
@@ -25,9 +21,7 @@ export class MaxScoreImpl extends SimulateService {
      */
     public evaluate(): number {
         const myMarkCount = this.mapState.getMarkCount(this.myMark);
-        const opponentMarkCount = this.mapState.getMarkCount(
-            MarkTypeUtil.getOpponent(this.myMark)
-        );
+        const opponentMarkCount = this.mapState.getMarkCount(MarkTypeUtil.getOpponent(this.myMark));
         return myMarkCount - opponentMarkCount;
     }
 }

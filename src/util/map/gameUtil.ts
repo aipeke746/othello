@@ -16,11 +16,7 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    public static advance(
-        tilemap: Tilemap,
-        mark: MarkType,
-        coord: Coord
-    ): void {
+    public static advance(tilemap: Tilemap, mark: MarkType, coord: Coord): void {
         this.advanceMap(tilemap.mapState, coord, mark);
         tilemap.update();
     }
@@ -31,11 +27,7 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    public static simulateAdvance(
-        simulate: SimulateService,
-        mark: MarkType,
-        coord: Coord
-    ): void {
+    public static simulateAdvance(simulate: SimulateService, mark: MarkType, coord: Coord): void {
         this.advanceMap(simulate.mapState, coord, mark);
     }
 
@@ -46,11 +38,7 @@ export class GameUtil {
      * @param coord 座標
      * @param mark マーク
      */
-    private static advanceMap(
-        mapState: MapState,
-        coord: Coord,
-        mark: MarkType
-    ): void {
+    private static advanceMap(mapState: MapState, coord: Coord, mark: MarkType): void {
         ReverseMarkUtil.reverse(mapState, coord, mark);
         mapState.nextTurn();
         if (!PutMarkUtil.isPutableMark(mapState, mapState.getNowTurnMark())) {

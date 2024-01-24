@@ -72,9 +72,7 @@ export class TakeBackService {
      * @returns 一手前のマップの状態
      */
     private getMapStateByMark(mark: MarkType): MapState | undefined {
-        return mark === MarkType.BLACK
-            ? this.blackMapState
-            : this.whiteMapState;
+        return mark === MarkType.BLACK ? this.blackMapState : this.whiteMapState;
     }
 
     /**
@@ -82,9 +80,7 @@ export class TakeBackService {
      * @param mark マーク
      */
     private countUp(mark: MarkType): void {
-        mark === MarkType.BLACK
-            ? (this.blackCount += 1)
-            : (this.whiteCount += 1);
+        mark === MarkType.BLACK ? (this.blackCount += 1) : (this.whiteCount += 1);
     }
 
     /**

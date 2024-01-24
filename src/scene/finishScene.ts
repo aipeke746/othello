@@ -31,13 +31,7 @@ export class FinishScene extends Phaser.Scene {
         TextUtil.createText(this, centerX, centerY, this.winner, 50);
 
         // 閉じるボタン
-        TextUtil.createTextButton(
-            this,
-            centerX + 150,
-            centerY + 80,
-            '閉じる',
-            20
-        ).on('pointerdown', () => {
+        TextUtil.createTextButton(this, centerX + 150, centerY + 80, '閉じる', 20).on('pointerdown', () => {
             this.scene.stop('finishScene');
         });
     }

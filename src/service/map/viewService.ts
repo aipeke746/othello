@@ -52,35 +52,19 @@ export class ViewService {
         const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;
         const width = scene.cameras.main.width - x - Param.TILE_MARGIN;
         const height = scene.cameras.main.height - y - Param.TILE_MARGIN;
-        scene.add
-            .rectangle(x, y, width, height, this.BACKGROUND_COLOR)
-            .setOrigin(0, 0);
+        scene.add.rectangle(x, y, width, height, this.BACKGROUND_COLOR).setOrigin(0, 0);
 
         let tx: number, ty: number;
 
         // 手番表示用のテキスト
         tx = x + width / 2;
         ty = y + height / 2 - Param.BOTTOM_TILE_MARGIN / 4;
-        this.turnText = TextUtil.createText(
-            scene,
-            tx,
-            ty,
-            '黒のターン',
-            this.FONT_SIZE,
-            this.FONT_COLOR
-        );
+        this.turnText = TextUtil.createText(scene, tx, ty, '黒のターン', this.FONT_SIZE, this.FONT_COLOR);
 
         // 黒のスコア表示用のテキスト
         tx = x + width / 2 + this.OFFSET;
         ty = y + height / 2;
-        this.blackScoreText = TextUtil.createText(
-            scene,
-            tx,
-            ty,
-            ':  2',
-            this.FONT_SIZE,
-            this.FONT_COLOR
-        );
+        this.blackScoreText = TextUtil.createText(scene, tx, ty, ':  2', this.FONT_SIZE, this.FONT_COLOR);
         scene.add
             .graphics()
             .fillStyle(0x000000)
@@ -89,14 +73,7 @@ export class ViewService {
         // 白のスコア表示用のテキスト
         tx = x + width / 2 + this.OFFSET;
         ty = y + height / 2 + Param.BOTTOM_TILE_MARGIN / 4;
-        this.whiteScoreText = TextUtil.createText(
-            scene,
-            tx,
-            ty,
-            ':  2',
-            this.FONT_SIZE,
-            this.FONT_COLOR
-        );
+        this.whiteScoreText = TextUtil.createText(scene, tx, ty, ':  2', this.FONT_SIZE, this.FONT_COLOR);
         scene.add
             .graphics()
             .fillStyle(0xffffff)
@@ -109,12 +86,8 @@ export class ViewService {
      */
     public update(tilemap: Tilemap): void {
         this.turnText.setText(this.getTurnString(tilemap));
-        this.blackScoreText.setText(
-            this.getMarkCountString(tilemap, MarkType.BLACK)
-        );
-        this.whiteScoreText.setText(
-            this.getMarkCountString(tilemap, MarkType.WHITE)
-        );
+        this.blackScoreText.setText(this.getMarkCountString(tilemap, MarkType.BLACK));
+        this.whiteScoreText.setText(this.getMarkCountString(tilemap, MarkType.WHITE));
     }
 
     /**

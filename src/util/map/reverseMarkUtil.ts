@@ -14,11 +14,7 @@ export class ReverseMarkUtil {
      * @param putCoord 座標
      * @param mark マーク
      */
-    public static reverse(
-        mapState: MapState,
-        putCoord: Coord,
-        mark: MarkType
-    ): void {
+    public static reverse(mapState: MapState, putCoord: Coord, mark: MarkType): void {
         mapState.setMark(mark, putCoord);
 
         const coords = this.getReversibleCoords(mapState, mark, putCoord);
@@ -34,11 +30,7 @@ export class ReverseMarkUtil {
      * @param mark マーク
      * @returns セットできる場合はtrue
      */
-    public static isReversible(
-        mapState: MapState,
-        putCoord: Coord,
-        mark: MarkType
-    ): boolean {
+    public static isReversible(mapState: MapState, putCoord: Coord, mark: MarkType): boolean {
         if (mapState.getMark(putCoord) !== MarkType.EMPTY) {
             return false;
         }
@@ -52,14 +44,8 @@ export class ReverseMarkUtil {
      * @param putCoord マークをセットする座標
      * @returns ひっくり返せる全ての座標
      */
-    public static getReversibleCoords(
-        mapState: MapState,
-        mark: MarkType,
-        putCoord: Coord
-    ): Coord[] {
-        return DirectionUtil.getDiff().flatMap((diff) =>
-            this.reversibleCoords(mapState, mark, putCoord, diff)
-        );
+    public static getReversibleCoords(mapState: MapState, mark: MarkType, putCoord: Coord): Coord[] {
+        return DirectionUtil.getDiff().flatMap((diff) => this.reversibleCoords(mapState, mark, putCoord, diff));
     }
 
     /**
@@ -112,12 +98,7 @@ export class ReverseMarkUtil {
      * @returns フィールドの範囲外の場合は、true
      */
     private static outSidePos(pos: Phaser.Math.Vector2): boolean {
-        return (
-            pos.x < 0 ||
-            pos.x > MapState.LENGTH - 1 ||
-            pos.y < 0 ||
-            pos.y > MapState.LENGTH - 1
-        );
+        return pos.x < 0 || pos.x > MapState.LENGTH - 1 || pos.y < 0 || pos.y > MapState.LENGTH - 1;
     }
 
     /**
@@ -126,13 +107,7 @@ export class ReverseMarkUtil {
      * @param pos タイルマップの座標
      * @returns スキップ対象のマークの場合はtrue
      */
-    private static skipMarkType(
-        mapState: MapState,
-        pos: Phaser.Math.Vector2
-    ): boolean {
-        return (
-            mapState.getMark(pos) === MarkType.EMPTY ||
-            mapState.getMark(pos) === MarkType.NONE
-        );
+    private static skipMarkType(mapState: MapState, pos: Phaser.Math.Vector2): boolean {
+        return mapState.getMark(pos) === MarkType.EMPTY || mapState.getMark(pos) === MarkType.NONE;
     }
 }

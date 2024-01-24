@@ -8,11 +8,7 @@ export class TweenUtil {
      * @param target 点滅させる対象
      * @param duration 1回の点滅にかかる時間
      */
-    public static blinking(
-        scene: Phaser.Scene,
-        target: any,
-        duration: number = 700
-    ): void {
+    public static blinking(scene: Phaser.Scene, target: any, duration: number = 700): void {
         scene.tweens.add({
             targets: target,
             alpha: 0,

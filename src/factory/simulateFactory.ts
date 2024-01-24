@@ -22,14 +22,8 @@ export class SimulateFactory {
      * @param param αβ法の探索パラメータ
      */
     constructor(mapState: MapState, myMark: MarkType, param: SimulateParam) {
-        this.MAP.set(
-            SimulateType.MAX_SCORE,
-            new MaxScoreImpl(mapState, myMark, param)
-        );
-        this.MAP.set(
-            SimulateType.WEIGHT_MAP,
-            new WeightMapImpl(mapState, myMark, param)
-        );
+        this.MAP.set(SimulateType.MAX_SCORE, new MaxScoreImpl(mapState, myMark, param));
+        this.MAP.set(SimulateType.WEIGHT_MAP, new WeightMapImpl(mapState, myMark, param));
     }
 
     /**

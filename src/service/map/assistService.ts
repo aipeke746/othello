@@ -29,28 +29,19 @@ export class AssistService {
      * @param tilemap タイルマップ
      * @param isManualOperator 手動操作のプレイヤーかどうか
      */
-    public showPutableCoords(
-        tilemap: Tilemap,
-        isManualOperator: boolean
-    ): void {
+    public showPutableCoords(tilemap: Tilemap, isManualOperator: boolean): void {
         const mark = tilemap.mapState.getNowTurnMark();
         this.removeAllCircle();
         if (!this.isVisible(isManualOperator)) return;
 
-        PutMarkUtil.getPutableCoords(tilemap.mapState, mark).forEach(
-            (coord) => {
-                const pos = tilemap.getWorldPos(coord);
-                const graphics = this.scene.add.graphics();
-                const circle = graphics
-                    .lineStyle(2, 0x0000ff)
-                    .strokeCircle(
-                        pos.x + MapState.SIZE / 2,
-                        pos.y + MapState.SIZE / 2,
-                        25
-                    );
-                this.putableCircles.push(circle);
-            }
-        );
+        PutMarkUtil.getPutableCoords(tilemap.mapState, mark).forEach((coord) => {
+            const pos = tilemap.getWorldPos(coord);
+            const graphics = this.scene.add.graphics();
+            const circle = graphics
+                .lineStyle(2, 0x0000ff)
+                .strokeCircle(pos.x + MapState.SIZE / 2, pos.y + MapState.SIZE / 2, 25);
+            this.putableCircles.push(circle);
+        });
         TweenUtil.blinking(this.scene, this.putableCircles);
     }
 

@@ -34,13 +34,7 @@ export class MenuScene extends Phaser.Scene {
         this.createTitleText(centerX, 100, 'オセロゲーム');
 
         // フィールドを選択
-        this.fieldTypeText = TextUtil.createText(
-            this,
-            centerX,
-            centerY - 200,
-            this.fieldType,
-            this.FONT_SIZE
-        );
+        this.fieldTypeText = TextUtil.createText(this, centerX, centerY - 200, this.fieldType, this.FONT_SIZE);
         this.createNextFieldType(centerX + 150, centerY - 200);
         this.createPreviouseFieldType(centerX - 150, centerY - 200);
 
@@ -57,11 +51,7 @@ export class MenuScene extends Phaser.Scene {
         this.createMusicText(centerX, this.cameras.main.height - 130);
 
         // ゲームスタートボタン
-        this.createStartText(
-            centerX,
-            this.cameras.main.height - 50,
-            'ゲームスタート'
-        );
+        this.createStartText(centerX, this.cameras.main.height - 50, 'ゲームスタート');
     }
 
     /**
@@ -80,15 +70,12 @@ export class MenuScene extends Phaser.Scene {
      * @param y ｙ座標
      */
     private createNextFieldType(x: number, y: number): void {
-        TextUtil.createTextButton(this, x, y, '▶︎', this.FONT_SIZE).on(
-            'pointerdown',
-            () => {
-                this.fieldType = FieldTypeUtil.getNext(this.fieldType);
-                this.fieldTypeText.setText(this.fieldType);
-                this.tilemap.mapState.setField(this.fieldType);
-                this.tilemap.update();
-            }
-        );
+        TextUtil.createTextButton(this, x, y, '▶︎', this.FONT_SIZE).on('pointerdown', () => {
+            this.fieldType = FieldTypeUtil.getNext(this.fieldType);
+            this.fieldTypeText.setText(this.fieldType);
+            this.tilemap.mapState.setField(this.fieldType);
+            this.tilemap.update();
+        });
     }
 
     /**
@@ -97,15 +84,12 @@ export class MenuScene extends Phaser.Scene {
      * @param y ｙ座標
      */
     private createPreviouseFieldType(x: number, y: number): void {
-        TextUtil.createTextButton(this, x, y, '◀︎', this.FONT_SIZE).on(
-            'pointerdown',
-            () => {
-                this.fieldType = FieldTypeUtil.getPrevious(this.fieldType);
-                this.fieldTypeText.setText(this.fieldType);
-                this.tilemap.mapState.setField(this.fieldType);
-                this.tilemap.update();
-            }
-        );
+        TextUtil.createTextButton(this, x, y, '◀︎', this.FONT_SIZE).on('pointerdown', () => {
+            this.fieldType = FieldTypeUtil.getPrevious(this.fieldType);
+            this.fieldTypeText.setText(this.fieldType);
+            this.tilemap.mapState.setField(this.fieldType);
+            this.tilemap.update();
+        });
     }
 
     /**
@@ -121,14 +105,8 @@ export class MenuScene extends Phaser.Scene {
             `先攻（黒）: ${OperateTypeUtil.getString(this.firstOperateType)}`,
             this.FONT_SIZE
         ).on('pointerdown', () => {
-            this.firstOperateType = OperateTypeUtil.getOpposition(
-                this.firstOperateType
-            );
-            text.setText(
-                `先攻（黒）: ${OperateTypeUtil.getString(
-                    this.firstOperateType
-                )}`
-            );
+            this.firstOperateType = OperateTypeUtil.getOpposition(this.firstOperateType);
+            text.setText(`先攻（黒）: ${OperateTypeUtil.getString(this.firstOperateType)}`);
         });
     }
 
@@ -146,14 +124,8 @@ export class MenuScene extends Phaser.Scene {
             `後攻（白）: ${OperateTypeUtil.getString(this.secondOperateType)}`,
             this.FONT_SIZE
         ).on('pointerdown', () => {
-            this.secondOperateType = OperateTypeUtil.getOpposition(
-                this.secondOperateType
-            );
-            text.setText(
-                `後攻（白）: ${OperateTypeUtil.getString(
-                    this.secondOperateType
-                )}`
-            );
+            this.secondOperateType = OperateTypeUtil.getOpposition(this.secondOperateType);
+            text.setText(`後攻（白）: ${OperateTypeUtil.getString(this.secondOperateType)}`);
         });
     }
 
@@ -164,13 +136,7 @@ export class MenuScene extends Phaser.Scene {
      */
     private createMusicText(x: number, y: number): void {
         const isPlay: string = Param.PLAY_MUSIC ? ' ON' : 'OFF';
-        const text = TextUtil.createTextButton(
-            this,
-            x,
-            y,
-            `音楽再生: ${isPlay}`,
-            25
-        ).on('pointerdown', () => {
+        const text = TextUtil.createTextButton(this, x, y, `音楽再生: ${isPlay}`, 25).on('pointerdown', () => {
             Param.PLAY_MUSIC = !Param.PLAY_MUSIC;
             const isPlay: string = Param.PLAY_MUSIC ? ' ON' : 'OFF';
             text.setText(`音楽再生: ${isPlay}`);
@@ -184,13 +150,7 @@ export class MenuScene extends Phaser.Scene {
      * @param content 表示する文字列
      */
     private createStartText(x: number, y: number, content: string): void {
-        const text = TextUtil.createTextButton(
-            this,
-            x,
-            y,
-            content,
-            this.FONT_SIZE
-        ).on('pointerdown', () => {
+        const text = TextUtil.createTextButton(this, x, y, content, this.FONT_SIZE).on('pointerdown', () => {
             Param.FIELD_TYPE = this.fieldType;
             this.scene.start('playScene', {
                 firstOperateType: this.firstOperateType,

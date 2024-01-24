@@ -45,11 +45,6 @@ export class Coord {
      * @returns 無効な座標の場合はtrue
      */
     private inValid(): boolean {
-        return (
-            this.x < 0 ||
-            MapState.LENGTH <= this.x ||
-            this.y < 0 ||
-            MapState.LENGTH <= this.y
-        );
+        return this.x < 0 || MapState.LENGTH <= this.x || this.y < 0 || MapState.LENGTH <= this.y;
     }
 }

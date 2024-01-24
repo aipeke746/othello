@@ -21,11 +21,7 @@ export class TextUtil {
         fontSize: number,
         fontColor: string = Color.WHITE
     ): Phaser.GameObjects.Text {
-        return scene.add
-            .text(x, y, content)
-            .setOrigin(0.5)
-            .setFontSize(fontSize)
-            .setColor(fontColor);
+        return scene.add.text(x, y, content).setOrigin(0.5).setFontSize(fontSize).setColor(fontColor);
     }
 
     /**
@@ -45,13 +41,6 @@ export class TextUtil {
         fontSize: number,
         fontColor: string = Color.WHITE
     ): Phaser.GameObjects.Text {
-        return this.createText(
-            scene,
-            x,
-            y,
-            content,
-            fontSize,
-            fontColor
-        ).setInteractive();
+        return this.createText(scene, x, y, content, fontSize, fontColor).setInteractive();
     }
 }

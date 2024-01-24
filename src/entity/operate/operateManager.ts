@@ -18,11 +18,7 @@ export class OperateManager {
      * @param blackType 黒の操作方法
      * @param whiteType 白の操作方法
      */
-    constructor(
-        scene: Phaser.Scene,
-        blackType: OperateType,
-        whiteType: OperateType
-    ) {
+    constructor(scene: Phaser.Scene, blackType: OperateType, whiteType: OperateType) {
         this.operators = new Map();
         this.operators.set(MarkType.BLACK, new Operator(scene, blackType));
         this.operators.set(MarkType.WHITE, new Operator(scene, whiteType));

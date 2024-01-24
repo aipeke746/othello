@@ -22,8 +22,7 @@ export class FieldTypeUtil {
      */
     public static getNext(fieldType: FieldType): FieldType {
         const currentIndex: number = this.getCurrentIndex(fieldType);
-        const nextIndex: number =
-            (currentIndex + 1) % FieldTypeUtil.TOTAL_ELEMENT_COUNT;
+        const nextIndex: number = (currentIndex + 1) % FieldTypeUtil.TOTAL_ELEMENT_COUNT;
 
         return FieldTypeUtil.FIELD_TYPS[nextIndex];
     }
@@ -36,8 +35,7 @@ export class FieldTypeUtil {
     public static getPrevious(fieldType: FieldType): FieldType {
         const currentIndex: number = this.getCurrentIndex(fieldType);
         const previousIndex: number =
-            (currentIndex - 1 + FieldTypeUtil.TOTAL_ELEMENT_COUNT) %
-            FieldTypeUtil.TOTAL_ELEMENT_COUNT;
+            (currentIndex - 1 + FieldTypeUtil.TOTAL_ELEMENT_COUNT) % FieldTypeUtil.TOTAL_ELEMENT_COUNT;
 
         return FieldTypeUtil.FIELD_TYPS[previousIndex];
     }

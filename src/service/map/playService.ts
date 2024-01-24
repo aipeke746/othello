@@ -41,11 +41,7 @@ export class PlayService {
      */
     private readonly reverseMarkSound: Phaser.Sound.BaseSound;
 
-    constructor(
-        scene: Phaser.Scene,
-        operateManager: OperateManager,
-        assist: AssistService
-    ) {
+    constructor(scene: Phaser.Scene, operateManager: OperateManager, assist: AssistService) {
         this.scene = scene;
         this.operateManager = operateManager;
         this.assist = assist;
@@ -60,9 +56,7 @@ export class PlayService {
     public do(tilemap: Tilemap, takeBackService: TakeBackService): void {
         if (this.isReversing || this.isFinished) return;
 
-        PutMarkUtil.isPutable(tilemap.mapState)
-            ? this.play(tilemap, takeBackService)
-            : this.finish(tilemap);
+        PutMarkUtil.isPutable(tilemap.mapState) ? this.play(tilemap, takeBackService) : this.finish(tilemap);
     }
 
     /**
@@ -102,34 +96,21 @@ export class PlayService {
      * @param mark セットしたマーク
      * @param putCoord セットした座標
      */
-    private playAnimation(
-        tilemap: Tilemap,
-        mark: MarkType,
-        putCoord: Coord
-    ): void {
+    private playAnimation(tilemap: Tilemap, mark: MarkType, putCoord: Coord): void {
         this.isReversing = true;
 
-        const reversibleCoords = ReverseMarkUtil.getReversibleCoords(
-            tilemap.mapState,
-            mark,
-            putCoord
-        );
+        const reversibleCoords = ReverseMarkUtil.getReversibleCoords(tilemap.mapState, mark, putCoord);
         const key = ReverseToMarkUtil.get(mark);
 
         reversibleCoords.forEach((reversibleCoord) => {
             const pos = tilemap.getWorldPos(reversibleCoord);
-            const sprite = this.scene.add
-                .sprite(pos.x, pos.y, key)
-                .setOrigin(0, 0);
+            const sprite = this.scene.add.sprite(pos.x, pos.y, key).setOrigin(0, 0);
 
             sprite.anims.play(key).on('animationcomplete', () => {
                 this.reverseMarkSound.play();
                 sprite.destroy();
                 const nextMark = tilemap.mapState.getNowTurnMark();
-                this.assist.showPutableCoords(
-                    tilemap,
-                    this.operateManager.isManual(nextMark)
-                );
+                this.assist.showPutableCoords(tilemap, this.operateManager.isManual(nextMark));
                 this.isReversing = false;
             });
         });
@@ -141,12 +122,8 @@ export class PlayService {
      * @returns 勝敗結果の文字列
      */
     private getWinnerContent(tilemap: Tilemap): string {
-        const blackCount: number = tilemap.mapState.getMarkCount(
-            MarkType.BLACK
-        );
-        const whiteCount: number = tilemap.mapState.getMarkCount(
-            MarkType.WHITE
-        );
+        const blackCount: number = tilemap.mapState.getMarkCount(MarkType.BLACK);
+        const whiteCount: number = tilemap.mapState.getMarkCount(MarkType.WHITE);
 
         if (blackCount > whiteCount) {
             return '黒の勝ち';

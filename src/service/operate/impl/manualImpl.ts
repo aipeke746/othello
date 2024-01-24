@@ -34,9 +34,7 @@ export class ManualImpl implements OperateService {
      * @returns 座標
      */
     getCoord(tilemap: Tilemap, mark: MarkType): Coord | undefined {
-        return this.isPointerDown
-            ? this.getManualCoord(tilemap, mark)
-            : undefined;
+        return this.isPointerDown ? this.getManualCoord(tilemap, mark) : undefined;
     }
 
     /**
@@ -45,16 +43,11 @@ export class ManualImpl implements OperateService {
      * @param mark マーク
      * @returns 座標
      */
-    private getManualCoord(
-        tilemap: Tilemap,
-        mark: MarkType
-    ): Coord | undefined {
+    private getManualCoord(tilemap: Tilemap, mark: MarkType): Coord | undefined {
         const pos = this.pointer.position;
         try {
             const coord = new Coord(tilemap.getTilePos(pos));
-            return ReverseMarkUtil.isReversible(tilemap.mapState, coord, mark)
-                ? coord
-                : undefined;
+            return ReverseMarkUtil.isReversible(tilemap.mapState, coord, mark) ? coord : undefined;
         } catch (e) {
             return undefined;
         }

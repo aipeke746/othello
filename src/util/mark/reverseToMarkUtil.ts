@@ -19,9 +19,7 @@ export class ReverseToMarkUtil {
      * @returns
      */
     public static get(markType: MarkType): string {
-        return markType === MarkType.BLACK
-            ? 'reverseToBlack'
-            : 'reverseToWhite';
+        return markType === MarkType.BLACK ? 'reverseToBlack' : 'reverseToWhite';
     }
 
     /**

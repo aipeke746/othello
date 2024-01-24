@@ -4,10 +4,7 @@ import { MarkType } from '../../type/markType';
  * オセロのマークに関するユーティリティクラス
  */
 export class MarkTypeUtil {
-    public static readonly MARK_TYPE_MAP: Map<MarkType, string> = new Map<
-        MarkType,
-        string
-    >([
+    public static readonly MARK_TYPE_MAP: Map<MarkType, string> = new Map<MarkType, string>([
         [MarkType.EMPTY, '空'],
         [MarkType.BLACK, '黒'],
         [MarkType.WHITE, '白'],

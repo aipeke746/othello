@@ -7,10 +7,7 @@ export class OperateTypeUtil {
     /**
      * 操作タイプと画面に表示する文字列のマップ
      */
-    public static readonly OPERATE_TYPE_MAP: Map<OperateType, string> = new Map<
-        OperateType,
-        string
-    >([
+    public static readonly OPERATE_TYPE_MAP: Map<OperateType, string> = new Map<OperateType, string>([
         [OperateType.MANUAL, 'MANUAL'],
         [OperateType.ALPHA_BETA, '  AUTO'],
     ]);
@@ -30,8 +27,6 @@ export class OperateTypeUtil {
      * @returns 反対の操作タイプ
      */
     public static getOpposition(operateType: OperateType): OperateType {
-        return operateType === OperateType.MANUAL
-            ? OperateType.ALPHA_BETA
-            : OperateType.MANUAL;
+        return operateType === OperateType.MANUAL ? OperateType.ALPHA_BETA : OperateType.MANUAL;
     }
 }

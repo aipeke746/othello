@@ -38,22 +38,17 @@ export class PlayScene extends Phaser.Scene {
 
     preload(): void {
         this.load.image('mapTiles', 'asset/image/mapTiles.png');
-        this.load.spritesheet(
-            ReverseToMarkUtil.get(MarkType.BLACK),
-            'asset/image/reverseToBlack.png',
-            { frameWidth: 64, frameHeight: 64 }
-        );
-        this.load.spritesheet(
-            ReverseToMarkUtil.get(MarkType.WHITE),
-            'asset/image/reverseToWhite.png',
-            { frameWidth: 64, frameHeight: 64 }
-        );
+        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.BLACK), 'asset/image/reverseToBlack.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
+        this.load.spritesheet(ReverseToMarkUtil.get(MarkType.WHITE), 'asset/image/reverseToWhite.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
         this.load.audio('putMarkSound', 'asset/sound/putMark.mp3');
         this.load.audio('reverseMarkSound', 'asset/sound/reverseMark.mp3');
-        this.load.audio(
-            'music',
-            'asset/music/Digital_Ghosts-Unicorn_Heads.mp3'
-        );
+        this.load.audio('music', 'asset/music/Digital_Ghosts-Unicorn_Heads.mp3');
     }
 
     create(): void {
@@ -75,16 +70,9 @@ export class PlayScene extends Phaser.Scene {
             this.takeBackService,
             this.music
         );
-        this.playService = new PlayService(
-            this,
-            this.operateManager,
-            this.assistService
-        );
+        this.playService = new PlayService(this, this.operateManager, this.assistService);
 
-        this.assistService.showPutableCoords(
-            this.tilemap,
-            this.operateManager.isManual(MarkType.BLACK)
-        );
+        this.assistService.showPutableCoords(this.tilemap, this.operateManager.isManual(MarkType.BLACK));
     }
 
     update(): void {

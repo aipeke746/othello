@@ -60,9 +60,7 @@ export class FunctionService {
         const y = scene.cameras.main.height - Param.BOTTOM_TILE_MARGIN;
         const width = scene.cameras.main.width / 2 - x - Param.TILE_MARGIN / 2;
         const height = scene.cameras.main.height - y - Param.TILE_MARGIN;
-        scene.add
-            .rectangle(x, y, width, height, this.BACKGROUND_COLOR)
-            .setOrigin(0, 0);
+        scene.add.rectangle(x, y, width, height, this.BACKGROUND_COLOR).setOrigin(0, 0);
 
         let tx: number, ty: number;
 
@@ -74,13 +72,7 @@ export class FunctionService {
         // 一手戻るボタン
         tx = x + width / 2;
         ty = y + height / 2;
-        this.createTakeBackText(
-            tilemap,
-            operateManager,
-            takeBackService,
-            tx,
-            ty
-        );
+        this.createTakeBackText(tilemap, operateManager, takeBackService, tx, ty);
 
         // メニュー画面への遷移ボタン
         tx = x + 60;
@@ -95,8 +87,7 @@ export class FunctionService {
      */
     public update(tilemap: Tilemap, takeBackService: TakeBackService): void {
         const nowTurnMark: MarkType = tilemap.mapState.getNowTurnMark();
-        const canTakeBack: boolean =
-            takeBackService.isTakeBackable(nowTurnMark);
+        const canTakeBack: boolean = takeBackService.isTakeBackable(nowTurnMark);
         const alpha: number = canTakeBack ? 1.0 : 0.3;
         this.takeBackTextButton.setAlpha(alpha);
         this.takeBackCountText.setText(`${takeBackService.getCountString()}`);
@@ -127,10 +118,7 @@ export class FunctionService {
         ).on('pointerdown', () => {
             Param.SHOW_PUTABLE_CIRCLES = !Param.SHOW_PUTABLE_CIRCLES;
             if (Param.SHOW_PUTABLE_CIRCLES) {
-                assistService.showPutableCoords(
-                    tilemap,
-                    operateManager.isManual(tilemap.mapState.getNowTurnMark())
-                );
+                assistService.showPutableCoords(tilemap, operateManager.isManual(tilemap.mapState.getNowTurnMark()));
                 this.assistTextToggle.setText(this.getAssistString());
             } else {
                 assistService.removeAllCircle();
@@ -183,31 +171,21 @@ export class FunctionService {
      * @param ty 表示する文字左上のｙ座標
      * @param music 音楽
      */
-    private createBackMenuText(
-        tx: number,
-        ty: number,
-        music: Phaser.Sound.BaseSound
-    ): void {
-        TextUtil.createTextButton(
-            this.scene,
-            tx,
-            ty,
-            '⇦Menu画面',
-            this.FONT_SIZE,
-            this.FONT_COLOR
-        ).on('pointerdown', () => {
-            music.stop();
-            this.scene.scene.stop('finishScene');
-            this.scene.scene.start('menuScene');
-        });
+    private createBackMenuText(tx: number, ty: number, music: Phaser.Sound.BaseSound): void {
+        TextUtil.createTextButton(this.scene, tx, ty, '⇦Menu画面', this.FONT_SIZE, this.FONT_COLOR).on(
+            'pointerdown',
+            () => {
+                music.stop();
+                this.scene.scene.stop('finishScene');
+                this.scene.scene.start('menuScene');
+            }
+        );
     }
 
     /**
      * アシスト表示の文字列を取得する
      */
     private getAssistString(): string {
-        return Param.SHOW_PUTABLE_CIRCLES
-            ? 'アシスト表示:  ON'
-            : 'アシスト表示: OFF';
+        return Param.SHOW_PUTABLE_CIRCLES ? 'アシスト表示:  ON' : 'アシスト表示: OFF';
     }
 }
