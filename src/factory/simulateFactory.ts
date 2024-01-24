@@ -11,26 +11,33 @@ import { SimulateType } from '../type/simulateType';
  */
 export class SimulateFactory {
     /**
+     * シミュレーションのマップ
+     */
+    private readonly MAP = new Map<SimulateType, SimulateService>();
+
+    /**
+     * シミュレーションのマップを設定する
+     * @param mapState マップの状態
+     * @param myMark 自分のマーク
+     * @param param αβ法の探索パラメータ
+     */
+    constructor(mapState: MapState, myMark: MarkType, param: SimulateParam) {
+        this.MAP.set(
+            SimulateType.MAX_SCORE,
+            new MaxScoreImpl(mapState, myMark, param)
+        );
+        this.MAP.set(
+            SimulateType.WEIGHT_MAP,
+            new WeightMapImpl(mapState, myMark, param)
+        );
+    }
+
+    /**
      * シミュレーション方法を生成する
      * @param type シミュレーションの種類
-     * @param mapState マップの状態
-     * @param myMark 対象のマーク
-     * @param param αβ法の探索パラメータ
      * @returns シミュレーション
      */
-    public static create(
-        type: SimulateType,
-        mapState: MapState,
-        myMark: MarkType,
-        param: SimulateParam
-    ): SimulateService {
-        switch (type) {
-            case SimulateType.MAX_SCORE:
-                return new MaxScoreImpl(mapState, myMark, param);
-            case SimulateType.WEIGHT_MAP:
-                return new WeightMapImpl(mapState, myMark, param);
-            default:
-                throw new Error('SimulateFactory.create type error');
-        }
+    public create(type: SimulateType): SimulateService {
+        return this.MAP.get(type);
     }
 }

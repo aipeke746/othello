@@ -35,12 +35,11 @@ export class AlphaBetaImpl implements OperateService {
             Number.NEGATIVE_INFINITY,
             Number.POSITIVE_INFINITY
         );
-        const simulate: SimulateService = SimulateFactory.create(
-            this.simulateType,
+        const simulate: SimulateService = new SimulateFactory(
             tilemap.mapState.clone(),
             myMark,
             param
-        );
+        ).create(this.simulateType);
         const result: [number, Coord | undefined] =
             this.getAlphaBetaCoord(simulate);
 

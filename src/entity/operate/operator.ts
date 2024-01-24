@@ -22,7 +22,7 @@ export class Operator {
      */
     constructor(scene: Phaser.Scene, operateType: OperateType) {
         this.operateType = operateType;
-        this.operateService = OperateFactory.create(scene, operateType);
+        this.operateService = new OperateFactory(scene).create(operateType);
     }
 
     /**

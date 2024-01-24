@@ -8,22 +8,25 @@ import { OperateType } from '../type/operateType';
  */
 export class OperateFactory {
     /**
-     * 操作方法を生成する
+     * 操作方法のマップ
+     */
+    private readonly MAP = new Map<OperateType, OperateService>();
+
+    /**
+     * 操作方法のマップを設定する
      * @param scene シーン
+     */
+    constructor(scene: Phaser.Scene) {
+        this.MAP.set(OperateType.MANUAL, new ManualImpl(scene));
+        this.MAP.set(OperateType.ALPHA_BETA, new AlphaBetaImpl());
+    }
+
+    /**
+     * 操作方法を生成する
      * @param operateType 操作方法の種類
      * @returns 操作方法
      */
-    static create(
-        scene: Phaser.Scene,
-        operateType: OperateType
-    ): OperateService {
-        switch (operateType) {
-            case OperateType.MANUAL:
-                return new ManualImpl(scene);
-            case OperateType.ALPHA_BETA:
-                return new AlphaBetaImpl();
-            default:
-                throw new Error('OperateFactory: OperateType not found.');
-        }
+    public create(operateType: OperateType): OperateService {
+        return this.MAP.get(operateType);
     }
 }

@@ -34,7 +34,7 @@ export class MapState {
      * マップの状態の初期化を行い、オセロのフィールドの初期配置を行う
      */
     constructor() {
-        this.field = FieldFactory.create(Param.FIELD_TYPE);
+        this.field = new FieldFactory().create(Param.FIELD_TYPE);
         this.nowTurnMark = MarkType.BLACK;
     }
 
@@ -64,7 +64,7 @@ export class MapState {
      * @param fieldType フィールドタイプ
      */
     public setField(fieldType: FieldType): void {
-        this.field = FieldFactory.create(fieldType);
+        this.field = new FieldFactory().create(fieldType);
     }
 
     /**

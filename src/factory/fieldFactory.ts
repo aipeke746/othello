@@ -7,31 +7,33 @@ import { MarkType } from '../type/markType';
  */
 export class FieldFactory {
     /**
+     * オセロのフィールドのマップ
+     */
+    private readonly MAP = new Map<FieldType, MarkType[][]>();
+
+    /**
+     * オセロのフィールドのマップを設定する
+     */
+    constructor() {
+        this.MAP.set(FieldType.NORMAL, Field.NORMAL);
+        this.MAP.set(FieldType.CROSS, Field.CROSS);
+        this.MAP.set(FieldType.BATSU, Field.BATSU);
+        this.MAP.set(FieldType.MARU, Field.MARU);
+        this.MAP.set(FieldType.WIND_MILL, Field.WIND_MILL);
+        this.MAP.set(FieldType.NO_CORNERS, Field.NO_CORNERS);
+        this.MAP.set(FieldType.BLOCK1, Field.BLOCK1);
+        this.MAP.set(FieldType.BLOCK2, Field.BLOCK2);
+        this.MAP.set(FieldType.BLOCK3, Field.BLOCK3);
+    }
+
+    /**
      * オセロのフィールドを生成する
      * @param type オセロのフィールドの種類
      * @returns オセロのフィールド
      */
-    public static create(type: FieldType): MarkType[][] {
-        switch (type) {
-            case FieldType.NORMAL:
-                return this.getField(Field.NORMAL);
-            case FieldType.CROSS:
-                return this.getField(Field.CROSS);
-            case FieldType.BATSU:
-                return this.getField(Field.BATSU);
-            case FieldType.MARU:
-                return this.getField(Field.MARU);
-            case FieldType.WIND_MILL:
-                return this.getField(Field.WIND_MILL);
-            case FieldType.NO_CORNERS:
-                return this.getField(Field.NO_CORNERS);
-            case FieldType.BLOCK1:
-                return this.getField(Field.BLOCK1);
-            case FieldType.BLOCK2:
-                return this.getField(Field.BLOCK2);
-            case FieldType.BLOCK3:
-                return this.getField(Field.BLOCK3);
-        }
+    public create(type: FieldType): MarkType[][] {
+        const field = this.MAP.get(type);
+        return this.getField(field);
     }
 
     /**
@@ -40,7 +42,7 @@ export class FieldFactory {
      * @param field オセロのフィールド
      * @returns オセロのフィールド
      */
-    public static getField(field: Field): MarkType[][] {
+    public getField(field: Field): MarkType[][] {
         return JSON.parse(JSON.stringify(field));
     }
 }
